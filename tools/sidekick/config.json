@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    {
+      "id": "library",
+      "title": "Library",
+      "url": "/tools/sidekick/library.html",
+      "environments": ["edit", "dev"]
+    }
+  ]
+}
