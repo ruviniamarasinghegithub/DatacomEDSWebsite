@@ -1,0 +1,37 @@
+.heading .heading-text {
+  text-align: left;
+}
+
+.heading .heading-text.center-aligned {
+  text-align: center;
+}
+
+/* Visual style overrides — independent of the actual semantic tag */
+.heading .heading-text.h1 { font-size: var(--heading-font-size-xxl); }
+.heading .heading-text.h2 { font-size: var(--heading-font-size-xl); }
+.heading .heading-text.h3 { font-size: var(--heading-font-size-l); }
+.heading .heading-text.h4 { font-size: var(--heading-font-size-m); }
+
+/* themes */
+.heading.white-theme {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.heading.light-theme {
+  background-color: #add8e6;
+  color: #1a1a1a;
+}
+
+.heading.dark-theme {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .heading .heading-text.h3,
+  .heading .heading-text.h4 {
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+}
