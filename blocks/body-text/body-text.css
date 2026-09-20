@@ -1,0 +1,84 @@
+/* Datacom - Body Text block - Styles */
+
+.body-text .caption {
+  font-size: var(--font-14-size);
+  font-weight: 400;
+  line-height: var(--font-14-line-height);
+  font-family: var(--typography-font-family-400);
+  letter-spacing: var(--letter-spacing-small);
+  color: var(--color-dark-grey); /* overrides caption-format()'s own color, matching original component */
+}
+
+.body-text a {
+  color: var(--color-action-blue);
+  text-decoration: none;
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(var(--color-action-blue-hover), var(--color-action-blue-hover));
+  background-size: 100% 1px, 0 1px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.1s linear;
+}
+
+.body-text a:hover,
+.body-text a:focus {
+  color: var(--color-action-blue-hover);
+  background-size: 0 1px, 100% 1px;
+}
+
+.body-text h1,
+.body-text h2,
+.body-text h3,
+.body-text h4 {
+  margin-bottom: var(--spacing-padding-05); /* 24px */
+}
+
+@media (max-width: 500px) {
+  .body-text h1,
+  .body-text h2,
+  .body-text h3,
+  .body-text h4 {
+    margin-bottom: var(--spacing-padding-04); /* 16px */
+  }
+}
+
+.body-text h1 a,
+.body-text h2 a {
+  background-size: 100% 3px, 0 3px;
+}
+.body-text h1 a:hover,
+.body-text h2 a:hover {
+  background-size: 0 3px, 100% 3px;
+}
+
+.body-text h3 a,
+.body-text h4 a {
+  background-size: 100% 2px, 0 2px;
+}
+.body-text h3 a:hover,
+.body-text h4 a:hover {
+  background-size: 0 2px, 100% 2px;
+}
+
+/* Whole-block variants (previously per-paragraph RTE formats) */
+.body-text.dark-blue {
+  background-color: #003366;
+  color: #fff;
+}
+.body-text.dark-blue a {
+  color: #fff;
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(var(--font-color-default), var(--font-color-default));
+}
+.body-text.dark-blue a:hover {
+  color: var(--font-color-default);
+}
+
+/* Padding variants (from the paddingBottom / paddingBottomForForm checkboxes) */
+.body-text.padding-bottom {
+  padding-bottom: var(--spacing-padding-05); /* 24px */
+}
+
+.body-text.padding-bottom-form {
+  padding-bottom: var(--spacing-padding-05); /* 24px — confirm if this should differ from padding-bottom */
+}
