@@ -76,9 +76,9 @@
 
 /* Padding variants (from the paddingBottom / paddingBottomForForm checkboxes) */
 .body-text.padding-bottom {
-  padding-bottom: var(--spacing-padding-05); /* 24px */
+  padding-bottom: 24px;
 }
 
 .body-text.padding-bottom-form {
-  padding-bottom: var(--spacing-padding-05); /* 24px — confirm if this should differ from padding-bottom */
+  padding-bottom: 48px;
 }
