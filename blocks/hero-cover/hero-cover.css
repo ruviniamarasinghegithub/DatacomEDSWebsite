@@ -1,0 +1,19 @@
+.hero-cover__animate {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition-delay: var(--hero-cover-delay, 0s);
+}
+
+.hero-cover--in-view .hero-cover__animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cover__animate {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
