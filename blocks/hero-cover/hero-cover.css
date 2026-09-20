@@ -136,7 +136,7 @@
 
 /* Shape variants */
 .hero-cover.arched .hero-cover__image-ctn {
-  border-radius: 0 0 40% 40% / 0 0 10% 10%;
+  border-radius: 0 0 40% 40%;
 }
 
 .hero-cover:not(.arched) .hero-cover__image-ctn {
