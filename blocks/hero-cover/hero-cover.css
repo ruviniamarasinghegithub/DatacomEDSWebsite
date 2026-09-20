@@ -135,8 +135,8 @@
 }
 
 /* Shape variants */
-.hero-cover.arched .hero-cover__image-ctn {
-  border-radius: 0 0 40% 40%;
+.hero-cover.arched .hero-cover__image-ctn .hero-cover__image {
+  border-radius: 0 0 5% 5%;
 }
 
 .hero-cover:not(.arched) .hero-cover__image-ctn {
