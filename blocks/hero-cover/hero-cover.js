@@ -1,3 +1,5 @@
+/* Datacom - Hero Cover block - JS */
+
 export default function decorate(block) {
   const rows = [...block.children];
   const [imageRow, subHeadingRow, mainHeadingRow, subTextRow, cta1Row, cta2Row] = rows;

@@ -1,19 +1,19 @@
 /* Datacom - Body Text block - Styles */
 
 .body-text .caption {
-  font-size: var(--font-14-size);
+  font-size: 14px;
   font-weight: 400;
-  line-height: var(--font-14-line-height);
+  line-height: 20px;
   font-family: var(--typography-font-family-400);
   letter-spacing: var(--letter-spacing-small);
-  color: var(--color-dark-grey); /* overrides caption-format()'s own color, matching original component */
+  color: var(--color-dark-grey); 
 }
 
 .body-text a {
-  color: var(--color-action-blue);
+  color: #0000EE;
   text-decoration: none;
   background-image: linear-gradient(transparent, transparent),
-    linear-gradient(var(--color-action-blue-hover), var(--color-action-blue-hover));
+    linear-gradient(#0000EE, #0000EE);
   background-size: 100% 1px, 0 1px;
   background-position: 100% 100%, 0 100%;
   background-repeat: no-repeat;
@@ -22,7 +22,7 @@
 
 .body-text a:hover,
 .body-text a:focus {
-  color: var(--color-action-blue-hover);
+  color: #0000EE;
   background-size: 0 1px, 100% 1px;
 }
 
@@ -30,7 +30,7 @@
 .body-text h2,
 .body-text h3,
 .body-text h4 {
-  margin-bottom: var(--spacing-padding-05); /* 24px */
+  margin-bottom: 24px;
 }
 
 @media (max-width: 500px) {
@@ -38,7 +38,7 @@
   .body-text h2,
   .body-text h3,
   .body-text h4 {
-    margin-bottom: var(--spacing-padding-04); /* 16px */
+    margin-bottom: 16px;
   }
 }
 
@@ -68,10 +68,10 @@
 .body-text.dark-blue a {
   color: #fff;
   background-image: linear-gradient(transparent, transparent),
-    linear-gradient(var(--font-color-default), var(--font-color-default));
+    linear-gradient(#fff, #fff);
 }
 .body-text.dark-blue a:hover {
-  color: var(--font-color-default);
+  color: #fff;
 }
 
 /* Padding variants (from the paddingBottom / paddingBottomForForm checkboxes) */
