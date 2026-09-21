@@ -4,14 +4,21 @@ export default function decorate(block) {
 
   const isContained = block.classList.contains('contained');
   const isGradient = block.classList.contains('gradient');
-  // 'arched' handled via CSS class already present on block; 'square' needs no extra class
 
-  const picture = imageRow?.querySelector('picture');
-  const videoLink = imageRow?.querySelector('a[href$=".mp4"], a[href$=".mov"]');
-  const youtubeLink = imageRow?.querySelector('a[href*="youtube.com/watch"], a[href*="youtu.be/"]');
+  // Support embed block wrapper: <div class="embed"><div><div><a href="...">
+  const embedBlock = imageRow?.querySelector('.embed');
+  const mediaSource = embedBlock || imageRow;
+
+  const picture = mediaSource?.querySelector('picture');
+  const directVideoLink = mediaSource?.querySelector('a[href$=".mp4"], a[href$=".mov"]');
+  const youtubeLink = mediaSource?.querySelector(
+    'a[href*="youtube.com/watch"], a[href*="youtu.be/"]',
+  );
 
   let mediaWrapper;
-  if (videoLink) {
+
+  if (directVideoLink) {
+    // Direct MP4 / MOV file
     mediaWrapper = document.createElement('div');
     mediaWrapper.className = 'hero-cover__video-ctn';
     const video = document.createElement('video');
@@ -19,12 +26,13 @@ export default function decorate(block) {
     video.loop = true;
     video.muted = true;
     video.playsInline = true;
-    const source = document.createElement('source');
-    source.src = videoLink.href;
-    video.append(source);
     video.className = 'hero-cover__video';
+    const source = document.createElement('source');
+    source.src = directVideoLink.href;
+    video.append(source);
     mediaWrapper.append(video);
   } else if (youtubeLink) {
+    // YouTube URL — plain link or inside an embed block
     const url = new URL(youtubeLink.href);
     const videoId = url.searchParams.get('v') || url.pathname.split('/').pop();
     mediaWrapper = document.createElement('div');
@@ -36,7 +44,8 @@ export default function decorate(block) {
     iframe.setAttribute('allowfullscreen', '');
     iframe.setAttribute('frameborder', '0');
     mediaWrapper.append(iframe);
-    } else if (picture) {
+  } else if (picture) {
+    // Image / picture
     mediaWrapper = document.createElement('div');
     mediaWrapper.className = 'hero-cover__image-ctn';
     picture.querySelector('img')?.classList.add('hero-cover__image');
