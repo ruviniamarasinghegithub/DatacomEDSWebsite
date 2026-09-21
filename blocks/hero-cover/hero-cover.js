@@ -8,6 +8,7 @@ export default function decorate(block) {
 
   const picture = imageRow?.querySelector('picture');
   const videoLink = imageRow?.querySelector('a[href$=".mp4"], a[href$=".mov"]');
+  const youtubeLink = imageRow?.querySelector('a[href*="youtube.com/watch"], a[href*="youtu.be/"]');
 
   let mediaWrapper;
   if (videoLink) {
@@ -23,7 +24,19 @@ export default function decorate(block) {
     video.append(source);
     video.className = 'hero-cover__video';
     mediaWrapper.append(video);
-  } else if (picture) {
+  } else if (youtubeLink) {
+    const url = new URL(youtubeLink.href);
+    const videoId = url.searchParams.get('v') || url.pathname.split('/').pop();
+    mediaWrapper = document.createElement('div');
+    mediaWrapper.className = 'hero-cover__video-ctn';
+    const iframe = document.createElement('iframe');
+    iframe.className = 'hero-cover__video';
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&playsinline=1`;
+    iframe.allow = 'autoplay; encrypted-media';
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.setAttribute('frameborder', '0');
+    mediaWrapper.append(iframe);
+    } else if (picture) {
     mediaWrapper = document.createElement('div');
     mediaWrapper.className = 'hero-cover__image-ctn';
     picture.querySelector('img')?.classList.add('hero-cover__image');
