@@ -14,6 +14,9 @@ export default function decorate(block) {
   const youtubeLink = mediaSource?.querySelector(
     'a[href*="youtube.com/watch"], a[href*="youtu.be/"]',
   );
+  const vimeoLink = mediaSource?.querySelector(
+    'a[href*="vimeo.com/"]',
+  );
 
   let mediaWrapper;
 
@@ -40,6 +43,19 @@ export default function decorate(block) {
     const iframe = document.createElement('iframe');
     iframe.className = 'hero-cover__video';
     iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&playsinline=1`;
+    iframe.allow = 'autoplay; encrypted-media';
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.setAttribute('frameborder', '0');
+    mediaWrapper.append(iframe);
+  } else if (vimeoLink) {
+    // Vimeo URL — plain link or inside an embed block
+    const url = new URL(vimeoLink.href);
+    const videoId = url.pathname.split('/').filter(Boolean).pop();
+    mediaWrapper = document.createElement('div');
+    mediaWrapper.className = 'hero-cover__video-ctn';
+    const iframe = document.createElement('iframe');
+    iframe.className = 'hero-cover__video';
+    iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1&muted=1&loop=1&background=1&controls=0`;
     iframe.allow = 'autoplay; encrypted-media';
     iframe.setAttribute('allowfullscreen', '');
     iframe.setAttribute('frameborder', '0');
