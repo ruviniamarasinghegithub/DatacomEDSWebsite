@@ -5,6 +5,18 @@
       "title": "Library",
       "url": "/tools/sidekick/library.html",
       "environments": ["edit", "dev"]
+    },
+
+    { 
+      "id": "asset-library", 
+      "title": "AEM Assets Selector", 
+      "environments": ["edit"], 
+      "url": "https://experience.adobe.com/solutions/CQ-assets-selectors/static-assets/resources/franklin/asset-selector.html", 
+      "isPalette": true, 
+      "includePaths": ["**"], 
+      "passConfig": true, 
+      "paletteRect": "top: 50px; bottom: 10px; right: 10px; left: auto; width:400px; height: calc(100vh - 60px)" 
     }
   ]
 }
+
