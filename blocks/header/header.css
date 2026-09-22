@@ -115,6 +115,10 @@ header nav[aria-expanded='true'] .nav-hamburger-icon {
   height: 22px;
 }
 
+header nav[aria-expanded='true'] ul {
+  display: none;
+}
+
 header nav[aria-expanded='true'] .nav-hamburger-icon::before,
 header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   top: 3px;
@@ -180,7 +184,6 @@ header nav .nav-sections ul > li {
 
 header nav .nav-sections ul > li > ul {
   margin-top: 0;
-  display: none;
 }
 
 header nav .nav-sections ul > li > ul > li {
