@@ -1,24 +1,36 @@
 /* ---- Datacom - Article Body Text block - Styles ---- */
 
-.article-body-text {background-color: #f00;}
+.article-body-text {background-color: blue;}
 
+.article-body-content-margin {
+  margin-bottom: var(--spacing-padding-08);
+}
+
+
+@media (max-width: var(--screen-small)) {
+  .article-body-content-margin {
+    margin-bottom: var(--spacing-padding-06);
+  }
+}
+
+/* Blockquote styling */
 .article-body-text .cmp-text blockquote {
   letter-spacing: -0.24px;
   margin: 0;
   padding: var(--spacing-layout-04) 0 var(--spacing-layout-03);
 }
 
-.article-body-text .cmp-text blockquote &:before {
+.article-body-text .cmp-text blockquote::before {
   content: "\201C";
 }
 
-.article-body-text .cmp-text blockquote &:after {
+.article-body-text .cmp-text blockquote::after {
   content: "\201D";
 }
 
-.article-body-text.dark-theme .article-body-text h2,
-.article-body-text.dark-theme .article-body-text h3,
-.article-body-text.dark-theme .article-body-text h4 {
+.dark-theme .article-body-text h2,
+.dark-theme .article-body-text h3,
+.dark-theme .article-body-text h4 {
   color: var(--color-dark-text);
 }
 
@@ -35,3 +47,4 @@
     letter-spacing: -0.18px;
   }
 }
+
