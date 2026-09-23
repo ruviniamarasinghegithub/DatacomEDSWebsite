@@ -1,0 +1,88 @@
+/*
+ * Article Cover Image block
+ * -----------------------------------------------------------------------
+ * Ported from:
+ *   - datacom-commons-v2 "Article cover-image" — default.less
+ *   - datacom "Article cover-image" — default.less (project overrides;
+ *     identical to the commons version other than dropping the extra
+ *     `&>picture>img.cmp-image__image` selector, which is included below
+ *     anyway since EDS images are always wrapped in <picture>)
+ *
+ * CSS custom properties use generic fallback values and should be swapped
+ * for the project's real design tokens once defined for this EDS project.
+ *
+ * Unlike the AEM version (which relied on the page template's own grid to
+ * naturally span full width), this block explicitly breaks out of EDS's
+ * centered, max-width content container using the "full-bleed" technique,
+ * so it renders edge-to-edge regardless of where it's placed in the page.
+ */
+
+.article-cover-image-wrapper {
+  /* Un-constrain the section wrapper so the full-bleed trick below has
+     the whole viewport to work with. */
+  max-width: none;
+  padding: 0;
+}
+
+.article-cover-image {
+  /* ---- Full-bleed: break out of the centered content container ---- */
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.article-cover-image picture {
+  display: block;
+  width: 100%;
+}
+
+.article-cover-image img.cmp-image__image {
+  width: 100%;
+  max-height: 500px; /* matches original */
+  object-fit: cover;
+  margin: 0;
+  display: block;
+}
+
+.article-cover-image .lottie-asset {
+  max-height: 500px;
+  object-fit: cover;
+  margin: 0;
+}
+
+/* ---- Caption ---- */
+/* Shown centered underneath the full-bleed image, constrained back to the
+   normal content column width (unlike the image itself). */
+
+.article-cover-image .cmp-image__title {
+  display: flex;
+  margin: var(--spacing-padding-02, 8px) auto 0;
+  /* .caption-format(); */
+  font-size: var(--body-font-size-s, 0.875rem);
+  line-height: 1.4;
+  color: var(--color-dark-grey, #666666);
+  max-width: var(--max-width, 1200px);
+  padding: 0 var(--gutter-padding, 24px);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media (width <= 900px) {
+  .article-cover-image .cmp-image__title {
+    padding: 0 var(--gutter-padding-mobile, 16px);
+  }
+}
+
+/* Hide the caption entirely when empty, matching the original component's
+   default (.cmp-image__title { display: none; }) — the JS only appends
+   this element when a caption is actually provided, so this rule mainly
+   guards against any leftover empty element. */
+.article-cover-image .cmp-image__title:empty {
+  display: none;
+}
