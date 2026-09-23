@@ -323,3 +323,1473 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+
+/* ==========================================================================
+   Datacom | Global Design Tokens
+   AEM Edge Delivery Services
+   ========================================================================== */
+
+/* ==========================================================================
+   Runtime / Base Variables
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------------
+     Core Colours
+     ------------------------------------------------------------------------ */
+
+  --color-midnight-blue-base: #000a14;
+  --color-midnight-blue-minus-1: #1a232c;
+  --color-midnight-blue-minus-3: #80858a;
+  --color-midnight-blue-minus-4: #b3b6b9;
+  --color-midnight-blue-minus-5: #e6e7e8;
+  --color-midnight-blue-coral-1: #ff5733;
+
+  --color-royal-purple-light: #b888ff;
+  --color-royal-purple-deep: #6b2fc6;
+
+  --color-admiral-blue-base: #00167f;
+  --color-admiral-blue-minus-1: #334599;
+  --color-admiral-blue-minus-2: #808bbf;
+  --color-admiral-blue-minus-3: #ccd0e5;
+  --color-admiral-blue-plus-1: #001266;
+  --color-admiral-blue-plus-2: #000b40;
+  --color-admiral-blue-plus-3: #000419;
+
+  --color-electric-blue-base: #002bfe;
+  --color-electric-blue-minus-1: #3366f3;
+  --color-electric-blue-minus-2: #80a0fb;
+  --color-electric-blue-minus-3: #ccd9fc;
+  --color-electric-blue-minus-4: #f2f4ff;
+  --color-electric-blue-plus-1: #0022cb;
+  --color-electric-blue-plus-2: #00167f;
+  --color-electric-blue-plus-3: #000933;
+
+  --color-empress-teal-base: #00d1c4;
+  --color-empress-teal-minus-1: #33dad0;
+  --color-empress-teal-minus-2: #80e8e2;
+  --color-empress-teal-minus-3: #ccf6f3;
+  --color-empress-teal-plus-1: #00a79d;
+  --color-empress-teal-plus-2: #006962;
+  --color-empress-teal-plus-3: #002a27;
+
+  --color-sky-blue-v-2-base: #4adeff;
+  --color-sky-blue-v-2-minus-1: #6ee5ff;
+  --color-sky-blue-v-2-minus-2: #a5efff;
+  --color-sky-blue-v-2-minus-3: #dbf8ff;
+  --color-sky-blue-v-2-plus-1: #3bb2cc;
+  --color-sky-blue-v-2-plus-2: #256f80;
+  --color-sky-blue-v-2-plus-3: #0f2c33;
+
+  --color-candy-pink-base: #ff0070;
+  --color-candy-pink-minus-1: #ff338d;
+  --color-candy-pink-minus-2: #ff80b8;
+  --color-candy-pink-minus-3: #ffcce2;
+  --color-candy-pink-plus-1: #cc005a;
+  --color-candy-pink-plus-2: #800038;
+  --color-candy-pink-plus-3: #330016;
+
+  --color-tangerine-orange-base: #ff5c00;
+  --color-tangerine-orange-minus-1: #ff7d33;
+  --color-tangerine-orange-minus-2: #ffae80;
+  --color-tangerine-orange-minus-3: #ffdecc;
+  --color-tangerine-orange-plus-1: #cc4a00;
+  --color-tangerine-orange-plus-2: #802e00;
+  --color-tangerine-orange-plus-3: #331200;
+
+  /* ------------------------------------------------------------------------
+     Datapay
+     ------------------------------------------------------------------------ */
+
+  --color-datapay-turquoise-base: #01dbe5;
+  --color-datapay-turquoise-minus-1: #34e2ea;
+  --color-datapay-turquoise-minus-2: #80edf2;
+  --color-datapay-turquoise-minus-3: #ccf8fa;
+  --color-datapay-turquoise-minus-4: #f2fdfe;
+  --color-datapay-turquoise-plus-1: #01afb7;
+  --color-datapay-turquoise-plus-2: #016e73;
+  --color-datapay-turquoise-plus-3: #002c2e;
+
+  /* ------------------------------------------------------------------------
+     Timpani
+     ------------------------------------------------------------------------ */
+
+  --color-timpani-sapphire-base: #0072ed;
+  --color-timpani-sapphire-minus-1: #338ef1;
+  --color-timpani-sapphire-minus-2: #80b9f6;
+  --color-timpani-sapphire-minus-3: #cce3fb;
+  --color-timpani-sapphire-minus-4: #f2f8fe;
+  --color-timpani-sapphire-plus-1: #005bbe;
+
+  /* ------------------------------------------------------------------------
+     Datascape
+     ------------------------------------------------------------------------ */
+
+  --color-datascape-indigo-base: #7827ff;
+  --color-datascape-indigo-minus-1: #9352ff;
+  --color-datascape-indigo-minus-2: #bc93ff;
+  --color-datascape-indigo-minus-3: #e4d4ff;
+  --color-datascape-indigo-minus-4: #f8f4ff;
+  --color-datascape-indigo-plus-1: #601fcc;
+  --color-datascape-indigo-plus-2: #3c1480;
+  --color-datascape-indigo-plus-3: #180833;
+
+  /* ------------------------------------------------------------------------
+     Gateway
+     ------------------------------------------------------------------------ */
+
+  --color-gateway-gold-base: #feb301;
+  --color-gateway-gold-minus-1: #fec234;
+  --color-gateway-gold-minus-2: #ffd980;
+  --color-gateway-gold-minus-3: #fff0cc;
+  --color-gateway-gold-minus-4: #fffbf2;
+  --color-gateway-gold-plus-1: #cb8f01;
+  --color-gateway-gold-plus-2: #7f5a01;
+  --color-gateway-gold-plus-3: #332400;
+
+  /* ------------------------------------------------------------------------
+     Accent Colours
+     ------------------------------------------------------------------------ */
+
+  --color-accent-pink-20: #faccdf;
+  --color-accent-pink-40: #f599bf;
+  --color-accent-pink-60: #f0669f;
+  --color-accent-pink-80: #eb337f;
+  --color-accent-pink-base: #ff0070;
+
+  --color-dark-blue-20: #ced0d7;
+  --color-dark-blue-40: #9da2af;
+  --color-dark-blue-60: #6c7488;
+  --color-dark-blue-80: #3b4660;
+  --color-dark-blue-base: #000a14;
+
+  --color-datacom-blue-20: #ccd3e2;
+  --color-datacom-blue-40: #99a7c6;
+  --color-datacom-blue-60: #667ba9;
+  --color-datacom-blue-80: #334f8c;
+  --color-datacom-blue-base: #00125e;
+
+  --color-action-blue: #002bfe;
+  --color-action-blue-hover: #0022cb;
+
+  --color-light-blue-20: #e3f3ff;
+  --color-light-blue-40: #c8e7ff;
+  --color-light-blue-60: #acdbff;
+  --color-light-blue-80: #91cfff;
+  --color-light-blue-base: #80a0f8;
+
+  --color-extra-light-blue-20: #fafcff;
+  --color-extra-light-blue-40: #f5f9ff;
+  --color-extra-light-blue-60: #eff6ff;
+  --color-extra-light-blue-80: #eaf3ff;
+  --color-extra-light-blue-base: #f2f4ff;
+
+  --color-cobalt-blue-20: #d1daf0;
+  --color-cobalt-blue-40: #a3b6e0;
+  --color-cobalt-blue-60: #7692d2;
+  --color-cobalt-blue-80: #486dc2;
+  --color-cobalt-blue-base: #0022cb;
+
+  --color-sky-blue-20: #dbedf8;
+  --color-sky-blue-40: #b6daf1;
+  --color-sky-blue-60: #92c9ea;
+  --color-sky-blue-80: #6db6e3;
+  --color-sky-blue-base: #00a7e1;
+
+  --color-accent-orange-20: #fcdbd4;
+  --color-accent-orange-40: #f9b7aa;
+  --color-accent-orange-60: #f69380;
+  --color-accent-orange-80: #f36f56;
+  --color-accent-orange-base: #ff5c00;
+
+  /* ------------------------------------------------------------------------
+     Status / Neutral
+     ------------------------------------------------------------------------ */
+
+  --color-rag-red: #c80000;
+  --color-rag-amber: #b98922;
+  --color-rag-green: #33913a;
+
+  --color-datacom-black: #151515;
+  --color-darkest-grey: #333333;
+  --color-dark-grey: #666666;
+  --color-grey: #999999;
+  --color-light-grey: #dadada;
+  --color-extra-light-grey: #f0f0f0;
+  --color-white: #ffffff;
+  --color-error-red: #c80000;
+
+  /* ------------------------------------------------------------------------
+     Theme Colours
+     ------------------------------------------------------------------------ */
+
+  --color-theme-datapay: #ccf8fa;
+  --color-theme-datascape: #e4d4ff;
+  --color-theme-gateway: #fff0cc;
+  --color-theme-timpani: #cce3fb;
+
+  /* ------------------------------------------------------------------------
+     Social
+     ------------------------------------------------------------------------ */
+
+  --color-social-linkedin: #0077b5;
+  --color-social-twitter: #1da1f2;
+  --color-social-youtube: #c4302b;
+  --color-social-facebook: #3b5998;
+
+  /* ------------------------------------------------------------------------
+     Font sizes
+     ------------------------------------------------------------------------ */
+
+  --font-14-size: 14px;
+  --font-14-line-height: 18px;
+
+  --font-16-size: 16px;
+  --font-16-line-height: 24px;
+
+  --font-18-size: 18px;
+  --font-18-line-height: 24px;
+
+  --font-24-size: 24px;
+  --font-24-line-height: 32px;
+
+  --font-32-size: 32px;
+  --font-32-line-height: 40px;
+
+  --font-40-size: 40px;
+  --font-40-line-height: 48px;
+
+  --font-48-size: 48px;
+  --font-48-line-height: 64px;
+
+  --font-64-size: 64px;
+  --font-64-line-height: 80px;
+
+  --font-80-size: 80px;
+  --font-80-line-height: 100px;
+
+  /* ------------------------------------------------------------------------
+     Typography
+     ------------------------------------------------------------------------ */
+
+  --font-color-default: #000a14;
+  --font-color-cta: #002bfe;
+  --font-color-caption: #666666;
+
+  --font-h-1-size: 80px;
+  --font-h-1-line-height: 100px;
+
+  --font-h-2-size: 64px;
+  --font-h-2-line-height: 80px;
+
+  --font-h-3-size: 48px;
+  --font-h-3-line-height: 64px;
+
+  --font-h-4-size: 40px;
+  --font-h-4-line-height: 48px;
+
+  --font-h-5-size: 32px;
+  --font-h-5-line-height: 40px;
+
+  --font-h-6-size: 24px;
+  --font-h-6-line-height: 32px;
+
+  --font-cta-size: 18px;
+  --font-cta-line-height: 24px;
+
+  --font-body-size: 16px;
+  --font-body-line-height: 24px;
+
+  --font-captions-size: 14px;
+  --font-captions-line-height: 18px;
+
+  /* ------------------------------------------------------------------------
+     Breakpoints
+     ------------------------------------------------------------------------ */
+
+  --breakpoint-mobile-01: 400px;
+  --breakpoint-mobile: 500px;
+  --breakpoint-mobile-02: 600px;
+  --breakpoint-mobile-03: 725px;
+  --breakpoint-mobile-04: 768px;
+
+  --breakpoint-tablet: 900px;
+  --breakpoint-tablet-01: 1100px;
+  --breakpoint-tablet-02: 1112px;
+  --breakpoint-tablet-03: 1113px;
+
+  --breakpoint-desktop: 1300px;
+  --breakpoint-desktop-01: 1500px;
+
+  /* ------------------------------------------------------------------------
+     Icons / Misc
+     ------------------------------------------------------------------------ */
+
+  --icon-20-size: 20px;
+  --icon-20-line-height: 20px;
+
+  --icon-24-size: 24px;
+  --icon-24-line-height: 24px;
+
+  --text-indent: 80px;
+
+  --letter-spacing-large: -0.5px;
+  --letter-spacing-small: -0.2px;
+
+  --header-height-desktop: 80px;
+  --header-height-mobile: 60px;
+
+  --max-width-desktop: 1256px;
+  --max-width-mobile: 100%;
+
+  /* ------------------------------------------------------------------------
+     Spacing - Padding
+     ------------------------------------------------------------------------ */
+
+  --spacing-padding-01: 4px;
+  --spacing-padding-02: 8px;
+  --spacing-padding-03: 12px;
+  --spacing-padding-04: 16px;
+  --spacing-padding-05: 24px;
+  --spacing-padding-06: 32px;
+  --spacing-padding-07: 40px;
+  --spacing-padding-08: 48px;
+  --spacing-padding-09: 64px;
+
+  /* ------------------------------------------------------------------------
+     Spacing - Layout
+     ------------------------------------------------------------------------ */
+
+  --spacing-layout-01: 12px;
+  --spacing-layout-02: 16px;
+  --spacing-layout-03: 24px;
+  --spacing-layout-04: 32px;
+  --spacing-layout-05: 40px;
+  --spacing-layout-06: 48px;
+  --spacing-layout-07: 64px;
+  --spacing-layout-08: 80px;
+  --spacing-layout-09: 120px;
+
+  /* ------------------------------------------------------------------------
+     Font families
+     ------------------------------------------------------------------------ */
+
+  --typography-font-family-200: 'Montserrat Extra Light', sans-serif;
+  --typography-font-family-300: 'Montserrat Light', sans-serif;
+  --typography-font-family-400: 'Montserrat Regular', sans-serif;
+  --typography-font-family-500: 'Montserrat Medium', sans-serif;
+  --typography-font-family-600: 'Montserrat Semi Bold', sans-serif;
+  --typography-font-family-700: 'Montserrat Bold', sans-serif;
+
+  --typography-font-family-v-2-200: 'Montserrat Regular', sans-serif;
+  --typography-font-family-v-2-300: 'Montserrat Semi Bold', sans-serif;
+  --typography-font-family-v-2-400: 'Montserrat Semi Bold', sans-serif;
+  --typography-font-family-v-2-500: 'Montserrat Light', sans-serif;
+  --typography-font-family-v-2-600: 'Montserrat Light', sans-serif;
+  --typography-font-family-v-2-700: 'Montserrat Light', sans-serif;
+}
+
+
+/* ==========================================================================
+   Datacom Semantic Colour Variables
+   ========================================================================== */
+
+:root {
+  --color-accent-pink-20: var(--color-accent-pink-20);
+  --color-accent-pink-40: var(--color-accent-pink-40);
+  --color-accent-pink-60: var(--color-accent-pink-60);
+  --color-accent-pink-80: var(--color-accent-pink-80);
+  --color-accent-pink-base: var(--color-accent-pink-base);
+
+  --color-cobalt-blue-20: var(--color-cobalt-blue-20);
+  --color-cobalt-blue-40: var(--color-cobalt-blue-40);
+  --color-cobalt-blue-60: var(--color-cobalt-blue-60);
+  --color-cobalt-blue-80: var(--color-cobalt-blue-80);
+  --color-cobalt-blue-base: var(--color-cobalt-blue-base);
+
+  --color-dark-blue-20: var(--color-dark-blue-20);
+  --color-dark-blue-40: var(--color-dark-blue-40);
+  --color-dark-blue-60: var(--color-dark-blue-60);
+  --color-dark-blue-80: var(--color-dark-blue-80);
+  --color-dark-blue-base: var(--color-dark-blue-base);
+
+  --color-datacom-blue-20: var(--color-datacom-blue-20);
+  --color-datacom-blue-40: var(--color-datacom-blue-40);
+  --color-datacom-blue-60: var(--color-datacom-blue-60);
+  --color-datacom-blue-80: var(--color-datacom-blue-80);
+  --color-datacom-blue-base: var(--color-datacom-blue-base);
+
+  --color-light-blue-20: var(--color-light-blue-20);
+  --color-light-blue-40: var(--color-light-blue-40);
+  --color-light-blue-60: var(--color-light-blue-60);
+  --color-light-blue-80: var(--color-light-blue-80);
+  --color-light-blue-base: var(--color-light-blue-base);
+
+  --color-extra-light-blue-20: var(--color-extra-light-blue-20);
+  --color-extra-light-blue-40: var(--color-extra-light-blue-40);
+  --color-extra-light-blue-60: var(--color-extra-light-blue-60);
+  --color-extra-light-blue-80: var(--color-extra-light-blue-80);
+  --color-extra-light-blue-base: var(--color-extra-light-blue-base);
+
+  --color-sky-blue-20: var(--color-sky-blue-20);
+  --color-sky-blue-40: var(--color-sky-blue-40);
+  --color-sky-blue-60: var(--color-sky-blue-60);
+  --color-sky-blue-80: var(--color-sky-blue-80);
+  --color-sky-blue-base: var(--color-sky-blue-base);
+
+  --color-accent-orange-20: var(--color-accent-orange-20);
+  --color-accent-orange-40: var(--color-accent-orange-40);
+  --color-accent-orange-60: var(--color-accent-orange-60);
+  --color-accent-orange-80: var(--color-accent-orange-80);
+  --color-accent-orange-base: var(--color-accent-orange-base);
+}
+
+
+/* ==========================================================================
+   Datacom Colour Aliases
+   ========================================================================== */
+
+:root {
+  --color-midnight-blue: var(--color-midnight-blue-base);
+  --color-midnight-blue-minus1: var(--color-midnight-blue-minus-1);
+  --color-midnight-blue-minus3: var(--color-midnight-blue-minus-3);
+  --color-midnight-blue-minus4: var(--color-midnight-blue-minus-4);
+  --color-midnight-blue-minus5: var(--color-midnight-blue-minus-5);
+
+  --color-light-royal-purple: var(--color-royal-purple-light);
+  --color-deep-royal-purple: var(--color-royal-purple-deep);
+
+  --color-admiral-blue: var(--color-admiral-blue-base);
+  --color-admiral-blue-minus1: var(--color-admiral-blue-minus-1);
+  --color-admiral-blue-minus2: var(--color-admiral-blue-minus-2);
+  --color-admiral-blue-minus3: var(--color-admiral-blue-minus-3);
+  --color-admiral-blue-plus1: var(--color-admiral-blue-plus-1);
+  --color-admiral-blue-plus2: var(--color-admiral-blue-plus-2);
+  --color-admiral-blue-plus3: var(--color-admiral-blue-plus-3);
+
+  --color-electric-blue: var(--color-electric-blue-base);
+  --color-electric-blue-minus1: var(--color-electric-blue-minus-1);
+  --color-electric-blue-minus2: var(--color-electric-blue-minus-2);
+  --color-electric-blue-minus3: var(--color-electric-blue-minus-3);
+  --color-electric-blue-plus1: var(--color-electric-blue-plus-1);
+  --color-electric-blue-plus2: var(--color-electric-blue-plus-2);
+  --color-electric-blue-plus3: var(--color-electric-blue-plus-3);
+
+  --color-empress-teal: var(--color-empress-teal-base);
+  --color-empress-teal-minus1: var(--color-empress-teal-minus-1);
+  --color-empress-teal-minus2: var(--color-empress-teal-minus-2);
+  --color-empress-teal-minus3: var(--color-empress-teal-minus-3);
+  --color-empress-teal-plus1: var(--color-empress-teal-plus-1);
+  --color-empress-teal-plus2: var(--color-empress-teal-plus-2);
+  --color-empress-teal-plus3: var(--color-empress-teal-plus-3);
+
+  --color-sky-blue: var(--color-sky-blue-v-2-base);
+  --color-sky-blue-minus1: var(--color-sky-blue-v-2-minus-1);
+  --color-sky-blue-minus2: var(--color-sky-blue-v-2-minus-2);
+  --color-sky-blue-minus3: var(--color-sky-blue-v-2-minus-3);
+  --color-sky-blue-plus1: var(--color-sky-blue-v-2-plus-1);
+  --color-sky-blue-plus2: var(--color-sky-blue-v-2-plus-2);
+  --color-sky-blue-plus3: var(--color-sky-blue-v-2-plus-3);
+
+  --color-candy-pink: var(--color-candy-pink-base);
+  --color-candy-pink-minus1: var(--color-candy-pink-minus-1);
+  --color-candy-pink-minus2: var(--color-candy-pink-minus-2);
+  --color-candy-pink-minus3: var(--color-candy-pink-minus-3);
+  --color-candy-pink-plus1: var(--color-candy-pink-plus-1);
+  --color-candy-pink-plus2: var(--color-candy-pink-plus-2);
+  --color-candy-pink-plus3: var(--color-candy-pink-plus-3);
+
+  --color-tangerine-orange: var(--color-tangerine-orange-base);
+  --color-tangerine-orange-minus1: var(--color-tangerine-orange-minus-1);
+  --color-tangerine-orange-minus2: var(--color-tangerine-orange-minus-2);
+  --color-tangerine-orange-minus3: var(--color-tangerine-orange-minus-3);
+  --color-tangerine-orange-plus1: var(--color-tangerine-orange-plus-1);
+  --color-tangerine-orange-plus2: var(--color-tangerine-orange-plus-2);
+  --color-tangerine-orange-plus3: var(--color-tangerine-orange-plus-3);
+
+  --color-datapay-turquoise: var(--color-datapay-turquoise-base);
+  --color-datapay-turquoise-minus1: var(--color-datapay-turquoise-minus-1);
+  --color-datapay-turquoise-minus2: var(--color-datapay-turquoise-minus-2);
+  --color-datapay-turquoise-minus3: var(--color-datapay-turquoise-minus-3);
+  --color-datapay-turquoise-minus4: var(--color-datapay-turquoise-minus-4);
+  --color-datapay-turquoise-plus1: var(--color-datapay-turquoise-plus-1);
+  --color-datapay-turquoise-plus2: var(--color-datapay-turquoise-plus-2);
+  --color-datapay-turquoise-plus3: var(--color-datapay-turquoise-plus-3);
+
+  --color-timpani-sapphire: var(--color-timpani-sapphire-base);
+  --color-timpani-sapphire-minus1: var(--color-timpani-sapphire-minus-1);
+  --color-timpani-sapphire-minus2: var(--color-timpani-sapphire-minus-2);
+  --color-timpani-sapphire-minus3: var(--color-timpani-sapphire-minus-3);
+  --color-timpani-sapphire-minus4: var(--color-timpani-sapphire-minus-4);
+  --color-timpani-sapphire-plus1: var(--color-timpani-sapphire-plus-1);
+
+  --color-datascape-indigo: var(--color-datascape-indigo-base);
+  --color-datascape-indigo-minus1: var(--color-datascape-indigo-minus-1);
+  --color-datascape-indigo-minus2: var(--color-datascape-indigo-minus-2);
+  --color-datascape-indigo-minus3: var(--color-datascape-indigo-minus-3);
+  --color-datascape-indigo-minus4: var(--color-datascape-indigo-minus-4);
+  --color-datascape-indigo-plus1: var(--color-datascape-indigo-plus-1);
+  --color-datascape-indigo-plus2: var(--color-datascape-indigo-plus-2);
+  --color-datascape-indigo-plus3: var(--color-datascape-indigo-plus-3);
+
+  --color-gateway-gold: var(--color-gateway-gold-base);
+  --color-gateway-gold-minus1: var(--color-gateway-gold-minus-1);
+  --color-gateway-gold-minus2: var(--color-gateway-gold-minus-2);
+  --color-gateway-gold-minus3: var(--color-gateway-gold-minus-3);
+  --color-gateway-gold-minus4: var(--color-gateway-gold-minus-4);
+  --color-gateway-gold-plus1: var(--color-gateway-gold-plus-1);
+  --color-gateway-gold-plus2: var(--color-gateway-gold-plus-2);
+  --color-gateway-gold-plus3: var(--color-gateway-gold-plus-3);
+
+  --color-action-blue: var(--color-action-blue);
+  --color-action-blue-hover: var(--color-action-blue-hover);
+}
+
+
+/* ==========================================================================
+   Theme Variables
+   ========================================================================== */
+
+:root {
+  --color-light-background: var(--color-extra-light-blue-40);
+  --color-light-text: var(--color-dark-blue-base);
+
+  --color-dark-background: var(--color-dark-blue-base);
+  --color-dark-text: var(--color-white);
+
+  --color-datapay-background: var(--color-theme-datapay);
+  --color-datascape-background: var(--color-theme-datascape);
+  --color-gateway-background: var(--color-theme-gateway);
+  --color-timpani-background: var(--color-theme-timpani);
+}
+
+
+/* ==========================================================================
+   Common Variables
+   ========================================================================== */
+
+:root {
+  --primary-01-120: var(--color-dark-blue-base);
+  --primary-01-100: var(--color-datacom-blue-base);
+  --primary-01-080: var(--color-datacom-blue-80);
+  --primary-01-060: var(--color-datacom-blue-60);
+  --primary-01-040: var(--color-datacom-blue-40);
+  --primary-01-020: var(--color-datacom-blue-20);
+
+  --secondary-01-100: var(--color-dark-blue-base);
+  --secondary-01-080: var(--color-dark-blue-80);
+  --secondary-01-060: var(--color-dark-blue-60);
+  --secondary-01-040: var(--color-dark-blue-40);
+  --secondary-01-020: var(--color-dark-blue-20);
+
+  --secondary-02-100: var(--color-light-blue-base);
+  --secondary-02-080: var(--color-light-blue-80);
+  --secondary-02-060: var(--color-light-blue-60);
+  --secondary-02-040: var(--color-light-blue-40);
+  --secondary-02-020: var(--color-light-blue-20);
+
+  --secondary-03-100: var(--color-extra-light-blue-base);
+  --secondary-03-080: var(--color-extra-light-blue-80);
+  --secondary-03-060: var(--color-extra-light-blue-60);
+  --secondary-03-040: var(--color-extra-light-blue-40);
+  --secondary-03-020: var(--color-extra-light-blue-20);
+
+  --secondary-04-100: var(--color-accent-pink-base);
+  --secondary-04-080: var(--color-accent-pink-80);
+  --secondary-04-060: var(--color-accent-pink-60);
+  --secondary-04-040: var(--color-accent-pink-40);
+  --secondary-04-020: var(--color-accent-pink-20);
+
+  --secondary-05-100: var(--color-accent-orange-base);
+  --secondary-05-080: var(--color-accent-orange-80);
+  --secondary-05-060: var(--color-accent-orange-60);
+  --secondary-05-040: var(--color-accent-orange-40);
+  --secondary-05-020: var(--color-accent-orange-20);
+
+  --color-black: var(--color-datacom-black);
+  --color-darkest-grey: var(--color-darkest-grey);
+  --color-dark-grey: var(--color-dark-grey);
+  --color-dark-grey-02: var(--color-midnight-blue-minus-5);
+  --color-grey: var(--color-grey);
+  --color-light-grey: var(--color-light-grey);
+  --color-extra-light-grey: var(--color-extra-light-grey);
+  --color-white: var(--color-white);
+  --color-error-red: var(--color-error-red);
+
+  --color-rag-red: var(--color-rag-red);
+  --color-rag-amber: var(--color-rag-amber);
+  --color-rag-green: var(--color-rag-green);
+
+  --color-cta: var(--color-action-blue);
+  --color-cta-hover: var(--color-action-blue-hover);
+
+  --font-color-default: var(--font-color-default);
+  --font-color-caption: var(--font-color-caption);
+
+  --linkedin-color: var(--color-social-linkedin);
+  --twitter-color: var(--color-social-twitter);
+  --youtube-color: var(--color-social-youtube);
+  --facebook-color: var(--color-social-facebook);
+
+  --event-color: var(--secondary-04-100);
+}
+
+
+/* ==========================================================================
+   Component Variables
+   ========================================================================== */
+
+:root {
+  --color-background-overlay: rgb(10 24 57 / 50%);
+
+  --color-bg-overlay-expanded-tile-1: rgb(0 10 20 / 80%);
+  --color-bg-overlay-expanded-tile-2: rgb(0 10 20 / 0%);
+  --color-bg-overlay-expanded-tile-3: rgb(0 18 94 / 98%);
+  --color-bg-overlay-expanded-tile-4: rgb(128 160 248 / 98%);
+
+  --overlay-modes-1: overlay, overlay, overlay, overlay, overlay, normal;
+  --overlay-modes-2: overlay, overlay, difference, difference, difference, normal;
+
+  --color-background-overlay-hero-tabs: rgb(0 10 20 / 15%);
+  --color-admiral-blue-overlay-1: rgb(0 22 127 / 50%);
+}
+
+
+/* ==========================================================================
+   Gradients
+   ========================================================================== */
+
+:root {
+  --gradient-first: var(--color-datacom-blue-base);
+  --gradient-second: var(--color-datacom-blue-80);
+  --gradient-third: var(--color-datacom-blue-60);
+
+  --conic-gradient-white:
+    conic-gradient(
+      var(--color-white),
+      rgb(255 255 255 / 0%)
+    );
+
+  --conic-gradient-blue:
+    conic-gradient(
+      var(--color-electric-blue),
+      rgb(0 43 251 / 0%)
+    );
+}
+
+
+/* ==========================================================================
+   Font Size Aliases
+   ========================================================================== */
+
+:root {
+  --font-80-size: var(--font-80-size);
+  --font-80-line-height: var(--font-80-line-height);
+
+  --font-64-size: var(--font-64-size);
+  --font-64-line-height: var(--font-64-line-height);
+
+  --font-48-size: var(--font-48-size);
+  --font-48-line-height: var(--font-48-line-height);
+
+  --font-40-size: var(--font-40-size);
+  --font-40-line-height: var(--font-40-line-height);
+
+  --font-32-size: var(--font-32-size);
+  --font-32-line-height: var(--font-32-line-height);
+
+  --font-24-size: var(--font-24-size);
+  --font-24-line-height: var(--font-24-line-height);
+
+  --font-18-size: var(--font-18-size);
+  --font-18-line-height: var(--font-18-line-height);
+
+  --font-16-size: var(--font-16-size);
+  --font-16-line-height: var(--font-16-line-height);
+
+  --font-14-size: var(--font-14-size);
+  --font-14-line-height: var(--font-14-line-height);
+
+  --icon-24-size: var(--icon-24-size);
+  --icon-24-line-height: var(--icon-24-line-height);
+
+  --icon-20-size: var(--icon-20-size);
+  --icon-20-line-height: var(--icon-20-line-height);
+
+  --letter-spacing-large: var(--letter-spacing-large);
+  --letter-spacing-small: var(--letter-spacing-small);
+}
+
+
+/* ==========================================================================
+   Typography Aliases
+   ========================================================================== */
+
+:root {
+  --typography-font-family-200: var(--typography-font-family-200);
+  --typography-font-family-300: var(--typography-font-family-300);
+  --typography-font-family-400: var(--typography-font-family-400);
+  --typography-font-family-500: var(--typography-font-family-500);
+  --typography-font-family-600: var(--typography-font-family-600);
+  --typography-font-family-700: var(--typography-font-family-700);
+
+  --typography-font-family-v2-200:
+    var(--typography-font-family-v-2-200);
+
+  --typography-font-family-v2-300:
+    var(--typography-font-family-v-2-300);
+
+  --typography-font-family-v2-400:
+    var(--typography-font-family-v-2-400);
+
+  --typography-font-family-v2-500:
+    var(--typography-font-family-v-2-500);
+
+  --typography-font-family-v2-600:
+    var(--typography-font-family-v-2-600);
+
+  --typography-font-family-v2-700:
+    var(--typography-font-family-v-2-700);
+
+  --font-family-light:
+    var(--typography-font-family-300);
+
+  --font-family-base:
+    var(--typography-font-family-400);
+
+  --font-family-medium:
+    var(--typography-font-family-500);
+
+  --font-family-semi-bold:
+    var(--typography-font-family-600);
+
+  --font-family-bold:
+    var(--typography-font-family-700);
+
+  --font-family-light-v2:
+    var(--typography-font-family-v2-700);
+
+  --font-family-regular-v2:
+    var(--typography-font-family-v2-200);
+
+  --font-family-semi-bold-v2:
+    var(--typography-font-family-v2-400);
+}
+
+
+/* ==========================================================================
+   Breakpoints
+   ========================================================================== */
+
+:root {
+  --breakpoint-400: var(--breakpoint-mobile-01);
+  --breakpoint-600: var(--breakpoint-mobile-02);
+  --breakpoint-725: var(--breakpoint-mobile-03);
+  --breakpoint-768: var(--breakpoint-mobile-04);
+
+  --breakpoint-1100: var(--breakpoint-tablet-01);
+  --breakpoint-1112: var(--breakpoint-tablet-02);
+  --breakpoint-1113: var(--breakpoint-tablet-03);
+
+  --breakpoint-1500: var(--breakpoint-desktop-01);
+
+  --breakpoint-mobile: var(--breakpoint-mobile);
+  --breakpoint-tablet: var(--breakpoint-tablet);
+  --breakpoint-desktop: var(--breakpoint-desktop);
+
+  /* Datacom website breakpoints */
+
+  --screen-large-02: 1500px;
+  --screen-large-03: 1366px;
+
+  --screen-large: 1300px;
+  --screen-medium-02: 1100px;
+  --screen-medium-04: 1113px;
+  --screen-medium-03: 1112px;
+
+  --screen-medium: 900px;
+  --screen-x-medium: 768px;
+  --screen-small-03: 725px;
+  --screen-small-02: 600px;
+
+  --screen-small: 500px;
+  --screen-x-small: 400px;
+}
+
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+:root {
+  --text-indent: 80px;
+
+  /* Layout spacing */
+
+  --spacing-layout-01: 12px;
+  --spacing-layout-02: 16px;
+  --spacing-layout-03: 24px;
+  --spacing-layout-04: 32px;
+  --spacing-layout-05: 40px;
+  --spacing-layout-06: 48px;
+  --spacing-layout-07: 64px;
+  --spacing-layout-08: 80px;
+  --spacing-layout-09: 120px;
+
+  /* Padding */
+
+  --spacing-padding-01: 4px;
+  --spacing-padding-02: 8px;
+  --spacing-padding-03: 12px;
+  --spacing-padding-04: 16px;
+  --spacing-padding-05: 24px;
+  --spacing-padding-06: 32px;
+  --spacing-padding-07: 40px;
+  --spacing-padding-08: 48px;
+  --spacing-padding-09: 64px;
+
+  /* Component */
+
+  --gutter-padding: var(--spacing-padding-08);
+  --gutter-padding-mobile: var(--spacing-padding-05);
+
+  --max-width: var(--max-width-desktop);
+
+  --header-height: 80px;
+  --header-height-mobile: 60px;
+  --header-height-mobile-open: calc(var(--header-height-mobile) * 2);
+
+  /* Section */
+
+  --cmp-section-padding-bottom-desktop: var(--spacing-layout-09);
+  --cmp-section-padding-bottom-large-tablet: var(--spacing-layout-08);
+  --cmp-section-padding-bottom-tablet: var(--spacing-layout-08);
+  --cmp-section-padding-bottom-mobile: var(--spacing-layout-06);
+
+  --cmp-section-padding-top-desktop: var(--spacing-layout-07);
+  --cmp-section-padding-top-large-tablet: var(--spacing-layout-06);
+  --cmp-section-padding-top-tablet: var(--spacing-layout-06);
+  --cmp-section-padding-top-mobile: var(--spacing-layout-04);
+
+  /* Content */
+
+  --cmp-content-padding-bottom-desktop: var(--spacing-layout-06);
+  --cmp-content-padding-bottom-large-tablet: var(--spacing-layout-05);
+  --cmp-content-padding-bottom-tablet: var(--spacing-layout-04);
+  --cmp-content-padding-bottom-mobile: var(--spacing-layout-04);
+
+  --cmp-content-padding-top-desktop: var(--spacing-layout-06);
+  --cmp-content-padding-top-large-tablet: var(--spacing-layout-05);
+  --cmp-content-padding-top-tablet: var(--spacing-layout-04);
+  --cmp-content-padding-top-mobile: var(--spacing-layout-04);
+}
+
+/* =========================================================
+   General / Utility Styles
+   Converted from Datacom general.less
+   ========================================================= */
+
+/* Content container */
+
+.content-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter-padding);
+  width: auto;
+}
+
+@media (max-width: var(--screen-medium)) {
+  .content-container {
+    padding: 0 var(--gutter-padding-mobile);
+  }
+}
+
+
+/* Article body content margin */
+.article-body-content-margin {
+  margin-bottom: var(--spacing-padding-08);
+}
+
+@media (max-width: var(--screen-small)) {
+  .article-body-content-margin {
+    margin-bottom: var(--spacing-padding-06);
+  }
+}
+
+
+/* Tags */
+.tags-format {
+  margin-bottom: var(--spacing-padding-02);
+  padding: var(--spacing-padding-01) var(--spacing-padding-02);
+  background-color: var(--color-white);
+  color: var(--font-color-default);
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.tags-format a {
+  color: var(--font-color-default);
+}
+
+
+/* Tag type */
+.tag-type {
+  background-color: var(--color-white);
+}
+
+.tag-type a {
+  color: var(--font-color-default);
+}
+
+
+/* Tag hover */
+.tag-hover:hover {
+  background-color: var(--color-dark-grey-02);
+}
+
+.tag-hover:hover a {
+  color: var(--font-color-default);
+}
+
+
+/* Component heading padding */
+.component-heading-padding {
+  padding-bottom: var(--spacing-padding-07);
+}
+
+@media (max-width: var(--screen-large)) {
+  .component-heading-padding {
+    padding-bottom: var(--spacing-padding-06);
+  }
+}
+
+@media (max-width: var(--screen-medium)) {
+  .component-heading-padding {
+    font-size: var(--font-32-size);
+    font-weight: 300;
+    line-height: var(--font-32-line-height);
+    font-family: var(--font-family-light-v2);
+    letter-spacing: var(--letter-spacing-large);
+  }
+}
+
+
+/* Section margin bottom */
+.section-margin-bottom {
+  margin-bottom: var(--cmp-section-padding-bottom-desktop);
+}
+
+@media (max-width: var(--screen-large)) {
+  .section-margin-bottom {
+    margin-bottom: var(--cmp-section-padding-bottom-tablet);
+  }
+}
+
+@media (max-width: var(--screen-medium)) {
+  .section-margin-bottom {
+    margin-bottom: var(--cmp-section-padding-bottom-mobile);
+  }
+}
+
+
+/* Section margin top */
+.section-margin-top {
+  margin-top: var(--cmp-section-padding-top-desktop);
+}
+
+@media (max-width: var(--screen-large)) {
+  .section-margin-top {
+    margin-top: var(--cmp-section-padding-top-tablet);
+  }
+}
+
+@media (max-width: var(--screen-medium)) {
+  .section-margin-top {
+    margin-top: var(--cmp-section-padding-top-mobile);
+  }
+}
+
+
+/* Content margin bottom */
+.content-margin-bottom {
+  margin-bottom: var(--cmp-content-padding-bottom-desktop);
+}
+
+@media (max-width: var(--screen-large)) {
+  .content-margin-bottom {
+    margin-bottom: var(--cmp-content-padding-bottom-tablet);
+  }
+}
+
+@media (max-width: var(--screen-medium)) {
+  .content-margin-bottom {
+    margin-bottom: var(--cmp-content-padding-bottom-mobile);
+  }
+}
+
+
+/* Content margin top */
+.content-margin-top {
+  margin-top: var(--cmp-content-padding-top-desktop);
+}
+
+@media (max-width: var(--screen-large)) {
+  .content-margin-top {
+    margin-top: var(--cmp-content-padding-top-tablet);
+  }
+}
+
+@media (max-width: var(--screen-medium)) {
+  .content-margin-top {
+    margin-top: var(--cmp-content-padding-top-mobile);
+  }
+}
+
+/* =========================================================
+   Datacom - Typography / Font Utilities
+   Converted from fonts.less for AEM Edge Delivery Services
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Small text
+   --------------------------------------------------------- */
+
+.small-text-format {
+  font-size: var(--font-14-size);
+  font-weight: 400;
+  line-height: var(--font-14-line-height);
+  font-family: var(--font-family-base);
+}
+
+
+/* ---------------------------------------------------------
+   Small text heading
+   --------------------------------------------------------- */
+
+.small-text-heading-format {
+  font-size: var(--font-14-size);
+  font-weight: 400;
+  line-height: var(--font-14-line-height);
+  font-family: var(--font-family-bold);
+  letter-spacing: var(--letter-spacing-small);
+}
+
+
+/* ---------------------------------------------------------
+   Caption
+   --------------------------------------------------------- */
+
+.caption-format {
+  font-size: var(--font-14-size);
+  font-weight: 400;
+  line-height: var(--font-14-line-height);
+  font-family: var(--font-family-base);
+  letter-spacing: var(--letter-spacing-small);
+  color: var(--font-color-caption);
+}
+
+
+/* ---------------------------------------------------------
+   Tags
+   --------------------------------------------------------- */
+
+.tags-text-format {
+  font-size: var(--font-14-size);
+  font-weight: 400;
+  line-height: var(--font-14-line-height);
+  font-family: var(--font-family-semiBold);
+  letter-spacing: var(--letter-spacing-small);
+}
+
+
+/* ---------------------------------------------------------
+   Body text
+   --------------------------------------------------------- */
+
+.body-text-format {
+  font-size: var(--font-16-size);
+  font-weight: 400;
+  line-height: var(--font-16-line-height);
+  font-family: var(--font-family-base);
+  letter-spacing: var(--letter-spacing-small);
+}
+
+
+/* ---------------------------------------------------------
+   Medium placeholder
+   --------------------------------------------------------- */
+
+.medium-placeholder-text-format {
+  font-size: var(--font-18-size);
+  line-height: var(--font-18-line-height);
+  font-family: var(--font-family-medium);
+  letter-spacing: var(--letter-spacing-small);
+}
+
+
+/* ---------------------------------------------------------
+   Large placeholder
+   --------------------------------------------------------- */
+
+.large-placeholder-text-format {
+  font-size: var(--font-24-size);
+  font-weight: 600;
+  line-height: var(--font-24-line-height);
+  font-family: var(--font-family-medium);
+  letter-spacing: var(--letter-spacing-small);
+}
+
+
+/* ---------------------------------------------------------
+   Medium paragraph
+   --------------------------------------------------------- */
+
+.p-medium-text-format {
+  font-size: var(--font-16-size);
+  font-weight: 400;
+  line-height: var(--font-16-line-height);
+  font-family: var(--font-family-medium);
+  letter-spacing: var(--letter-spacing-small);
+}
+
+@media (max-width: var(--screen-small)) {
+  .p-medium-text-format {
+    font-weight: 600;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Bold paragraph
+   --------------------------------------------------------- */
+
+.p-bold-text-format {
+  font-size: var(--font-16-size);
+  font-weight: 400;
+  line-height: var(--font-16-line-height);
+  font-family: var(--font-family-bold);
+  letter-spacing: var(--letter-spacing-small);
+}
+
+@media (max-width: var(--screen-small)) {
+  .p-bold-text-format {
+    font-weight: 600;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Maximum hero heading
+   --------------------------------------------------------- */
+
+.max-hero-heading-format {
+  font-size: var(--font-80-size);
+  line-height: var(--font-80-line-height);
+  font-family: var(--font-family-bold);
+  letter-spacing: var(--letter-spacing-large);
+}
+
+
+/* ---------------------------------------------------------
+   H1
+   --------------------------------------------------------- */
+
+.h1-text-format {
+  font-size: var(--font-64-size);
+  font-weight: 300;
+  line-height: var(--font-64-line-height);
+  font-family: var(--font-family-light-v2);
+  letter-spacing: var(--letter-spacing-large);
+}
+
+
+/* ---------------------------------------------------------
+   H2
+   --------------------------------------------------------- */
+
+.h2-text-format {
+  font-size: var(--font-48-size);
+  font-weight: 300;
+  line-height: var(--font-48-line-height);
+  font-family: var(--font-family-light-v2);
+  letter-spacing: var(--letter-spacing-large);
+}
+
+
+/* ---------------------------------------------------------
+   Large heading
+   --------------------------------------------------------- */
+
+.large-heading-format {
+  font-size: var(--font-40-size);
+  font-weight: 300;
+  line-height: var(--font-40-line-height);
+  font-family: var(--font-family-light-v2);
+  letter-spacing: var(--letter-spacing-large);
+}
+
+
+/* ---------------------------------------------------------
+   H3
+   --------------------------------------------------------- */
+
+.h3-text-format {
+  font-size: var(--font-32-size);
+  font-weight: 600;
+  line-height: var(--font-32-line-height);
+  font-family: var(--font-family-semiBold-v2);
+  letter-spacing: var(--letter-spacing-large);
+}
+
+@media (max-width: var(--screen-small)) {
+  .h3-text-format {
+    font-weight: 300;
+    font-family: var(--font-family-light-v2);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   H4
+   --------------------------------------------------------- */
+
+.h4-text-format {
+  font-size: var(--font-24-size);
+  font-weight: 600;
+  line-height: var(--font-24-line-height);
+  font-family: var(--font-family-semiBold-v2);
+  letter-spacing: var(--letter-spacing-large);
+}
+
+
+/* ---------------------------------------------------------
+   Icons
+   --------------------------------------------------------- */
+
+.icon-format {
+  font-size: var(--icon-24-size);
+  line-height: var(--icon-24-line-height);
+}
+
+
+/* ---------------------------------------------------------
+   CTA link
+   --------------------------------------------------------- */
+
+.cta-link-format {
+  font-size: var(--font-18-size);
+  line-height: var(--font-18-line-height);
+  font-family: var(--font-family-medium);
+  letter-spacing: var(--letter-spacing-small);
+  color: var(--color-cta);
+}
+
+
+/* ---------------------------------------------------------
+   Page link
+   --------------------------------------------------------- */
+
+.page-link-format {
+  font-size: var(--font-18-size);
+  line-height: var(--font-18-line-height);
+  font-family: var(--font-family-medium);
+  letter-spacing: var(--letter-spacing-small);
+}
+
+
+/* ---------------------------------------------------------
+   Bold page link
+   --------------------------------------------------------- */
+
+.bold-page-link-format {
+  font-size: var(--font-18-size);
+  line-height: var(--font-18-line-height);
+  font-family: var(--font-family-bold);
+  letter-spacing: var(--letter-spacing-small);
+}
+
+
+/* =========================================================
+   TABLET TYPOGRAPHY
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Maximum hero heading - tablet
+   --------------------------------------------------------- */
+
+.max-hero-heading-tablet-format {
+  font-size: var(--font-64-size);
+  font-weight: 300;
+  line-height: var(--font-64-line-height);
+  font-family: var(--font-family-light-v2);
+  letter-spacing: var(--letter-spacing-small);
+}
+
+
+/* ---------------------------------------------------------
+   H1 - tablet
+   --------------------------------------------------------- */
+
+.h1-text-tablet-format {
+  font-size: var(--font-48-size);
+  font-weight: 300;
+  line-height: var(--font-48-line-height);
+  font-family: var(--font-family-light-v2);
+  letter-spacing: var(--letter-spacing-large);
+}
+
+
+/* ---------------------------------------------------------
+   H2 - tablet
+   --------------------------------------------------------- */
+
+.h2-text-tablet-format {
+  font-size: var(--font-40-size);
+  font-weight: 300;
+  line-height: var(--font-40-line-height);
+  font-family: var(--font-family-light-v2);
+  letter-spacing: var(--letter-spacing-large);
+}
+
+
+/* ---------------------------------------------------------
+   H3 - tablet
+   --------------------------------------------------------- */
+
+.h3-text-tablet-format {
+  font-size: var(--font-24-size);
+  font-weight: 300;
+  line-height: var(--font-24-line-height);
+  font-family: var(--font-family-semiBold-v2);
+  letter-spacing: var(--letter-spacing-large);
+}
+
+@media (max-width: var(--screen-small)) {
+  .h3-text-tablet-format {
+    font-weight: 600;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   H4 - tablet
+   --------------------------------------------------------- */
+
+.h4-text-tablet-format {
+  font-size: var(--font-18-size);
+  line-height: var(--font-18-line-height);
+  font-family: var(--font-family-bold);
+  letter-spacing: var(--letter-spacing-small);
+}
+
+@media (max-width: var(--screen-small)) {
+  .h4-text-tablet-format {
+    font-family: var(--font-family-semiBold);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Icons - tablet
+   --------------------------------------------------------- */
+
+.icon-tablet-format {
+  font-size: var(--icon-20-size);
+  line-height: var(--icon-20-line-height);
+}
+
+
+/* =========================================================
+   MOBILE TYPOGRAPHY
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   H1 - mobile
+   --------------------------------------------------------- */
+
+.h1-text-mobile-format {
+  font-size: var(--font-32-size);
+  font-weight: 600;
+  line-height: var(--font-32-line-height);
+  font-family: var(--font-family-semiBold-v2);
+  letter-spacing: var(--letter-spacing-large);
+}
+
+@media (max-width: var(--screen-small)) {
+  .h1-text-mobile-format {
+    font-weight: 300;
+    font-family: var(--font-family-light-v2);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   H2 - mobile
+   --------------------------------------------------------- */
+
+.h2-text-mobile-format {
+  font-size: var(--font-24-size);
+  font-weight: 600;
+  line-height: var(--font-24-line-height);
+  font-family: var(--font-family-semiBold-v2);
+  letter-spacing: var(--letter-spacing-large);
+}
+
+
+/* ---------------------------------------------------------
+   H3 - mobile
+   --------------------------------------------------------- */
+
+.h3-text-mobile-format {
+  font-size: var(--font-18-size);
+  line-height: var(--font-18-line-height);
+  font-family: var(--font-family-bold);
+  letter-spacing: var(--letter-spacing-small);
+}
+
+@media (max-width: var(--screen-small)) {
+  .h3-text-mobile-format {
+    font-weight: 600;
+  }
+}
+
+
+/* =========================================================
+   THEME / TEXT COLOUR
+   ========================================================= */
+
+/*
+ * LESS:
+ *
+ * .text-theme(@text-color: @font-color-default) {
+ *   h1, h2, h3, h4, h5, h6,
+ *   .h1, .h2, .h3, .h4, .h5, .h6 {
+ *     color: @text-color;
+ *   }
+ * }
+ *
+ * CSS cannot have parameters, so use a custom property.
+ */
+
+.text-theme {
+  --theme-text-color: var(--font-color-default);
+}
+
+.text-theme h1,
+.text-theme h2,
+.text-theme h3,
+.text-theme h4,
+.text-theme h5,
+.text-theme h6,
+.text-theme .h1,
+.text-theme .h2,
+.text-theme .h3,
+.text-theme .h4,
+.text-theme .h5,
+.text-theme .h6 {
+  color: var(--theme-text-color);
+}
