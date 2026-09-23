@@ -1,0 +1,190 @@
+/*
+ * Article Body Image block
+ * -----------------------------------------------------------------------
+ * Ported from:
+ *   - datacom-commons-v2 "Article body image" — default.less
+ *   - datacom "Article body image" — default.less (project overrides)
+ *
+ * CSS custom properties use generic fallback values and should be swapped
+ * for the project's real design tokens once defined for this EDS project.
+ * The original LESS variable/mixin each property maps to is noted beside
+ * it in a comment.
+ */
+
+.article-body-image__parent-ctn {
+  display: flex;
+  flex-direction: column;
+  /* .article-body-content-margin(); — replace with the project's real
+     article body content margin utility/token once available */
+  margin-bottom: var(--spacing-padding-06, 32px);
+}
+
+.article-body-image__ctn {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.article-body-image__caption {
+  /* .caption-format(); */
+  font-size: var(--body-font-size-s, 0.875rem);
+  line-height: 1.4;
+  color: var(--color-dark-grey, #666666);
+  padding-top: 12px;
+  display: block;
+}
+
+/* ---- Asset container (one per image/video/lottie slot) ---- */
+
+.article-body-image__image__ctn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  box-sizing: border-box;
+  position: relative; /* for lightbox positioning */
+}
+
+.article-body-image__image__ctn:nth-child(odd) {
+  padding-right: var(--spacing-padding-04, 16px);
+}
+
+@media (width <= 1200px) {
+  .article-body-image__image__ctn:nth-child(odd) {
+    padding-right: var(--spacing-padding-03, 12px);
+  }
+}
+
+.article-body-image__image__ctn:nth-child(even) {
+  padding-left: var(--spacing-padding-04, 16px);
+}
+
+@media (width <= 1200px) {
+  .article-body-image__image__ctn:nth-child(even) {
+    padding-left: var(--spacing-padding-03, 12px);
+  }
+}
+
+.article-body-image__image__ctn:nth-child(3),
+.article-body-image__image__ctn:nth-child(4) {
+  padding-top: var(--spacing-padding-06, 32px);
+}
+
+@media (width <= 1200px) {
+  .article-body-image__image__ctn:nth-child(3),
+  .article-body-image__image__ctn:nth-child(4) {
+    padding-top: var(--spacing-padding-05, 24px);
+  }
+}
+
+.article-body-image__image__ctn--full-width {
+  width: 100%;
+  padding: 0 !important;
+}
+
+.article-body-image__image__ctn--invisible {
+  visibility: hidden;
+}
+
+/* ---- Image asset ---- */
+
+.article-body-image__image {
+  width: 100%;
+  border-radius: 8px; /* .border-radius(8px); */
+  border: 2px solid transparent;
+  display: block;
+}
+
+.article-body-image__image--border {
+  border: 2px solid var(--cmp-article-body-image-border-color, #d9d9d9);
+}
+
+/* ---- Video asset ---- */
+/* Video is always autoplay/loop/muted/playsinline (set in JS), matching
+   the legacy component's hardcoded behaviour. */
+
+.article-body-image__video {
+  width: 100%;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  display: block;
+}
+
+.article-body-image__video--border {
+  border: 2px solid var(--cmp-article-body-image-border-color, #d9d9d9);
+}
+
+/* ---- Lottie asset ---- */
+
+.article-body-image__lottie-container {
+  width: auto;
+}
+
+.article-body-image__lottie-container svg {
+  border-radius: 8px;
+}
+
+/* ---- Lightbox behaviour ---- */
+/* Original component delegated to a separate lightbox component keyed off
+   nth-child position; this version uses a single click-to-open modal
+   overlay shared across all assets on the page. */
+
+.article-body-image--lightbox {
+  cursor: pointer;
+}
+
+.article-body-image__lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgb(0 0 0 / 85%);
+  align-items: center;
+  justify-content: center;
+}
+
+.article-body-image__lightbox-overlay--open {
+  display: flex;
+}
+
+.article-body-image__lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.article-body-image__lightbox-content img,
+.article-body-image__lightbox-content video,
+.article-body-image__lightbox-content picture img {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+}
+
+.article-body-image__lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* ---- Responsive: stack to a single column on small screens ---- */
+
+@media (width <= 600px) {
+  .article-body-image__image__ctn {
+    width: 100%;
+    padding: 0 !important;
+    margin-bottom: var(--spacing-padding-04, 16px);
+  }
+
+  .article-body-image__image__ctn:nth-child(3),
+  .article-body-image__image__ctn:nth-child(4) {
+    padding-top: 0;
+  }
+}
