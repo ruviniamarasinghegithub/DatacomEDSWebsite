@@ -1,0 +1,125 @@
+/* ---- Datacom - Article Body Text block - Styles ---- */
+
+.article-body-text.cmp-text .caption {
+  /* .caption-format(); */
+  font-size: var(--body-font-size-s, 0.875rem);
+  line-height: 1.4;
+  color: var(--color-dark-grey, #666666); /* @color-dark-grey */
+}
+
+.article-body-text.cmp-text a {
+  color: var(--color-cta, #0057b8); /* @color-cta */
+  text-decoration: none;
+  background-image:
+    linear-gradient(transparent, transparent),
+    linear-gradient(
+      var(--color-cta-hover, #003f88),
+      var(--color-cta-hover, #003f88)
+    ); /* @color-cta-hover */
+  background-size: 100% 1px, 0 1px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.1s linear;
+}
+
+.article-body-text.cmp-text a:hover,
+.article-body-text.cmp-text a:focus {
+  color: var(--color-cta-hover, #003f88);
+  background-size: 0 1px, 100% 1px;
+}
+
+.article-body-text.cmp-text h1,
+.article-body-text.cmp-text h2,
+.article-body-text.cmp-text h3,
+.article-body-text.cmp-text h4 {
+  margin-bottom: var(--spacing-padding-05, 24px); /* @spacing-padding-05 */
+}
+
+@media (width <= 600px) {
+  .article-body-text.cmp-text h1,
+  .article-body-text.cmp-text h2,
+  .article-body-text.cmp-text h3,
+  .article-body-text.cmp-text h4 {
+    margin-bottom: var(--spacing-padding-04, 16px); /* @spacing-padding-04 */
+  }
+}
+
+/* thicker underline on h1/h2 links */
+.article-body-text.cmp-text h1 a,
+.article-body-text.cmp-text h2 a {
+  background-size: 100% 3px, 0 3px;
+}
+
+.article-body-text.cmp-text h1 a:hover,
+.article-body-text.cmp-text h2 a:hover {
+  background-size: 0 3px, 100% 3px;
+}
+
+/* medium underline on h3/h4 links */
+.article-body-text.cmp-text h3 a,
+.article-body-text.cmp-text h4 a {
+  background-size: 100% 2px, 0 2px;
+}
+
+.article-body-text.cmp-text h3 a:hover,
+.article-body-text.cmp-text h4 a:hover {
+  background-size: 0 2px, 100% 2px;
+}
+
+/*
+ * "dark-blue" inline style — applied by wrapping specific text in a
+ * <span class="dark-blue"> within the authored rich text, not as a
+ * block-level variant.
+ */
+.article-body-text.cmp-text .dark-blue {
+  color: var(--font-color-default, #002554); /* @font-color-default */
+  background-image:
+    linear-gradient(transparent, transparent),
+    linear-gradient(
+      var(--font-color-default, #002554),
+      var(--font-color-default, #002554)
+    );
+}
+
+.article-body-text.cmp-text .dark-blue:hover {
+  color: var(--font-color-default, #002554);
+}
+
+/* ---- Variant: padding-bottom ---- */
+/* Authored as: Body Text (padding-bottom) */
+
+.article-body-text.padding-bottom {
+  margin-bottom: var(--spacing-layout-06, 64px); /* @spacing-layout-06 */
+}
+
+@media (width <= 1200px) {
+  .article-body-text.padding-bottom {
+    margin-bottom: var(--spacing-layout-05, 48px); /* @spacing-layout-05 */
+  }
+}
+
+@media (width <= 600px) {
+  .article-body-text.padding-bottom {
+    margin-bottom: var(--spacing-layout-04, 32px); /* @spacing-layout-04 */
+  }
+}
+
+/* ---- Variant: padding-bottom-form ---- */
+/* Authored as: Body Text (padding-bottom-form) */
+/* Used above a form/CTA to reduce bottom spacing instead of margin */
+
+.article-body-text.padding-bottom-form {
+  padding-bottom: var(--spacing-layout-03, 24px); /* @spacing-layout-03 */
+}
+
+@media (width <= 1200px) {
+  .article-body-text.padding-bottom-form {
+    padding-bottom: var(--spacing-layout-03, 24px);
+  }
+}
+
+@media (width <= 600px) {
+  .article-body-text.padding-bottom-form {
+    padding-bottom: var(--spacing-layout-02, 16px); /* @spacing-layout-02 */
+  }
+}
