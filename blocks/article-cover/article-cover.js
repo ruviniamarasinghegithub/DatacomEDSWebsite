@@ -25,8 +25,9 @@ function toBoolean(value = '') {
 
 function buildFieldMap(block) {
   const fields = {};
+  const rows = [...block.children];
 
-  [...block.children].forEach((row) => {
+  rows.forEach((row, index) => {
     const cells = [...row.children];
     if (!cells.length) return;
 
@@ -45,11 +46,21 @@ function buildFieldMap(block) {
         fields['image of person'] = imageUrl;
         return;
       }
+
+      if (/^image(?: of person)?$/i.test(label)) {
+        const nextRow = rows[index + 1];
+        const nextUrl = nextRow ? parseImageFromText(nextRow.textContent.trim()) : '';
+        if (nextUrl) {
+          fields['image of person'] = nextUrl;
+        }
+        return;
+      }
     }
 
     cells.forEach((cell) => {
       const text = cell.textContent.trim();
       if (!text) return;
+
       const directImage = parseImageFromText(text);
       if (directImage) {
         fields['image of person'] = directImage;

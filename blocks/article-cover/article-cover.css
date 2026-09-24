@@ -119,13 +119,13 @@
 }
 
 .article-cover__profile-image-ctn {
-  width: 78px;
-  height: 78px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
   overflow: hidden;
   background: linear-gradient(135deg, #7b6dff, #2fe2ff, #ff5ebc);
   flex-shrink: 0;
-  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.06);
+  box-shadow: 0 0 0 2px rgba(17, 17, 17, 0.06);
 }
 
 .article-cover__profile-image {
@@ -133,6 +133,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .article-cover__author-date-ctn {
@@ -144,7 +145,7 @@
 .article-cover__author-block {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.9rem;
 }
 
 .article-cover__author-name {
@@ -163,22 +164,27 @@
 .article-cover__social-wrap {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
 .article-cover__social-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 0.35rem;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 0.38rem;
   background: #111;
   color: #fff;
   text-decoration: none;
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   line-height: 1;
+}
+
+.article-cover__social-link:hover,
+.article-cover__social-link:focus-visible {
+  opacity: 0.9;
 }
 
 .article-cover__social-text {
