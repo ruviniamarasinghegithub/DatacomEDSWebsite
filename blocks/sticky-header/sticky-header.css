@@ -15,12 +15,12 @@
 
 .sticky-header.is-sticky {
   position: sticky;
-  top: var(--sticky-header-top, 0);
+  top: 0;
 }
 
 .sticky-header.is-sticky .sticky-header-bar {
   position: sticky;
-  top: var(--sticky-header-top, 0);
+  top: 0;
 }
 
 .sticky-header-content {
