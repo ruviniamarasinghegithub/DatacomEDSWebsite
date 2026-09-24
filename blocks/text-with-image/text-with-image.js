@@ -191,6 +191,13 @@ export default async function decorate(block) {
   const wideImage = isTrue(fieldValue(fields, 'widen image'));
   const compact = isTrue(fieldValue(fields, 'compact mode'));
   const alignTop = isTrue(fieldValue(fields, 'align content to the top of the container'));
+  const wrapper = block.parentElement;
+  const hasDarkTheme = block.classList.contains('dark-theme')
+    || wrapper?.classList.contains('dark-theme');
+  const hasLightTheme = block.classList.contains('light-theme')
+    || wrapper?.classList.contains('light-theme');
+  const hasWhiteTheme = block.classList.contains('white-theme')
+    || wrapper?.classList.contains('white-theme');
   const place = fieldValue(fields, 'name of place');
   const city = fieldValue(fields, 'city');
   const country = fieldValue(fields, 'country');
@@ -265,6 +272,12 @@ export default async function decorate(block) {
   block.classList.toggle('text-with-image-video-variant', isVideo);
   block.classList.toggle('text-with-image-lottie-variant', isLottie);
   block.classList.toggle('text-with-image-map-variant', isMap);
+  block.classList.toggle('text-with-image-dark-theme', block.classList.contains('dark-theme'));
+  block.classList.toggle('text-with-image-light-theme', block.classList.contains('light-theme'));
+  block.classList.toggle('text-with-image-white-theme', block.classList.contains('white-theme'));
+  wrapper?.classList.toggle('text-with-image-dark-theme', hasDarkTheme);
+  wrapper?.classList.toggle('text-with-image-light-theme', hasLightTheme);
+  wrapper?.classList.toggle('text-with-image-white-theme', hasWhiteTheme);
   block.textContent = '';
   block.append(content, media);
 
