@@ -107,14 +107,20 @@ async function createLottieMedia(url, loop, autoplay, alt) {
   const media = document.createElement('div');
   media.className = 'text-with-image-lottie';
   if (alt) media.setAttribute('aria-label', alt);
-  const lottie = await loadLottie();
-  lottie.loadAnimation({
-    container: media,
-    renderer: 'svg',
-    loop,
-    autoplay,
-    path: url,
-  });
+  try {
+    const lottie = await loadLottie();
+    lottie.loadAnimation({
+      container: media,
+      renderer: 'svg',
+      loop,
+      autoplay,
+      path: url,
+    });
+  } catch (error) {
+    // Keep the text-with-image content available if the animation cannot load.
+    // eslint-disable-next-line no-console
+    console.error('Lottie animation failed to load', error);
+  }
   return media;
 }
 
