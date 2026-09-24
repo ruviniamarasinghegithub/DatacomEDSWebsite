@@ -27,6 +27,27 @@ function isTrue(value) {
   return value.toLowerCase() === 'true';
 }
 
+function getFieldLink(rows, name) {
+  const row = rows.find((item) => getRowLabel(item) === name);
+  return row?.querySelector('a[href]');
+}
+
+function addCta(content, rows, fields, showField, textField, style) {
+  const text = fieldValue(fields, textField);
+  const sourceLink = getFieldLink(rows, textField);
+  if (!isTrue(fieldValue(fields, showField)) || !text || !sourceLink) return;
+
+  const wrapper = content.querySelector('.text-with-image-cta')
+    || document.createElement('div');
+  wrapper.className = 'text-with-image-cta button-wrapper';
+  const link = document.createElement('a');
+  link.className = `button ${style}`;
+  link.href = sourceLink.href;
+  link.textContent = text;
+  wrapper.append(link);
+  if (!wrapper.parentElement) content.append(wrapper);
+}
+
 export default function decorate(block) {
   const rows = [...block.children];
   const fields = getFieldRows(block);
@@ -67,6 +88,8 @@ export default function decorate(block) {
     if (heading) content.insertAdjacentHTML('beforeend', `<h2>${heading}</h2>`);
     if (subHeading) content.insertAdjacentHTML('beforeend', `<h3>${subHeading}</h3>`);
     if (body) content.insertAdjacentHTML('beforeend', `<p>${body}</p>`);
+    addCta(content, rows, fields, 'show cta button', 'cta button text', 'primary');
+    addCta(content, rows, fields, 'show secondary cta button', 'secondary cta button text', 'secondary');
     rows.slice(picture ? 1 : 0).forEach((row) => {
       if (fields[getRowLabel(row)]) return;
       [...row.children].forEach((child) => content.append(child));
