@@ -27,6 +27,26 @@ function isTrue(value) {
   return value.toLowerCase() === 'true';
 }
 
+const LOTTIE_CDN_URL = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js';
+let lottiePromise;
+
+function loadLottie() {
+  if (!lottiePromise) {
+    lottiePromise = new Promise((resolve, reject) => {
+      if (window.lottie) {
+        resolve(window.lottie);
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = LOTTIE_CDN_URL;
+      script.onload = () => resolve(window.lottie);
+      script.onerror = reject;
+      document.head.append(script);
+    });
+  }
+  return lottiePromise;
+}
+
 function getFieldLink(rows, name) {
   const row = rows.find((item) => getRowLabel(item) === name);
   return row?.querySelector('a[href]');
@@ -82,6 +102,22 @@ function createVideoMedia(url, alt) {
   return media;
 }
 
+async function createLottieMedia(url, loop, autoplay, alt) {
+  if (!url) return null;
+  const media = document.createElement('div');
+  media.className = 'text-with-image-lottie';
+  if (alt) media.setAttribute('aria-label', alt);
+  const lottie = await loadLottie();
+  lottie.loadAnimation({
+    container: media,
+    renderer: 'svg',
+    loop,
+    autoplay,
+    path: url,
+  });
+  return media;
+}
+
 function addVideoSchema(url, fields) {
   const uploadDate = fieldValue(fields, 'video upload date (for schema)');
   const title = fieldValue(fields, 'schema title (optional)') || fieldValue(fields, 'heading');
@@ -118,7 +154,7 @@ function addCta(content, rows, fields, showField, textField, style) {
   if (!wrapper.parentElement) content.append(wrapper);
 }
 
-export default function decorate(block) {
+export default async function decorate(block) {
   const rows = [...block.children];
   const fields = getFieldRows(block);
   const firstRow = rows[0];
@@ -132,14 +168,26 @@ export default function decorate(block) {
   const compact = isTrue(fieldValue(fields, 'compact mode'));
   const alignTop = isTrue(fieldValue(fields, 'align content to the top of the container'));
   const videoUrl = getMediaUrl(rows, fields, 'video link');
+  const lottieUrl = getMediaUrl(rows, fields, 'lottie asset link');
   const isVideo = block.classList.contains('video')
     || block.classList.contains('text-with-image-video')
     || Boolean(videoUrl);
+  const isLottie = block.classList.contains('lottie')
+    || block.classList.contains('text-with-image-lottie')
+    || Boolean(lottieUrl);
 
   const media = document.createElement('div');
   media.className = 'text-with-image-media';
   if (wideImage) media.classList.add('text-with-image-media-wide');
-  if (isVideo) {
+  if (isLottie) {
+    const lottie = await createLottieMedia(
+      lottieUrl,
+      isTrue(fieldValue(fields, 'loop animation')),
+      isTrue(fieldValue(fields, 'enable auto play')),
+      fieldValue(fields, 'alternative text for lottie'),
+    );
+    if (lottie) media.append(lottie);
+  } else if (isVideo) {
     const video = createVideoMedia(videoUrl, fieldValue(fields, 'alternative text for video'));
     if (video) media.append(video);
     addVideoSchema(videoUrl, fields);
@@ -182,6 +230,7 @@ export default function decorate(block) {
   block.classList.toggle('text-with-image-wide', wideImage);
   block.classList.toggle('text-with-image-compact', compact);
   block.classList.toggle('text-with-image-video-variant', isVideo);
+  block.classList.toggle('text-with-image-lottie-variant', isLottie);
   block.textContent = '';
   block.append(content, media);
 

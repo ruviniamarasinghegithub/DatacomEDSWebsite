@@ -90,6 +90,17 @@
   border: 0;
 }
 
+.text-with-image-lottie {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.text-with-image-lottie > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .text-with-image-wide .text-with-image-media picture,
 .text-with-image-wide .text-with-image-image {
   height: 100%;
@@ -101,6 +112,11 @@
 }
 
 .text-with-image-wide .text-with-image-video {
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.text-with-image-wide .text-with-image-lottie {
   height: 100%;
   aspect-ratio: auto;
 }
