@@ -78,8 +78,13 @@ export default function decorate(block) {
   block.append(stickyBar);
 
   const updateSticky = () => {
+    const topNav = document.querySelector('header .header, .cmp-header-mega, header')
+      || document.querySelector('header');
+    const navHeight = topNav ? topNav.getBoundingClientRect().height : 0;
+    document.documentElement.style.setProperty('--sticky-header-top', `${navHeight}px`);
+
     const rect = block.getBoundingClientRect();
-    const shouldStick = rect.top <= 0;
+    const shouldStick = rect.top <= navHeight;
     block.classList.toggle('is-sticky', shouldStick);
   };
 
