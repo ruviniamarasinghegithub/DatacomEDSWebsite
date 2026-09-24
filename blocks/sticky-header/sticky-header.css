@@ -15,12 +15,8 @@
 
 .sticky-header.is-sticky {
   position: sticky;
-  top: 0;
-}
-
-.sticky-header.is-sticky .sticky-header-bar {
-  position: sticky;
-  top: 0;
+  top: var(--sticky-header-top, 0px);
+  z-index: 60;
 }
 
 .sticky-header-content {
