@@ -268,6 +268,10 @@
   --sticky-header-border: #444;
 }
 
+.sticky-header__navigation {
+  display: none;
+}
+
 @media (max-width: 899px) {
   .sticky-header .cmp-tabs__heading__ctn {
     padding: 0 16px;
