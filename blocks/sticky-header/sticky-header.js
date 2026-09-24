@@ -81,6 +81,12 @@ export default function decorate(block) {
     const topNav = document.querySelector('header .nav-wrapper, header .header, .cmp-header-mega, header')
       || document.querySelector('header');
     const navHeight = topNav ? Math.ceil(topNav.getBoundingClientRect().height) : 0;
+
+    if (!topNav || navHeight <= 0) {
+      block.classList.remove('is-sticky');
+      return;
+    }
+
     block.style.setProperty('--sticky-header-top', `${navHeight}px`);
 
     const rect = block.getBoundingClientRect();
