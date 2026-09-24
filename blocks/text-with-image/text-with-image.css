@@ -77,6 +77,16 @@
   object-fit: cover;
 }
 
+.text-with-image-wide .text-with-image-media picture,
+.text-with-image-wide .text-with-image-image {
+  height: 100%;
+}
+
+.text-with-image-wide .text-with-image-image {
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
 .text-with-image-content .button-wrapper {
   margin: 20px 0 0;
 }
@@ -102,9 +112,15 @@
     width: 100%;
     justify-self: end;
     padding: 0 64px;
+    box-sizing: border-box;
   }
 
   .text-with-image-wide .text-with-image-media {
+    height: 100%;
+  }
+
+  .text-with-image-wide .text-with-image-media picture {
+    display: block;
     height: 100%;
   }
 
