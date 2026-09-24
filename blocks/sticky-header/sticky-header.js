@@ -48,6 +48,7 @@ export default function decorate(block) {
   }
 
   block.textContent = '';
+  block.classList.add('sticky-header');
 
   const stickyBar = document.createElement('div');
   stickyBar.className = 'sticky-header-bar';
@@ -75,4 +76,14 @@ export default function decorate(block) {
 
   stickyBar.append(headerContent);
   block.append(stickyBar);
+
+  const updateStickyState = () => {
+    const topBoundary = block.offsetTop;
+    const shouldStick = window.scrollY > topBoundary;
+    block.classList.toggle('is-sticky', shouldStick);
+  };
+
+  updateStickyState();
+  window.addEventListener('scroll', updateStickyState, { passive: true });
+  window.addEventListener('resize', updateStickyState, { passive: true });
 }
