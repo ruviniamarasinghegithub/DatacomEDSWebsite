@@ -3,11 +3,19 @@ function normalizeLabel(label = '') {
 }
 
 function parseImageFromText(value = '') {
-  const match = String(value).match(/!\[(?:.*?)\]\((https?:\/\/[^)\s]+)\)/i);
-  if (match) return match[1];
+  const text = String(value || '').trim();
+  if (!text) return '';
 
-  const urlMatch = String(value).match(/https?:\/\/\S+/i);
-  return urlMatch ? urlMatch[0].replace(/[),.;]+$/, '') : '';
+  const markdownMatch = text.match(/!\[(?:.*?)\]\((https?:\/\/[^)\s]+)\)/i);
+  if (markdownMatch) return markdownMatch[1];
+
+  const fullUrlMatch = text.match(/https?:\/\/[^\s<>"]+/i);
+  if (fullUrlMatch) return fullUrlMatch[0].replace(/[),.;]+$/, '');
+
+  const imageCandidate = text.match(/(?:^|\s)(https?:\/\/[^\s]+\.(?:png|jpe?g|gif|webp|svg))(?:\s|$)/i);
+  if (imageCandidate) return imageCandidate[1].replace(/[),.;]+$/, '');
+
+  return '';
 }
 
 function getFieldValue(fields, ...keys) {
@@ -35,19 +43,21 @@ function buildFieldMap(block) {
     if (!rowTexts.length) return;
 
     const plainText = rowTexts.join(' ');
+    const directImage = parseImageFromText(plainText);
+
+    if (directImage) {
+      fields['image of person'] = directImage;
+      return;
+    }
+
     if (!plainText.includes(':') && rowTexts.length === 1) {
       const label = rowTexts[0].trim().toLowerCase();
       if (['content', 'time and location', 'scroll button'].includes(label)) {
         return;
       }
 
-      const imageUrl = parseImageFromText(rowTexts[0]);
-      if (imageUrl) {
-        fields['image of person'] = imageUrl;
-        return;
-      }
-
-      if (/^image(?: of person)?$/i.test(label)) {
+      const imageAlias = /^(?:image(?: of person)?|author image|profile image|person image|photo|avatar)$/i;
+      if (imageAlias.test(label)) {
         const nextRow = rows[index + 1];
         const nextUrl = nextRow ? parseImageFromText(nextRow.textContent.trim()) : '';
         if (nextUrl) {
@@ -61,9 +71,9 @@ function buildFieldMap(block) {
       const text = cell.textContent.trim();
       if (!text) return;
 
-      const directImage = parseImageFromText(text);
-      if (directImage) {
-        fields['image of person'] = directImage;
+      const directCellImage = parseImageFromText(text);
+      if (directCellImage) {
+        fields['image of person'] = directCellImage;
         return;
       }
 
@@ -72,7 +82,17 @@ function buildFieldMap(block) {
 
       const [, label, value] = match;
       if (!label || !value) return;
-      fields[normalizeLabel(label)] = value.trim();
+
+      const normalized = normalizeLabel(label);
+      if (['image', 'image of person', 'author image', 'profile image', 'person image', 'photo', 'avatar'].includes(normalized)) {
+        const parsed = parseImageFromText(value);
+        if (parsed) {
+          fields['image of person'] = parsed;
+          return;
+        }
+      }
+
+      fields[normalized] = value.trim();
     });
 
     if (Object.keys(fields).length) {
