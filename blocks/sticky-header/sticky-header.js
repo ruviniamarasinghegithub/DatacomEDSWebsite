@@ -76,14 +76,4 @@ export default function decorate(block) {
 
   stickyBar.append(headerContent);
   block.append(stickyBar);
-
-  const updateStickyState = () => {
-    const topBoundary = block.offsetTop;
-    const shouldStick = window.scrollY > topBoundary;
-    block.classList.toggle('is-sticky', shouldStick);
-  };
-
-  updateStickyState();
-  window.addEventListener('scroll', updateStickyState, { passive: true });
-  window.addEventListener('resize', updateStickyState, { passive: true });
 }

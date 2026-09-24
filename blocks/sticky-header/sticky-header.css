@@ -4,18 +4,14 @@
 }
 
 .sticky-header-bar {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 50;
   width: 100%;
   background: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid #d9d9d9;
   backdrop-filter: blur(6px);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
-}
-
-.sticky-header.is-sticky .sticky-header-bar {
-  position: sticky;
-  top: 0;
 }
 
 .sticky-header-content {
