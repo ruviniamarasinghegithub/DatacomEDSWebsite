@@ -1,11 +1,12 @@
 .sticky-header {
-  position: relative;
+  position: sticky;
+  top: var(--nav-height, 64px);
   z-index: 40;
+  background: rgba(255, 255, 255, 0.96);
 }
 
 .sticky-header-bar {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 50;
   width: 100%;
   background: rgba(255, 255, 255, 0.96);
