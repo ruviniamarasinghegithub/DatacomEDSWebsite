@@ -141,6 +141,12 @@
   gap: 0.1rem;
 }
 
+.article-cover__author-block {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
 .article-cover__author-name {
   font-size: 1.15rem;
   font-weight: 700;
@@ -152,6 +158,32 @@
   font-size: 1rem;
   color: #3d3d3d;
   line-height: 1.2;
+}
+
+.article-cover__social-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.article-cover__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.35rem;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.article-cover__social-text {
+  display: inline-block;
+  transform: translateY(-1px);
 }
 
 .article-cover__right-column {

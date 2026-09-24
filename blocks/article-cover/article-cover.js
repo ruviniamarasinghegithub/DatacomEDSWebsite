@@ -2,6 +2,14 @@ function normalizeLabel(label = '') {
   return label.toLowerCase().trim().replace(/\s+/g, ' ');
 }
 
+function parseImageFromText(value = '') {
+  const match = String(value).match(/!\[(?:.*?)\]\((https?:\/\/[^)\s]+)\)/i);
+  if (match) return match[1];
+
+  const urlMatch = String(value).match(/https?:\/\/\S+/i);
+  return urlMatch ? urlMatch[0].replace(/[),.;]+$/, '') : '';
+}
+
 function getFieldValue(fields, ...keys) {
   const match = keys.find((key) => {
     const value = fields[normalizeLabel(key)];
@@ -31,11 +39,23 @@ function buildFieldMap(block) {
       if (['content', 'time and location', 'scroll button'].includes(label)) {
         return;
       }
+
+      const imageUrl = parseImageFromText(rowTexts[0]);
+      if (imageUrl) {
+        fields['image of person'] = imageUrl;
+        return;
+      }
     }
 
     cells.forEach((cell) => {
       const text = cell.textContent.trim();
       if (!text) return;
+      const directImage = parseImageFromText(text);
+      if (directImage) {
+        fields['image of person'] = directImage;
+        return;
+      }
+
       const match = text.match(/^(.+?)\s*:\s*(.*)$/);
       if (!match) return;
 
@@ -56,6 +76,29 @@ function buildFieldMap(block) {
   });
 
   return fields;
+}
+
+function createSocialIcon(label, href) {
+  const link = document.createElement('a');
+  link.className = 'article-cover__social-link';
+  link.href = href || '#';
+  link.target = '_blank';
+  link.rel = 'noreferrer noopener';
+  link.setAttribute('aria-label', label);
+
+  const labelText = document.createElement('span');
+  labelText.className = 'article-cover__social-text';
+
+  let shortLabel = 'f';
+  if (label === 'LinkedIn') {
+    shortLabel = 'in';
+  } else if (label === 'X') {
+    shortLabel = 'x';
+  }
+
+  labelText.textContent = shortLabel;
+  link.append(labelText);
+  return link;
 }
 
 function createLabelValue(label, value) {
@@ -98,7 +141,6 @@ export default function decorate(block) {
     'name of author',
     'author',
     'author name',
-    'event organizer',
   );
 
   const authorRole = getFieldValue(
@@ -113,22 +155,11 @@ export default function decorate(block) {
     'image of person',
     'profile image',
     'image',
-  );
+  ) || parseImageFromText(block.textContent || '');
 
-  const postedDate = getFieldValue(
-    fields,
-    'show posted date',
-    'posted date',
-    'date',
-    'event date',
-  );
-
-  const readTime = getFieldValue(
-    fields,
-    'article read time',
-    'read time',
-    'minutes to read',
-  );
+  const showPostedDate = toBoolean(getFieldValue(fields, 'show posted date'));
+  const postedDate = getFieldValue(fields, 'posted date', 'date', 'event date');
+  const readTime = getFieldValue(fields, 'article read time', 'read time', 'minutes to read');
 
   const hideScrollButton = toBoolean(getFieldValue(fields, 'hide scroll button', 'hide scroll button?'));
   const scrollText = getFieldValue(fields, 'scroll button text', 'button text', 'anchor text') || 'Scroll to details';
@@ -145,6 +176,12 @@ export default function decorate(block) {
   const organizerEmail = getFieldValue(fields, 'event organizer email');
   const eventName = getFieldValue(fields, 'event name', 'event title');
 
+  const socialLinks = [
+    { label: 'Facebook', href: getFieldValue(fields, 'facebook url', 'facebook link') || 'https://www.facebook.com/' },
+    { label: 'LinkedIn', href: getFieldValue(fields, 'linkedin url', 'linkedin link') || 'https://www.linkedin.com/' },
+    { label: 'X', href: getFieldValue(fields, 'x url', 'twitter url', 'twitter link') || 'https://x.com/' },
+  ];
+
   block.textContent = '';
   block.classList.add('article-cover');
 
@@ -157,14 +194,14 @@ export default function decorate(block) {
   const metaRow = document.createElement('div');
   metaRow.className = 'article-cover__top-row';
 
-  if (postedDate && !toBoolean(getFieldValue(fields, 'hide posted date'))) {
+  if (showPostedDate && postedDate) {
     const posted = document.createElement('div');
     posted.className = 'article-cover__posted-date';
     posted.textContent = postedDate;
     metaRow.append(posted);
   }
 
-  if (readTime && toBoolean(getFieldValue(fields, 'show article read time'))) {
+  if (readTime) {
     const read = document.createElement('div');
     read.className = 'article-cover__read-time';
     read.textContent = `${readTime} minutes to read`;
@@ -227,18 +264,36 @@ export default function decorate(block) {
   if (authorName || authorRole) {
     const info = document.createElement('div');
     info.className = 'article-cover__author-date-ctn';
+
+    const authorBlock = document.createElement('div');
+    authorBlock.className = 'article-cover__author-block';
+
     if (authorName) {
       const name = document.createElement('div');
       name.className = 'article-cover__author-name';
       name.textContent = authorName;
-      info.append(name);
+      authorBlock.append(name);
     }
+
     if (authorRole) {
       const role = document.createElement('div');
       role.className = 'article-cover__author-role';
       role.textContent = authorRole;
-      info.append(role);
+      authorBlock.append(role);
     }
+
+    const socialWrap = document.createElement('div');
+    socialWrap.className = 'article-cover__social-wrap';
+    socialLinks.forEach(({ label, href }) => {
+      if (!href || href === '#') return;
+      socialWrap.append(createSocialIcon(label, href));
+    });
+
+    if (socialWrap.children.length) {
+      authorBlock.append(socialWrap);
+    }
+
+    info.append(authorBlock);
     profile.append(info);
   }
 
