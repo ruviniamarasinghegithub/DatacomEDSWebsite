@@ -159,9 +159,16 @@
 }
 
 .article-cover__author-role {
+  display: block;
   font-size: 0.95rem;
   color: #3d3d3d;
   line-height: 1.2;
+}
+
+.article-cover__author-date-ctn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
 }
 
 .article-cover__social-wrap {

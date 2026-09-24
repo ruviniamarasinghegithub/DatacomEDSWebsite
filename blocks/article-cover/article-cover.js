@@ -299,19 +299,24 @@ export default function decorate(block) {
     const authorBlock = document.createElement('div');
     authorBlock.className = 'article-cover__author-block';
 
+    const nameWrap = document.createElement('div');
+    nameWrap.className = 'article-cover__author-name-wrap';
+
     if (authorName) {
       const name = document.createElement('div');
       name.className = 'article-cover__author-name';
       name.textContent = authorName;
-      authorBlock.append(name);
+      nameWrap.append(name);
     }
 
     if (authorRole) {
       const role = document.createElement('div');
       role.className = 'article-cover__author-role';
       role.textContent = authorRole;
-      authorBlock.append(role);
+      nameWrap.append(role);
     }
+
+    authorBlock.append(nameWrap);
 
     const socialWrap = document.createElement('div');
     socialWrap.className = 'article-cover__social-wrap';
