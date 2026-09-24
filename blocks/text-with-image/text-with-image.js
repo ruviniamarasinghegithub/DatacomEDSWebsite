@@ -32,6 +32,76 @@ function getFieldLink(rows, name) {
   return row?.querySelector('a[href]');
 }
 
+function getMediaUrl(rows, fields, name) {
+  return getFieldLink(rows, name)?.href || fieldValue(fields, name);
+}
+
+function createVideoMedia(url, alt) {
+  if (!url) return null;
+  const media = document.createElement('div');
+  media.className = 'text-with-image-video';
+
+  if (/\.(mp4|webm|mov)(\?.*)?$/i.test(url)) {
+    const video = document.createElement('video');
+    video.className = 'text-with-image-video-player';
+    video.controls = true;
+    video.playsInline = true;
+    video.preload = 'metadata';
+    if (alt) video.setAttribute('aria-label', alt);
+    const source = document.createElement('source');
+    source.src = url;
+    video.append(source);
+    media.append(video);
+    return media;
+  }
+
+  let embedUrl;
+  try {
+    const parsedUrl = new URL(url, window.location.href);
+    if (parsedUrl.hostname.includes('youtube.com') || parsedUrl.hostname === 'youtu.be') {
+      const videoId = parsedUrl.searchParams.get('v') || parsedUrl.pathname.split('/').filter(Boolean).pop();
+      embedUrl = `https://www.youtube.com/embed/${videoId}`;
+    } else if (parsedUrl.hostname.includes('vimeo.com')) {
+      const videoId = parsedUrl.pathname.split('/').filter(Boolean).pop();
+      embedUrl = `https://player.vimeo.com/video/${videoId}`;
+    } else {
+      embedUrl = url;
+    }
+  } catch {
+    embedUrl = url;
+  }
+
+  const iframe = document.createElement('iframe');
+  iframe.className = 'text-with-image-video-player';
+  iframe.src = embedUrl;
+  iframe.title = alt || 'Text with image video';
+  iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+  iframe.setAttribute('allowfullscreen', '');
+  iframe.setAttribute('frameborder', '0');
+  media.append(iframe);
+  return media;
+}
+
+function addVideoSchema(url, fields) {
+  const uploadDate = fieldValue(fields, 'video upload date (for schema)');
+  const title = fieldValue(fields, 'schema title (optional)') || fieldValue(fields, 'heading');
+  const description = fieldValue(fields, 'video description (for schema)');
+  if (!url || !uploadDate || !title || !description) return;
+
+  const schema = document.createElement('script');
+  schema.type = 'application/ld+json';
+  schema.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: title,
+    description,
+    uploadDate,
+    contentUrl: url,
+    embedUrl: url,
+  });
+  document.head.append(schema);
+}
+
 function addCta(content, rows, fields, showField, textField, style) {
   const text = fieldValue(fields, textField);
   const sourceLink = getFieldLink(rows, textField);
@@ -61,11 +131,19 @@ export default function decorate(block) {
   const wideImage = isTrue(fieldValue(fields, 'widen image'));
   const compact = isTrue(fieldValue(fields, 'compact mode'));
   const alignTop = isTrue(fieldValue(fields, 'align content to the top of the container'));
+  const videoUrl = getMediaUrl(rows, fields, 'video link');
+  const isVideo = block.classList.contains('video')
+    || block.classList.contains('text-with-image-video')
+    || Boolean(videoUrl);
 
   const media = document.createElement('div');
   media.className = 'text-with-image-media';
   if (wideImage) media.classList.add('text-with-image-media-wide');
-  if (picture) {
+  if (isVideo) {
+    const video = createVideoMedia(videoUrl, fieldValue(fields, 'alternative text for video'));
+    if (video) media.append(video);
+    addVideoSchema(videoUrl, fields);
+  } else if (picture) {
     const image = picture.querySelector('img');
     const alt = fieldValue(fields, 'image alt');
     if (image) {
@@ -103,6 +181,7 @@ export default function decorate(block) {
   block.classList.toggle('text-with-image-switch', switchImage);
   block.classList.toggle('text-with-image-wide', wideImage);
   block.classList.toggle('text-with-image-compact', compact);
+  block.classList.toggle('text-with-image-video-variant', isVideo);
   block.textContent = '';
   block.append(content, media);
 
