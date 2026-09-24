@@ -41,16 +41,57 @@ export default function decorate(block) {
   const noSticky = block.classList.contains('no-sticky');
   block.classList.remove('hide-heading', 'no-sticky');
 
-  const row = block.firstElementChild;
-  const cells = row ? [...row.children] : [];
+  const rows = [...block.children];
+  const tableRow = block.firstElementChild;
+  const cells = tableRow ? [...tableRow.children] : [];
   const headingCell = cells[0];
   const buttonCell = cells[1];
 
-  const headingText = headingCell?.textContent.trim()
+  let headingText = headingCell?.textContent.trim()
     || document.querySelector('main h1')?.textContent.trim()
     || '';
 
-  const link = buttonCell?.querySelector('a');
+  let link = buttonCell?.querySelector('a');
+
+  if (!link && rows.length) {
+    const namedRows = rows.filter((row) => row.textContent && row.textContent.includes(':'));
+    const parsed = namedRows.reduce((result, row) => {
+      const rowText = row.textContent.trim();
+      const labelMatch = rowText.match(/^\s*(heading|button)\s*:\s*(.*)$/i);
+      if (!labelMatch) return result;
+
+      const [, type, value] = labelMatch;
+      const cleanedValue = value.trim();
+      const lowerType = type.toLowerCase();
+
+      if (lowerType === 'heading') {
+        return {
+          ...result,
+          headingText: cleanedValue || result.headingText,
+        };
+      }
+
+      if (lowerType === 'button') {
+        const buttonLink = row.querySelector('a');
+        if (buttonLink) {
+          return { ...result, link: buttonLink };
+        }
+
+        return {
+          ...result,
+          link: {
+            href: '#',
+            textContent: cleanedValue || 'Learn more',
+          },
+        };
+      }
+
+      return result;
+    }, { headingText, link });
+
+    headingText = parsed.headingText;
+    link = parsed.link || link;
+  }
 
   block.textContent = '';
 
@@ -76,8 +117,8 @@ export default function decorate(block) {
     btnCtn.className = 'sticky-header-btn';
     const button = document.createElement('a');
     button.className = 'sticky-header-button cmp-cta-button';
-    button.href = link.href;
-    button.textContent = link.textContent.trim();
+    button.href = link.href || '#';
+    button.textContent = link.textContent?.trim() || 'Learn more';
     btnCtn.append(button);
     tablistCtn.append(btnCtn);
   }
