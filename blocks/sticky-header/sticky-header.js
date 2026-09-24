@@ -55,17 +55,17 @@ export default function decorate(block) {
   block.textContent = '';
 
   const fixedCtn = document.createElement('div');
-  fixedCtn.className = 'cmp-tabs__tablist-fixed-ctn';
-  if (hideHeading) fixedCtn.classList.add('cmp-tabs__tablist-fixed-ctn--no-heading');
+  fixedCtn.className = 'sticky-header-bar';
+  if (hideHeading) fixedCtn.classList.add('sticky-header-bar-no-heading');
 
   const tablistCtn = document.createElement('div');
-  tablistCtn.className = 'cmp-tabs__tablist-ctn';
+  tablistCtn.className = 'sticky-header-tablist-ctn';
 
   if (!hideHeading && headingText) {
     const headingCtn = document.createElement('div');
-    headingCtn.className = 'cmp-tabs__heading__ctn';
+    headingCtn.className = 'sticky-header-heading-ctn';
     const heading = document.createElement('div');
-    heading.className = 'cmp-tabs__heading';
+    heading.className = 'sticky-header-heading';
     heading.textContent = headingText;
     headingCtn.append(heading);
     tablistCtn.append(headingCtn);
@@ -73,9 +73,9 @@ export default function decorate(block) {
 
   if (link) {
     const btnCtn = document.createElement('div');
-    btnCtn.className = 'sticky-header__btn';
+    btnCtn.className = 'sticky-header-btn';
     const button = document.createElement('a');
-    button.className = 'cmp-cta-button';
+    button.className = 'sticky-header-button cmp-cta-button';
     button.href = link.href;
     button.textContent = link.textContent.trim();
     btnCtn.append(button);
@@ -85,5 +85,5 @@ export default function decorate(block) {
   fixedCtn.append(tablistCtn);
   block.append(fixedCtn);
 
-  if (noSticky) block.classList.add('sticky-header--static');
+  if (noSticky) block.classList.add('sticky-header-static');
 }
