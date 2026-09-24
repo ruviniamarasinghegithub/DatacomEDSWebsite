@@ -1,11 +1,18 @@
+function getRowLabel(row) {
+  const cells = [...row.children];
+  const text = cells[0]?.textContent.trim() || '';
+  const separator = text.indexOf(':');
+  return (cells.length > 1 ? text : text.slice(0, separator))
+    .replace(/:$/, '').trim().toLowerCase();
+}
+
 function getFieldRows(block) {
   return [...block.children].reduce((fields, row) => {
     const cells = [...row.children];
     if (row.querySelector('picture')) return fields;
     const text = cells[0]?.textContent.trim() || '';
     const separator = text.indexOf(':');
-    const label = (cells.length > 1 ? text : text.slice(0, separator))
-      .replace(/:$/, '').trim().toLowerCase();
+    const label = getRowLabel(row);
     const value = cells.length > 1 ? cells[1] : text.slice(separator + 1).trim();
     if (label && value) fields[label] = value;
     return fields;
@@ -61,9 +68,8 @@ export default function decorate(block) {
     if (subHeading) content.insertAdjacentHTML('beforeend', `<h3>${subHeading}</h3>`);
     if (body) content.insertAdjacentHTML('beforeend', `<p>${body}</p>`);
     rows.slice(picture ? 1 : 0).forEach((row) => {
-      [...row.children].forEach((child) => {
-        if (!child.querySelector('picture') && !fields[child.textContent.trim().toLowerCase()]) content.append(child);
-      });
+      if (fields[getRowLabel(row)]) return;
+      [...row.children].forEach((child) => content.append(child));
     });
   }
 
