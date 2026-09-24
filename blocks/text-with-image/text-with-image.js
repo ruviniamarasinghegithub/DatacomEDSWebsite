@@ -102,6 +102,24 @@ function createVideoMedia(url, alt) {
   return media;
 }
 
+function createMapMedia(place, city, country) {
+  const location = [place, city, country].filter(Boolean).join(', ');
+  if (!location) return null;
+
+  const media = document.createElement('div');
+  media.className = 'text-with-image-map';
+  const map = document.createElement('iframe');
+  map.className = 'text-with-image-map-frame';
+  map.src = `https://www.google.com/maps?q=${encodeURIComponent(location)}&output=embed`;
+  map.title = `Map showing ${location}`;
+  map.loading = 'lazy';
+  map.referrerPolicy = 'no-referrer-when-downgrade';
+  map.setAttribute('allowfullscreen', '');
+  map.setAttribute('frameborder', '0');
+  media.append(map);
+  return media;
+}
+
 async function createLottieMedia(url, loop, autoplay, alt) {
   if (!url) return null;
   const media = document.createElement('div');
@@ -173,8 +191,14 @@ export default async function decorate(block) {
   const wideImage = isTrue(fieldValue(fields, 'widen image'));
   const compact = isTrue(fieldValue(fields, 'compact mode'));
   const alignTop = isTrue(fieldValue(fields, 'align content to the top of the container'));
+  const place = fieldValue(fields, 'name of place');
+  const city = fieldValue(fields, 'city');
+  const country = fieldValue(fields, 'country');
   const videoUrl = getMediaUrl(rows, fields, 'video link');
   const lottieUrl = getMediaUrl(rows, fields, 'lottie asset link');
+  const isMap = block.classList.contains('map')
+    || block.classList.contains('text-with-image-map')
+    || Boolean(place && city && country);
   const isVideo = block.classList.contains('video')
     || block.classList.contains('text-with-image-video')
     || Boolean(videoUrl);
@@ -185,7 +209,10 @@ export default async function decorate(block) {
   const media = document.createElement('div');
   media.className = 'text-with-image-media';
   if (wideImage) media.classList.add('text-with-image-media-wide');
-  if (isLottie) {
+  if (isMap) {
+    const map = createMapMedia(place, city, country);
+    if (map) media.append(map);
+  } else if (isLottie) {
     const lottie = await createLottieMedia(
       lottieUrl,
       isTrue(fieldValue(fields, 'loop animation')),
@@ -237,6 +264,7 @@ export default async function decorate(block) {
   block.classList.toggle('text-with-image-compact', compact);
   block.classList.toggle('text-with-image-video-variant', isVideo);
   block.classList.toggle('text-with-image-lottie-variant', isLottie);
+  block.classList.toggle('text-with-image-map-variant', isMap);
   block.textContent = '';
   block.append(content, media);
 
