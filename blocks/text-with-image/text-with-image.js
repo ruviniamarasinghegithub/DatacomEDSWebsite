@@ -35,14 +35,14 @@ function getFieldLink(rows, name) {
 function addCta(content, rows, fields, showField, textField, style) {
   const text = fieldValue(fields, textField);
   const sourceLink = getFieldLink(rows, textField);
-  if (!isTrue(fieldValue(fields, showField)) || !text || !sourceLink) return;
+  if (!isTrue(fieldValue(fields, showField)) || !text) return;
 
   const wrapper = content.querySelector('.text-with-image-cta')
     || document.createElement('div');
   wrapper.className = 'text-with-image-cta button-wrapper';
   const link = document.createElement('a');
   link.className = `button ${style}`;
-  link.href = sourceLink.href;
+  link.href = sourceLink?.href || '#';
   link.textContent = text;
   wrapper.append(link);
   if (!wrapper.parentElement) content.append(wrapper);
