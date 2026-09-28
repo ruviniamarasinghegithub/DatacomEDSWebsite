@@ -1,3 +1,5 @@
+import { decorateBlock, loadBlock } from '../../scripts/aem.js';
+
 function getVariant(block, name) {
   return block.classList.contains(`article-body-${name}`)
     || block.classList.contains(name);
@@ -127,7 +129,33 @@ function decorateSidebar(sidebar, block) {
   });
 }
 
-export default function decorate(block) {
+function isBlockMarkup(element) {
+  const rows = [...element.children];
+  return rows.length > 0 && rows.every((row) => (
+    row.tagName === 'DIV'
+    && row.children.length > 0
+    && [...row.children].every((cell) => cell.tagName === 'DIV')
+  ));
+}
+
+async function decorateNestedBlocks(container) {
+  const candidates = [...container.querySelectorAll('div[class]')]
+    .filter((candidate) => isBlockMarkup(candidate));
+  const topLevelCandidates = candidates.filter((candidate) => (
+    !candidates.some((other) => other !== candidate && other.contains(candidate))
+  ));
+
+  for (let index = 0; index < topLevelCandidates.length; index += 1) {
+    const nestedBlock = topLevelCandidates[index];
+    decorateBlock(nestedBlock);
+    // eslint-disable-next-line no-await-in-loop
+    await loadBlock(nestedBlock);
+    // eslint-disable-next-line no-await-in-loop
+    await decorateNestedBlocks(nestedBlock);
+  }
+}
+
+export default async function decorate(block) {
   const rows = [...block.children];
   const leftColumn = document.createElement('div');
   const rightColumn = document.createElement('aside');
@@ -204,6 +232,7 @@ export default function decorate(block) {
 
   block.replaceChildren(leftColumn, rightColumn);
   block.classList.add('article-body-ctn');
+  await decorateNestedBlocks(leftColumn);
   if (settings.hideIndustries) block.classList.add('article-body-hide-industries-tags');
   if (settings.hideSolutions) block.classList.add('article-body-hide-solutions-tags');
   const partnerDisplay = buildPartnerDisplay(partners, settings);
