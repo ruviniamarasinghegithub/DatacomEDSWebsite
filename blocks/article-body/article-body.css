@@ -44,6 +44,16 @@
   font-size: var(--heading-font-size-xs, 18px);
 }
 
+.article-body-hidden-tag-titles {
+  margin-bottom: var(--spacing-padding-06, 32px);
+}
+
+.article-body-hidden-tag-title {
+  display: block;
+  margin: 0 0 var(--spacing-padding-03, 12px);
+  font-size: var(--heading-font-size-xs, 18px);
+}
+
 .article-body-tag-list {
   display: flex;
   flex-wrap: wrap;
