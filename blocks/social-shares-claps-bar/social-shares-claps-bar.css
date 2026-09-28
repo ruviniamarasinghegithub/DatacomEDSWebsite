@@ -1,0 +1,115 @@
+.social-shares-claps-bar {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  color: #171717;
+}
+
+.social-shares-claps-bar-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.social-shares-claps-bar-clap,
+.social-shares-claps-bar-share-link,
+.social-shares-claps-bar-more-button {
+  display: inline-flex;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #b8b8b8;
+  border-radius: 0.25rem;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.social-shares-claps-bar-more-button {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.social-shares-claps-bar-clap {
+  gap: 0.6rem;
+  padding: 0 0.85rem;
+  font-size: 0.95rem;
+}
+
+.social-shares-claps-bar-clap:hover,
+.social-shares-claps-bar-share-link:hover,
+.social-shares-claps-bar-more-button:hover,
+.social-shares-claps-bar-clap:focus-visible,
+.social-shares-claps-bar-share-link:focus-visible,
+.social-shares-claps-bar-more-button:focus-visible {
+  border-color: #171717;
+  background: #171717;
+  color: #fff;
+}
+
+.social-shares-claps-bar-count {
+  min-width: 1ch;
+  font-variant-numeric: tabular-nums;
+}
+
+.social-shares-claps-bar-primary,
+.social-shares-claps-bar-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.social-shares-claps-bar-share-icon {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.social-shares-claps-bar-more {
+  position: relative;
+}
+
+.social-shares-claps-bar-more-button[aria-expanded="true"] {
+  border-color: #171717;
+  background: #171717;
+  color: #fff;
+}
+
+.social-shares-claps-bar-menu {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  z-index: 2;
+  padding: 0.5rem;
+  border: 1px solid #b8b8b8;
+  border-radius: 0.25rem;
+  background: #fff;
+  box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 12%);
+}
+
+.social-shares-claps-bar-menu[hidden] {
+  display: none;
+}
+
+@media (width <= 600px) {
+  .social-shares-claps-bar-toolbar {
+    gap: 0.4rem;
+  }
+
+  .social-shares-claps-bar-primary,
+  .social-shares-claps-bar-menu {
+    gap: 0.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-shares-claps-bar-clap,
+  .social-shares-claps-bar-share-link,
+  .social-shares-claps-bar-more-button {
+    transition: none;
+  }
+}
