@@ -22,6 +22,34 @@ function getSetting(rows, names, fallback = '') {
   return row ? getText(row.cells[1]) : fallback;
 }
 
+function getTagItems(cell) {
+  const links = [...(cell?.querySelectorAll('a') || [])];
+  if (links.length) return links.map((link) => link.cloneNode(true));
+  return getText(cell).split(/[,;\n]+/).map((tag) => tag.trim()).filter(Boolean);
+}
+
+function buildTagSection(title, items, className) {
+  const section = document.createElement('section');
+  const heading = document.createElement('h3');
+  const list = document.createElement('ul');
+  section.className = `article-body-tag-ctn ${className}`;
+  heading.textContent = title;
+  list.className = 'article-body-tag-list';
+
+  items.forEach((item) => {
+    const listItem = document.createElement('li');
+    if (typeof item === 'string') {
+      listItem.textContent = item;
+    } else {
+      listItem.append(item);
+    }
+    list.append(listItem);
+  });
+
+  section.append(heading, list);
+  return section;
+}
+
 function getImage(cell, alt, useDamAlt) {
   const picture = cell?.querySelector('picture');
   const image = cell?.querySelector('img');
@@ -172,6 +200,8 @@ export default async function decorate(block) {
   const settingsRows = [];
   const contentRows = [];
   const partners = [];
+  const industryTags = [];
+  const solutionTags = [];
   let inCarouselContent = false;
   let currentPartner = null;
 
@@ -179,6 +209,14 @@ export default async function decorate(block) {
     const cells = [...row.children];
     const label = normalizeLabel(getText(cells[0]));
     if (label === 'field' && normalizeLabel(getText(cells[1])) === 'value') {
+      return;
+    }
+    if (['industries', 'industry', 'industry tags', 'related industries'].includes(label)) {
+      industryTags.push(...getTagItems(cells[1]));
+      return;
+    }
+    if (['solutions', 'solution', 'solution tags', 'related solutions'].includes(label)) {
+      solutionTags.push(...getTagItems(cells[1]));
       return;
     }
     if (label === 'carousel content') {
@@ -239,6 +277,11 @@ export default async function decorate(block) {
     leftColumn.append(cells[0]);
     if (cells[1]) rightColumn.append(cells[1]);
   });
+
+  rightColumn.append(
+    buildTagSection('Related industries', industryTags, 'industries-tags'),
+    buildTagSection('Related solutions', solutionTags, 'solutions-tags'),
+  );
 
   block.replaceChildren(leftColumn, rightColumn);
   block.classList.add('article-body-ctn');
