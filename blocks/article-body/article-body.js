@@ -108,40 +108,25 @@ function getSectionLabel(section) {
   return heading?.textContent.trim().toLowerCase() || '';
 }
 
-function decorateSidebar(sidebar, block, leftColumn) {
+function decorateSidebar(sidebar, block) {
   const hideIndustries = getVariant(block, 'hide-industries-tags');
   const hideSolutions = getVariant(block, 'hide-solutions-tags');
-  const hiddenTagTitles = document.createElement('div');
-  hiddenTagTitles.className = 'article-body-hidden-tag-titles';
 
   [...sidebar.children].forEach((section) => {
     const label = getSectionLabel(section);
-    let hideSection = false;
     if (label.includes('industry')) {
       section.classList.add('article-body-tag-ctn', 'industries-tags');
-      hideSection = hideIndustries;
+      if (hideIndustries) section.hidden = true;
     } else if (label.includes('solution')) {
       section.classList.add('article-body-tag-ctn', 'solutions-tags');
-      hideSection = hideSolutions;
+      if (hideSolutions) section.hidden = true;
     } else {
       section.classList.add('article-body-sidebar-section');
     }
 
     const list = section.querySelector('ul, ol');
     if (list) list.classList.add('article-body-tag-list');
-
-    if (hideSection) {
-      const heading = section.querySelector('h1, h2, h3, h4, h5, h6, strong');
-      if (heading) {
-        const visibleHeading = heading.cloneNode(true);
-        visibleHeading.classList.add('article-body-hidden-tag-title');
-        hiddenTagTitles.append(visibleHeading);
-      }
-      section.remove();
-    }
   });
-
-  if (hiddenTagTitles.childElementCount) leftColumn.prepend(hiddenTagTitles);
 }
 
 async function decorateNestedBlocks(container) {
@@ -262,5 +247,5 @@ export default async function decorate(block) {
   if (settings.hideSolutions) block.classList.add('article-body-hide-solutions-tags');
   const partnerDisplay = buildPartnerDisplay(partners, settings);
   if (partnerDisplay) rightColumn.append(partnerDisplay);
-  decorateSidebar(rightColumn, block, leftColumn);
+  decorateSidebar(rightColumn, block);
 }
