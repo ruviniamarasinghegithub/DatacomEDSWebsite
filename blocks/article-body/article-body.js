@@ -129,24 +129,34 @@ function decorateSidebar(sidebar, block) {
   });
 }
 
-function isBlockMarkup(element) {
-  const rows = [...element.children];
-  return rows.length > 0 && rows.every((row) => (
-    row.tagName === 'DIV'
-    && row.children.length > 0
-    && [...row.children].every((cell) => cell.tagName === 'DIV')
-  ));
-}
-
 async function decorateNestedBlocks(container) {
-  const candidates = [...container.querySelectorAll('div[class]')]
-    .filter((candidate) => isBlockMarkup(candidate));
-  const topLevelCandidates = candidates.filter((candidate) => (
-    !candidates.some((other) => other !== candidate && other.contains(candidate))
+  const nestedBlocks = [];
+  [...container.querySelectorAll('table')].forEach((table) => {
+    const rows = [...table.rows];
+    const blockName = rows[0]?.cells[0]?.textContent.trim().toLowerCase();
+    if (!blockName || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(blockName) || rows[0].cells.length !== 1) return;
+
+    const nestedBlock = document.createElement('div');
+    nestedBlock.className = blockName;
+    rows.slice(1).forEach((row) => {
+      const blockRow = document.createElement('div');
+      [...row.cells].forEach((cell) => {
+        const blockCell = document.createElement('div');
+        blockCell.append(...cell.childNodes);
+        blockRow.append(blockCell);
+      });
+      nestedBlock.append(blockRow);
+    });
+    table.replaceWith(nestedBlock);
+    nestedBlocks.push(nestedBlock);
+  });
+
+  const topLevelBlocks = nestedBlocks.filter((candidate) => (
+    !nestedBlocks.some((other) => other !== candidate && other.contains(candidate))
   ));
 
-  for (let index = 0; index < topLevelCandidates.length; index += 1) {
-    const nestedBlock = topLevelCandidates[index];
+  for (let index = 0; index < topLevelBlocks.length; index += 1) {
+    const nestedBlock = topLevelBlocks[index];
     decorateBlock(nestedBlock);
     // eslint-disable-next-line no-await-in-loop
     await loadBlock(nestedBlock);
