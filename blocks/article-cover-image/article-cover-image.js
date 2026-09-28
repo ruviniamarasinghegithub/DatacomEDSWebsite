@@ -1,37 +1,4 @@
-/*
- * Article Cover Image block
- * =========================================================================
- * Ported from the Datacom AEM "Article cover image" component
- * (datacom-commons-v2 / datacom, extending core/wcm/components/image/v2).
- *
- * The original component rendered a single full-bleed hero image (or, if
- * configured, a Lottie animation instead) capped at 500px tall with
- * object-fit: cover, plus an optional caption shown centered underneath,
- * constrained to the normal content column width.
- *
- * -------------------------------------------------------------------------
- * AUTHORING FORMAT
- * -------------------------------------------------------------------------
- * Single row, 1 to 3 columns:
- *   Column 1 (required): the media —
- *     - an image, OR
- *     - a link to a Lottie JSON file (.json)
- *   Column 2 (optional): comma/space/newline separated option keywords —
- *     loop        -> (Lottie only) loops playback
- *     autoplay    -> (Lottie only) autoplays on load
- *     Any leftover text in this column that isn't one of the keywords
- *     above is treated as the caption.
- *   Column 3 (optional): if present, always treated as the caption text,
- *     regardless of column 2's contents.
- *
- * This block is always rendered full-bleed (edge-to-edge across the
- * viewport), matching the reference page's hero image behaviour — no
- * variant keyword is needed to trigger this, it's the block's default.
- * -------------------------------------------------------------------------
- */
-
 const LOTTIE_CDN_URL = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js';
-const KEYWORDS = ['loop', 'autoplay'];
 
 let lottiePromise;
 function loadLottie() {
@@ -51,72 +18,121 @@ function loadLottie() {
   return lottiePromise;
 }
 
-function parseOptionsCell(cell) {
+function parseField(row) {
+  const cell = row.firstElementChild;
   const text = (cell?.textContent || '').trim();
-  const found = new Set();
-  const remainder = text
-    .split(/[\n,]/)
-    .map((part) => part.trim())
-    .filter((part) => {
-      const lower = part.toLowerCase();
-      if (KEYWORDS.includes(lower)) {
-        found.add(lower);
-        return false;
-      }
-      return part.length > 0;
-    })
-    .join(' ');
-  return { flags: found, caption: remainder };
+  const separator = text.indexOf(':');
+  if (separator < 0) return null;
+
+  const label = text.slice(0, separator).trim().toLowerCase();
+  const value = text.slice(separator + 1).trim();
+  if (!label) return null;
+
+  return { label, value, href: cell.querySelector('a[href]')?.href || '' };
 }
 
-function getMediaType(cell) {
-  const picture = cell?.querySelector('picture');
-  const link = cell?.querySelector('a');
-  if (picture) return { type: 'image', picture };
-  if (link) {
-    const href = link.getAttribute('href') || '';
-    if (/\.json(\?.*)?$/i.test(href)) return { type: 'lottie', href };
-  }
-  return { type: 'none' };
+function toBoolean(value) {
+  return value.trim().toLowerCase() === 'true';
+}
+
+function getDamCaption(picture) {
+  const image = picture?.querySelector('img');
+  return image?.getAttribute('title')
+    || image?.dataset.title
+    || picture?.querySelector('a[title]')?.getAttribute('title')
+    || '';
 }
 
 export default async function decorate(block) {
-  const row = block.firstElementChild;
-  if (!row) return;
+  const fields = {};
+  let picture;
 
-  const cells = [...row.children];
-  const mediaCell = cells[0];
-  const optionsCell = cells[1];
-  const captionCell = cells[2];
+  [...block.children].forEach((row) => {
+    const rowPicture = row.querySelector('picture');
+    if (rowPicture) {
+      picture = rowPicture;
+      return;
+    }
 
-  const mediaInfo = getMediaType(mediaCell);
-  const { flags, caption: parsedCaption } = parseOptionsCell(optionsCell);
-  const caption = captionCell ? captionCell.textContent.trim() : parsedCaption;
+    const field = parseField(row);
+    if (field) fields[field.label] = field;
+  });
+
+  const getValue = (...labels) => {
+    const field = labels.map((label) => fields[label]).find(Boolean);
+    return field?.value || '';
+  };
+  const lottieEnabled = toBoolean(getValue('switch to lottie asset'));
+  const lottieField = fields['lottie asset'];
+  const lottiePath = lottieField?.href || lottieField?.value || '';
+  const useLottie = lottieEnabled && /\.json(?:[?#].*)?$/i.test(lottiePath);
+  const id = getValue('id').trim().replace(/\s+/g, '-');
+  const decorative = toBoolean(getValue('image is decorative'));
+  const authoredCaption = getValue('caption');
+  const useDamCaption = toBoolean(getValue('get caption from dam'));
+  const caption = (useDamCaption && getDamCaption(picture)) || authoredCaption;
+  const popupCaption = toBoolean(getValue('display caption as pop-up'));
+  const loop = toBoolean(getValue('loop animation'));
+  const autoplay = toBoolean(getValue('enable auto play'));
 
   block.textContent = '';
+  if (id) block.id = id;
 
-  if (mediaInfo.type === 'image') {
-    const img = mediaInfo.picture.querySelector('img');
-    if (img) img.classList.add('cmp-image__image');
-    block.append(mediaInfo.picture);
-  } else if (mediaInfo.type === 'lottie') {
+  const figure = document.createElement('figure');
+  figure.className = 'article-cover-image-figure';
+
+  if (useLottie) {
     const container = document.createElement('div');
     container.className = 'lottie-asset';
-    block.append(container);
-    const lottie = await loadLottie();
-    lottie.loadAnimation({
-      container,
-      renderer: 'svg',
-      loop: flags.has('loop'),
-      autoplay: flags.has('autoplay'),
-      path: mediaInfo.href,
-    });
+    if (decorative) container.setAttribute('aria-hidden', 'true');
+    figure.append(container);
+    block.append(figure);
+
+    try {
+      const lottie = await loadLottie();
+      lottie.loadAnimation({
+        container,
+        renderer: 'svg',
+        loop,
+        autoplay,
+        path: lottiePath,
+      });
+    } catch (error) {
+      container.remove();
+    }
+  } else if (picture) {
+    const image = picture.querySelector('img');
+    if (image) {
+      image.classList.add('article-cover-image-image');
+      if (decorative) image.alt = '';
+    }
+    figure.append(picture);
   }
 
   if (caption) {
-    const captionEl = document.createElement('span');
-    captionEl.className = 'cmp-image__title';
+    const captionEl = document.createElement('figcaption');
+    captionEl.className = 'article-cover-image-caption';
     captionEl.textContent = caption;
-    block.append(captionEl);
+
+    if (popupCaption) {
+      const captionButton = document.createElement('button');
+      captionButton.className = 'article-cover-image-caption-button';
+      captionButton.type = 'button';
+      captionButton.textContent = 'Caption';
+      captionButton.setAttribute('aria-expanded', 'false');
+      captionEl.id = `${block.id || 'article-cover-image'}-caption`;
+      captionEl.hidden = true;
+      captionButton.setAttribute('aria-controls', captionEl.id);
+      captionButton.addEventListener('click', () => {
+        const expanded = captionButton.getAttribute('aria-expanded') === 'true';
+        captionButton.setAttribute('aria-expanded', String(!expanded));
+        captionEl.hidden = expanded;
+      });
+      figure.append(captionButton);
+    }
+
+    figure.append(captionEl);
   }
+
+  if (figure.children.length) block.append(figure);
 }

@@ -32,7 +32,6 @@
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-
   display: flex;
   flex-direction: column;
 }
@@ -42,7 +41,13 @@
   width: 100%;
 }
 
-.article-cover-image img.cmp-image__image {
+.article-cover-image-figure {
+  position: relative;
+  width: 100%;
+  margin: 0;
+}
+
+.article-cover-image .article-cover-image-image {
   width: 100%;
   max-height: 500px; /* matches original */
   object-fit: cover;
@@ -57,16 +62,16 @@
 }
 
 /* ---- Caption ---- */
+
 /* Shown centered underneath the full-bleed image, constrained back to the
    normal content column width (unlike the image itself). */
 
-.article-cover-image .cmp-image__title {
+.article-cover-image .article-cover-image-caption {
   display: flex;
   margin: var(--spacing-padding-02, 8px) auto 0;
-  /* .caption-format(); */
   font-size: var(--body-font-size-s, 0.875rem);
   line-height: 1.4;
-  color: var(--color-dark-grey, #666666);
+  color: var(--color-dark-grey, #666);
   max-width: var(--max-width, 1200px);
   padding: 0 var(--gutter-padding, 24px);
   box-sizing: border-box;
@@ -74,15 +79,53 @@
 }
 
 @media (width <= 900px) {
-  .article-cover-image .cmp-image__title {
+  .article-cover-image .article-cover-image-caption {
     padding: 0 var(--gutter-padding-mobile, 16px);
   }
 }
 
-/* Hide the caption entirely when empty, matching the original component's
-   default (.cmp-image__title { display: none; }) — the JS only appends
+/* Hide the caption entirely when empty; the JS only appends
    this element when a caption is actually provided, so this rule mainly
    guards against any leftover empty element. */
-.article-cover-image .cmp-image__title:empty {
+.article-cover-image .article-cover-image-caption:empty {
   display: none;
+}
+
+.article-cover-image .article-cover-image-caption[hidden] {
+  display: none;
+}
+
+.article-cover-image-caption-button {
+  position: absolute;
+  right: var(--gutter-padding, 24px);
+  bottom: var(--spacing-padding-02, 8px);
+  border: 1px solid #fff;
+  border-radius: 2px;
+  padding: 8px 12px;
+  background: rgb(0 0 0 / 70%);
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.article-cover-image .article-cover-image-caption-button + .article-cover-image-caption {
+  position: absolute;
+  right: var(--gutter-padding, 24px);
+  bottom: calc(var(--spacing-padding-02, 8px) + 44px);
+  width: min(32rem, calc(100% - 2 * var(--gutter-padding, 24px)));
+  margin: 0;
+  padding: 12px 16px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 20%);
+}
+
+@media (width <= 900px) {
+  .article-cover-image-caption-button {
+    right: var(--gutter-padding-mobile, 16px);
+  }
+
+  .article-cover-image .article-cover-image-caption-button + .article-cover-image-caption {
+    right: var(--gutter-padding-mobile, 16px);
+    width: calc(100% - 2 * var(--gutter-padding-mobile, 16px));
+  }
 }
