@@ -61,6 +61,13 @@
   margin: 0;
 }
 
+.article-cover-image .lottie-asset svg {
+  max-height: 500px;
+  object-fit: cover;  
+  height: auto;
+  margin: 0;
+}
+
 /* ---- Caption ---- */
 
 /* Shown centered underneath the full-bleed image, constrained back to the
