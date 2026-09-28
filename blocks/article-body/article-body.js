@@ -22,10 +22,38 @@ function getSetting(rows, names, fallback = '') {
   return row ? getText(row.cells[1]) : fallback;
 }
 
+function createTagLink(href, label) {
+  const link = document.createElement('a');
+  link.href = href;
+  link.textContent = label || href;
+  return link;
+}
+
+function parseTagValue(value) {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+
+  const directUrlMatch = trimmed.match(/^(https?:\/\/\S+)$/i);
+  if (directUrlMatch) return createTagLink(directUrlMatch[1], directUrlMatch[1]);
+
+  const labelUrlMatch = trimmed.match(/^(.*?)(?:\s*[|>→-]\s*|\s*\(\s*)(https?:\/\/\S+)(?:\s*\))?$/i);
+  if (labelUrlMatch) {
+    const label = labelUrlMatch[1].trim();
+    const href = labelUrlMatch[2].trim();
+    return createTagLink(href, label || href);
+  }
+
+  return trimmed;
+}
+
 function getTagItems(cell) {
   const links = [...(cell?.querySelectorAll('a') || [])];
   if (links.length) return links.map((link) => link.cloneNode(true));
-  return getText(cell).split(/[,;\n]+/).map((tag) => tag.trim()).filter(Boolean);
+
+  return getText(cell)
+    .split(/[,;\n]+/)
+    .map((tag) => parseTagValue(tag))
+    .filter(Boolean);
 }
 
 function buildTagSection(title, items, className) {

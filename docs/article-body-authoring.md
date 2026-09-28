@@ -35,7 +35,7 @@ The nested block table's first row contains its block name, `social-shares-claps
 
 ## Sidebar Tags Example
 
-Add tag values as rows in the Article Body table. Separate multiple plain-text values with commas or semicolons. Hyperlinked values are also supported.
+Add tag values as rows in the Article Body table. Separate multiple plain-text values with commas or semicolons. Hyperlinked values are also supported, and the final URL can be entered directly in the link itself. No separate extra field is required.
 
 | Field | Value |
 | --- | --- |
@@ -43,6 +43,14 @@ Add tag values as rows in the Article Body table. Separate multiple plain-text v
 | Solutions | Cloud, Cyber Security |
 | Hide industries tags | false |
 | Hide solutions tags | false |
+
+For a custom search result link, set the tag as a hyperlink and point it to the final page URL you want, for example:
+
+```text
+https://datacom.com/nz/en/search?page=1&sortBy=&category=/insights&region=&tagCategories=Energy%20%26%20utilities&tagContentTypes=
+```
+
+The text label can still be edited independently of the URL, and the link target is used as-is. This means authors can keep the visible tag name while sending users to a search result page without needing an additional, separate URL field.
 
 When **Hide industries tags** is `false`, the **Related industries** heading and its tags are shown. Set it to `true` to hide both. **Hide solutions tags** controls the **Related solutions** heading and tags in the same way. Boolean values are case-insensitive.
 
@@ -79,8 +87,8 @@ Start each partner with a `Partner Name` row, followed by its image, alternative
 | --- | --- | --- |
 | Main column | Article content or a nested block table in the first cell | Renders in the left column. |
 | Sidebar | Optional content in the second cell | Renders in the right column. |
-| `Industries` | Tag text separated by commas or semicolons, or links | Displays under **Related industries** unless hidden. |
-| `Solutions` | Tag text separated by commas or semicolons, or links | Displays under **Related solutions** unless hidden. |
+| `Industries` | Tag text separated by commas or semicolons, or a full link URL | Displays under **Related industries** unless hidden. The visible label can be edited separately from the destination URL. |
+| `Solutions` | Tag text separated by commas or semicolons, or a full link URL | Displays under **Related solutions** unless hidden. No extra URL field is required when you provide the final target link directly. |
 | `Hide industries tags` | `true` or `false` | Hides or shows the Related industries heading and tags. |
 | `Hide solutions tags` | `true` or `false` | Hides or shows the Related solutions heading and tags. |
 | `Show partner display` | `true` or `false` | Enables or disables the partner display. |
