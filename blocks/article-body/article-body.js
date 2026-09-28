@@ -7,6 +7,10 @@ function getText(cell) {
   return cell?.textContent.trim() || '';
 }
 
+function normalizeLabel(value) {
+  return value.toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
 function toBoolean(value) {
   return ['true', 'yes', '1', 'on'].includes(value.toLowerCase());
 }
@@ -27,12 +31,28 @@ function getImage(cell, alt, useDamAlt) {
     return result;
   }
 
-  const path = getText(cell);
+  const link = cell?.querySelector('a');
+  const path = link?.href || getText(cell);
   if (!path) return null;
   const result = document.createElement('img');
   result.src = path;
   result.alt = alt;
   return result;
+}
+
+function getPartnerField(row) {
+  const label = normalizeLabel(getText(row.children[0]));
+  const value = row.children[1];
+  const valueText = getText(value);
+  const fieldNames = {
+    'partner name': 'name',
+    image: 'image',
+    'alternative text for image': 'alt',
+    'get image alternative text from dam': 'useDamAlt',
+    'link url': 'url',
+    'open link in a new': 'newTab',
+  };
+  return fieldNames[label] ? { name: fieldNames[label], value, valueText } : null;
 }
 
 function buildPartnerDisplay(partners, settings) {
@@ -54,18 +74,18 @@ function buildPartnerDisplay(partners, settings) {
     const item = document.createElement('li');
     const link = document.createElement('a');
     const image = getImage(
-      partner.cells[1],
-      getText(partner.cells[2]),
-      toBoolean(getText(partner.cells[3])),
+      partner.image,
+      partner.alt,
+      partner.useDamAlt,
     );
 
-    link.href = getText(partner.cells[4]) || '#';
-    link.target = toBoolean(getText(partner.cells[5])) ? '_blank' : '_self';
+    link.href = partner.url || '#';
+    link.target = partner.newTab ? '_blank' : '_self';
     link.rel = link.target === '_blank' ? 'noopener noreferrer' : '';
-    link.setAttribute('aria-label', getText(partner.cells[0]));
+    link.setAttribute('aria-label', partner.name);
     if (image) link.append(image);
     const name = document.createElement('span');
-    name.textContent = getText(partner.cells[0]);
+    name.textContent = partner.name;
     link.append(name);
     item.append(link);
     list.append(item);
@@ -115,15 +135,35 @@ export default function decorate(block) {
   const contentRows = [];
   const partners = [];
   let inCarouselContent = false;
+  let currentPartner = null;
 
   rows.forEach((row) => {
     const cells = [...row.children];
-    const label = getText(cells[0]).toLowerCase();
+    const label = normalizeLabel(getText(cells[0]));
+    if (label === 'field' && normalizeLabel(getText(cells[1])) === 'value') {
+      return;
+    }
     if (label === 'carousel content') {
       inCarouselContent = true;
-    } else if (inCarouselContent && label === 'partner name') {
-      // Partner rows use: name, image, alt text, use DAM alt, URL, new tab.
-      partners.push({ cells });
+    } else if (inCarouselContent) {
+      const field = getPartnerField(row);
+      if (field?.name === 'name') {
+        if (currentPartner?.name) partners.push(currentPartner);
+        currentPartner = {
+          name: field.valueText,
+          image: null,
+          alt: '',
+          useDamAlt: false,
+          url: '',
+          newTab: false,
+        };
+      } else if (field && currentPartner) {
+        if (field.name === 'image') currentPartner.image = field.value;
+        if (field.name === 'alt') currentPartner.alt = field.valueText;
+        if (field.name === 'useDamAlt') currentPartner.useDamAlt = toBoolean(field.valueText);
+        if (field.name === 'url') currentPartner.url = field.valueText;
+        if (field.name === 'newTab') currentPartner.newTab = toBoolean(field.valueText);
+      }
     } else if (!inCarouselContent && cells.length >= 2 && [
       'hide industries tags',
       'hide solutions tags',
@@ -138,6 +178,8 @@ export default function decorate(block) {
       contentRows.push(row);
     }
   });
+
+  if (currentPartner?.name) partners.push(currentPartner);
 
   const settings = {
     hideIndustries: toBoolean(getSetting(settingsRows, ['hide industries tags'])),
