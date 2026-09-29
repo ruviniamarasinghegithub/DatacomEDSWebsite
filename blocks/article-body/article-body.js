@@ -194,15 +194,27 @@ async function decorateNestedBlocks(container) {
 
     const nestedBlock = document.createElement('div');
     nestedBlock.className = blockName;
-    rows.slice(1).forEach((row) => {
-      const blockRow = document.createElement('div');
-      [...row.cells].forEach((cell) => {
-        const blockCell = document.createElement('div');
-        blockCell.append(...cell.childNodes);
-        blockRow.append(blockCell);
+    rows.slice(1)
+      .filter((row) => {
+        const rowText = row.textContent.trim();
+        const firstCellText = row.querySelector('td, th, div, p')?.textContent.trim() || '';
+        const normalized = (firstCellText || rowText).trim();
+        return !normalized.toLowerCase().startsWith('id:')
+          && !normalized.toLowerCase().startsWith(`${blockName}:`)
+          && normalized.toLowerCase() !== blockName
+          && normalized.toLowerCase() !== blockName.replace(/-/g, ' ')
+          && normalized.toLowerCase() !== 'article body text'
+          && normalized.toLowerCase() !== 'social shares claps bar';
+      })
+      .forEach((row) => {
+        const blockRow = document.createElement('div');
+        [...row.cells].forEach((cell) => {
+          const blockCell = document.createElement('div');
+          blockCell.append(...cell.childNodes);
+          blockRow.append(blockCell);
+        });
+        nestedBlock.append(blockRow);
       });
-      nestedBlock.append(blockRow);
-    });
     table.replaceWith(nestedBlock);
     nestedBlocks.push(nestedBlock);
   });
