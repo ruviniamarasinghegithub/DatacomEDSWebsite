@@ -237,9 +237,10 @@ export default async function decorate(block) {
     const cells = [...row.children];
     const label = normalizeLabel(getText(cells[0]));
     const rowText = row.textContent.trim();
+    const firstCellText = cells[0]?.textContent.trim() || '';
 
-    if (rowText.toLowerCase().startsWith('id:')) {
-      const id = rowText.slice(3).trim();
+    if ((firstCellText || rowText).toLowerCase().startsWith('id:')) {
+      const id = (firstCellText || rowText).slice(3).trim();
       if (id) block.id = id;
       return;
     }
