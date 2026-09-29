@@ -4,14 +4,19 @@ export default async function decorate(block) {
   const blockquotes = block.querySelectorAll('.article-body-text .cmp-text blockquote');
   const rows = [...block.children];
   const contentRows = [];
+
   rows.forEach((row) => {
     const rowText = row.textContent.trim();
-    if (rowText.toLowerCase().startsWith('id:')) {
-      const id = rowText.slice(3).trim();
+    const firstCellText = row.querySelector('td, th, div, p')?.textContent.trim() || '';
+    const rawIdentifierText = (firstCellText || rowText).trim();
+
+    if (rawIdentifierText.toLowerCase().startsWith('id:')) {
+      const id = rawIdentifierText.slice(3).trim();
       if (id) block.id = id;
-    } else {
-      contentRows.push(row);
+      return;
     }
+
+    contentRows.push(row);
   });
 
   const wrapper = document.createElement('div');
