@@ -16,18 +16,18 @@
 
 /* themes */
 .heading.white-theme {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .heading.light-theme {
-  background-color: #add8e6;
-  color: #1a1a1a;
+  background-color: var(--color-light-background);
+  color: var(--color-light-text);
 }
 
 .heading.dark-theme {
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: var(--color-dark-background);
+  color: var(--color-dark-text);
 }
 
 @media (max-width: 600px) {

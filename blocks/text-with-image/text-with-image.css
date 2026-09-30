@@ -128,7 +128,7 @@
 .text-with-image-video {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: #000;
+  background: var(--color-black);
 }
 
 .text-with-image-video-player {

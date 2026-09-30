@@ -2,7 +2,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  color: #171717;
+  color: var(--font-color-default);
 }
 
 .social-shares-claps-bar-toolbar {
@@ -19,9 +19,9 @@
   min-height: 2.75rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid #b8b8b8;
+  border: 1px solid var(--color-light-grey);
   border-radius: 0.25rem;
-  background: #fff;
+  background: var(--background-color);
   color: inherit;
   font: inherit;
   text-decoration: none;
@@ -46,9 +46,9 @@
 .social-shares-claps-bar-clap:focus-visible,
 .social-shares-claps-bar-share-link:focus-visible,
 .social-shares-claps-bar-more-button:focus-visible {
-  border-color: #171717;
-  background: #171717;
-  color: #fff;
+  border-color: var(--font-color-default);
+  background: var(--font-color-default);
+  color: var(--color-white);
 }
 
 .social-shares-claps-bar-count {
@@ -74,9 +74,9 @@
 }
 
 .social-shares-claps-bar-more-button[aria-expanded="true"] {
-  border-color: #171717;
-  background: #171717;
-  color: #fff;
+  border-color: var(--font-color-default);
+  background: var(--font-color-default);
+  color: var(--color-white);
 }
 
 .social-shares-claps-bar-menu {
@@ -85,9 +85,9 @@
   right: 0;
   z-index: 2;
   padding: 0.5rem;
-  border: 1px solid #b8b8b8;
+  border: 1px solid var(--color-light-grey);
   border-radius: 0.25rem;
-  background: #fff;
+  background: var(--background-color);
   box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 12%);
 }
 

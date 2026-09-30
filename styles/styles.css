@@ -12,61 +12,55 @@
 
 :root {
   /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --background-color: var(--color-white, #fff);
+  --light-color: var(--color-extra-light-grey, #f0f0f0);
+  --dark-color: var(--color-darkest-grey, #333);
+  --text-color: var(--font-color-default, #000a14);
+  --link-color: var(--color-action-blue, #002bfe);
+  --link-hover-color: var(--color-action-blue-hover, #0022cb);
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: 'Montserrat', montserrat-fallback, sans-serif;
+  --heading-font-family: 'Montserrat', montserrat-fallback, sans-serif;
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  --body-font-size-m: var(--font-body-size, 16px);
+  --body-font-size-s: var(--font-14-size, 14px);
+  --body-font-size-xs: var(--font-14-size, 14px);
 
   /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  --heading-font-size-xxl: var(--font-h-1-size, 64px);
+  --heading-font-size-xl: var(--font-h-2-size, 48px);
+  --heading-font-size-l: var(--font-h-3-size, 32px);
+  --heading-font-size-m: var(--font-h-4-size, 24px);
+  --heading-font-size-s: var(--font-18-size, 18px);
+  --heading-font-size-xs: var(--font-16-size, 16px);
 
   /* nav height */
   --nav-height: 64px;
 }
 
-/* fallback fonts */
+/* fallback font */
 @font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
+  font-family: montserrat-fallback;
+  size-adjust: 100%;
   src: local('Arial');
 }
 
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
-  src: local('Arial');
-}
-
-@media (width >= 900px) {
+@media (width < 900px) {
   :root {
     /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
+    --body-font-size-m: 16px;
+    --body-font-size-s: 14px;
     --body-font-size-xs: 14px;
 
     /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
+    --heading-font-size-xxl: 40px;
+    --heading-font-size-xl: 32px;
+    --heading-font-size-l: 24px;
+    --heading-font-size-m: 20px;
+    --heading-font-size-s: 18px;
+    --heading-font-size-xs: 16px;
   }
 }
 
@@ -77,7 +71,7 @@ body {
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.6;
+  line-height: var(--font-body-line-height, 1.5);
 }
 
 body.appear {
@@ -692,61 +686,6 @@ main .section.highlight {
 
 
 /* ==========================================================================
-   Datacom Semantic Colour Variables
-   ========================================================================== */
-
-:root {
-  --color-accent-pink-20: var(--color-accent-pink-20);
-  --color-accent-pink-40: var(--color-accent-pink-40);
-  --color-accent-pink-60: var(--color-accent-pink-60);
-  --color-accent-pink-80: var(--color-accent-pink-80);
-  --color-accent-pink-base: var(--color-accent-pink-base);
-
-  --color-cobalt-blue-20: var(--color-cobalt-blue-20);
-  --color-cobalt-blue-40: var(--color-cobalt-blue-40);
-  --color-cobalt-blue-60: var(--color-cobalt-blue-60);
-  --color-cobalt-blue-80: var(--color-cobalt-blue-80);
-  --color-cobalt-blue-base: var(--color-cobalt-blue-base);
-
-  --color-dark-blue-20: var(--color-dark-blue-20);
-  --color-dark-blue-40: var(--color-dark-blue-40);
-  --color-dark-blue-60: var(--color-dark-blue-60);
-  --color-dark-blue-80: var(--color-dark-blue-80);
-  --color-dark-blue-base: var(--color-dark-blue-base);
-
-  --color-datacom-blue-20: var(--color-datacom-blue-20);
-  --color-datacom-blue-40: var(--color-datacom-blue-40);
-  --color-datacom-blue-60: var(--color-datacom-blue-60);
-  --color-datacom-blue-80: var(--color-datacom-blue-80);
-  --color-datacom-blue-base: var(--color-datacom-blue-base);
-
-  --color-light-blue-20: var(--color-light-blue-20);
-  --color-light-blue-40: var(--color-light-blue-40);
-  --color-light-blue-60: var(--color-light-blue-60);
-  --color-light-blue-80: var(--color-light-blue-80);
-  --color-light-blue-base: var(--color-light-blue-base);
-
-  --color-extra-light-blue-20: var(--color-extra-light-blue-20);
-  --color-extra-light-blue-40: var(--color-extra-light-blue-40);
-  --color-extra-light-blue-60: var(--color-extra-light-blue-60);
-  --color-extra-light-blue-80: var(--color-extra-light-blue-80);
-  --color-extra-light-blue-base: var(--color-extra-light-blue-base);
-
-  --color-sky-blue-20: var(--color-sky-blue-20);
-  --color-sky-blue-40: var(--color-sky-blue-40);
-  --color-sky-blue-60: var(--color-sky-blue-60);
-  --color-sky-blue-80: var(--color-sky-blue-80);
-  --color-sky-blue-base: var(--color-sky-blue-base);
-
-  --color-accent-orange-20: var(--color-accent-orange-20);
-  --color-accent-orange-40: var(--color-accent-orange-40);
-  --color-accent-orange-60: var(--color-accent-orange-60);
-  --color-accent-orange-80: var(--color-accent-orange-80);
-  --color-accent-orange-base: var(--color-accent-orange-base);
-}
-
-
-/* ==========================================================================
    Datacom Colour Aliases
    ========================================================================== */
 
@@ -842,8 +781,6 @@ main .section.highlight {
   --color-gateway-gold-plus2: var(--color-gateway-gold-plus-2);
   --color-gateway-gold-plus3: var(--color-gateway-gold-plus-3);
 
-  --color-action-blue: var(--color-action-blue);
-  --color-action-blue-hover: var(--color-action-blue-hover);
 }
 
 
@@ -908,24 +845,10 @@ main .section.highlight {
   --secondary-05-020: var(--color-accent-orange-20);
 
   --color-black: var(--color-datacom-black);
-  --color-darkest-grey: var(--color-darkest-grey);
-  --color-dark-grey: var(--color-dark-grey);
   --color-dark-grey-02: var(--color-midnight-blue-minus-5);
-  --color-grey: var(--color-grey);
-  --color-light-grey: var(--color-light-grey);
-  --color-extra-light-grey: var(--color-extra-light-grey);
-  --color-white: var(--color-white);
-  --color-error-red: var(--color-error-red);
-
-  --color-rag-red: var(--color-rag-red);
-  --color-rag-amber: var(--color-rag-amber);
-  --color-rag-green: var(--color-rag-green);
 
   --color-cta: var(--color-action-blue);
   --color-cta-hover: var(--color-action-blue-hover);
-
-  --font-color-default: var(--font-color-default);
-  --font-color-caption: var(--font-color-caption);
 
   --linkedin-color: var(--color-social-linkedin);
   --twitter-color: var(--color-social-twitter);
@@ -980,60 +903,10 @@ main .section.highlight {
 
 
 /* ==========================================================================
-   Font Size Aliases
-   ========================================================================== */
-
-:root {
-  --font-80-size: var(--font-80-size);
-  --font-80-line-height: var(--font-80-line-height);
-
-  --font-64-size: var(--font-64-size);
-  --font-64-line-height: var(--font-64-line-height);
-
-  --font-48-size: var(--font-48-size);
-  --font-48-line-height: var(--font-48-line-height);
-
-  --font-40-size: var(--font-40-size);
-  --font-40-line-height: var(--font-40-line-height);
-
-  --font-32-size: var(--font-32-size);
-  --font-32-line-height: var(--font-32-line-height);
-
-  --font-24-size: var(--font-24-size);
-  --font-24-line-height: var(--font-24-line-height);
-
-  --font-18-size: var(--font-18-size);
-  --font-18-line-height: var(--font-18-line-height);
-
-  --font-16-size: var(--font-16-size);
-  --font-16-line-height: var(--font-16-line-height);
-
-  --font-14-size: var(--font-14-size);
-  --font-14-line-height: var(--font-14-line-height);
-
-  --icon-24-size: var(--icon-24-size);
-  --icon-24-line-height: var(--icon-24-line-height);
-
-  --icon-20-size: var(--icon-20-size);
-  --icon-20-line-height: var(--icon-20-line-height);
-
-  --letter-spacing-large: var(--letter-spacing-large);
-  --letter-spacing-small: var(--letter-spacing-small);
-}
-
-
-/* ==========================================================================
    Typography Aliases
    ========================================================================== */
 
 :root {
-  --typography-font-family-200: var(--typography-font-family-200);
-  --typography-font-family-300: var(--typography-font-family-300);
-  --typography-font-family-400: var(--typography-font-family-400);
-  --typography-font-family-500: var(--typography-font-family-500);
-  --typography-font-family-600: var(--typography-font-family-600);
-  --typography-font-family-700: var(--typography-font-family-700);
-
   --typography-font-family-v2-200:
     var(--typography-font-family-v-2-200);
 
@@ -1093,10 +966,6 @@ main .section.highlight {
   --breakpoint-1113: var(--breakpoint-tablet-03);
 
   --breakpoint-1500: var(--breakpoint-desktop-01);
-
-  --breakpoint-mobile: var(--breakpoint-mobile);
-  --breakpoint-tablet: var(--breakpoint-tablet);
-  --breakpoint-desktop: var(--breakpoint-desktop);
 
   /* Datacom website breakpoints */
 
@@ -1199,7 +1068,7 @@ main .section.highlight {
   width: auto;
 }
 
-@media (max-width: var(--screen-medium)) {
+@media (max-width: 900px) {
   .content-container {
     padding: 0 var(--gutter-padding-mobile);
   }
@@ -1211,7 +1080,7 @@ main .section.highlight {
   margin-bottom: var(--spacing-padding-08);
 }
 
-@media (max-width: var(--screen-small)) {
+@media (max-width: 500px) {
   .article-body-content-margin {
     margin-bottom: var(--spacing-padding-06);
   }
@@ -1258,13 +1127,13 @@ main .section.highlight {
   padding-bottom: var(--spacing-padding-07);
 }
 
-@media (max-width: var(--screen-large)) {
+@media (max-width: 1300px) {
   .component-heading-padding {
     padding-bottom: var(--spacing-padding-06);
   }
 }
 
-@media (max-width: var(--screen-medium)) {
+@media (max-width: 900px) {
   .component-heading-padding {
     font-size: var(--font-32-size);
     font-weight: 300;
@@ -1280,13 +1149,13 @@ main .section.highlight {
   margin-bottom: var(--cmp-section-padding-bottom-desktop);
 }
 
-@media (max-width: var(--screen-large)) {
+@media (max-width: 1300px) {
   .section-margin-bottom {
     margin-bottom: var(--cmp-section-padding-bottom-tablet);
   }
 }
 
-@media (max-width: var(--screen-medium)) {
+@media (max-width: 900px) {
   .section-margin-bottom {
     margin-bottom: var(--cmp-section-padding-bottom-mobile);
   }
@@ -1298,13 +1167,13 @@ main .section.highlight {
   margin-top: var(--cmp-section-padding-top-desktop);
 }
 
-@media (max-width: var(--screen-large)) {
+@media (max-width: 1300px) {
   .section-margin-top {
     margin-top: var(--cmp-section-padding-top-tablet);
   }
 }
 
-@media (max-width: var(--screen-medium)) {
+@media (max-width: 900px) {
   .section-margin-top {
     margin-top: var(--cmp-section-padding-top-mobile);
   }
@@ -1316,13 +1185,13 @@ main .section.highlight {
   margin-bottom: var(--cmp-content-padding-bottom-desktop);
 }
 
-@media (max-width: var(--screen-large)) {
+@media (max-width: 1300px) {
   .content-margin-bottom {
     margin-bottom: var(--cmp-content-padding-bottom-tablet);
   }
 }
 
-@media (max-width: var(--screen-medium)) {
+@media (max-width: 900px) {
   .content-margin-bottom {
     margin-bottom: var(--cmp-content-padding-bottom-mobile);
   }
@@ -1334,13 +1203,13 @@ main .section.highlight {
   margin-top: var(--cmp-content-padding-top-desktop);
 }
 
-@media (max-width: var(--screen-large)) {
+@media (max-width: 1300px) {
   .content-margin-top {
     margin-top: var(--cmp-content-padding-top-tablet);
   }
 }
 
-@media (max-width: var(--screen-medium)) {
+@media (max-width: 900px) {
   .content-margin-top {
     margin-top: var(--cmp-content-padding-top-mobile);
   }
@@ -1454,7 +1323,7 @@ main .section.highlight {
   letter-spacing: var(--letter-spacing-small);
 }
 
-@media (max-width: var(--screen-small)) {
+@media (max-width: 500px) {
   .p-medium-text-format {
     font-weight: 600;
   }
@@ -1473,7 +1342,7 @@ main .section.highlight {
   letter-spacing: var(--letter-spacing-small);
 }
 
-@media (max-width: var(--screen-small)) {
+@media (max-width: 500px) {
   .p-bold-text-format {
     font-weight: 600;
   }
@@ -1543,7 +1412,7 @@ main .section.highlight {
   letter-spacing: var(--letter-spacing-large);
 }
 
-@media (max-width: var(--screen-small)) {
+@media (max-width: 500px) {
   .h3-text-format {
     font-weight: 300;
     font-family: var(--font-family-light-v2);
@@ -1667,7 +1536,7 @@ main .section.highlight {
   letter-spacing: var(--letter-spacing-large);
 }
 
-@media (max-width: var(--screen-small)) {
+@media (max-width: 500px) {
   .h3-text-tablet-format {
     font-weight: 600;
   }
@@ -1685,7 +1554,7 @@ main .section.highlight {
   letter-spacing: var(--letter-spacing-small);
 }
 
-@media (max-width: var(--screen-small)) {
+@media (max-width: 500px) {
   .h4-text-tablet-format {
     font-family: var(--font-family-semiBold);
   }
@@ -1719,7 +1588,7 @@ main .section.highlight {
   letter-spacing: var(--letter-spacing-large);
 }
 
-@media (max-width: var(--screen-small)) {
+@media (max-width: 500px) {
   .h1-text-mobile-format {
     font-weight: 300;
     font-family: var(--font-family-light-v2);
@@ -1751,7 +1620,7 @@ main .section.highlight {
   letter-spacing: var(--letter-spacing-small);
 }
 
-@media (max-width: var(--screen-small)) {
+@media (max-width: 500px) {
   .h3-text-mobile-format {
     font-weight: 600;
   }

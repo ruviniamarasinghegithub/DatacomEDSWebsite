@@ -70,7 +70,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  color: #fff;
+  color: var(--color-white);
 }
 
 .hero-cover__text--sub-heading {
@@ -105,8 +105,8 @@
   display: inline-block;
   padding: 0.75rem 1.75rem;
   border-radius: 999px;
-  background: #fff;
-  color: #000;
+  background: var(--color-white);
+  color: var(--font-color-default);
   text-decoration: none;
   font-weight: 600;
   transition: transform 0.2s ease, background 0.2s ease;
@@ -130,7 +130,7 @@
   border-radius: 50%;
   width: 48px;
   height: 48px;
-  color: #fff;
+  color: var(--color-white);
   font-size: 1.25rem;
   cursor: pointer;
   backdrop-filter: blur(4px);

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-SkipToFirstPage_DarkBlue_Icon_24px">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="SkipToFirstPage_DarkBlue_Icon_24px" clip-path="url(#clip-SkipToFirstPage_DarkBlue_Icon_24px)">
+    <rect width="24" height="24" fill="#fff"/>
+    <g id="Group_1658" data-name="Group 1658" transform="translate(1410.057 2427.83) rotate(180)">
+      <rect id="Rectangle_1331" data-name="Rectangle 1331" width="24" height="24" transform="translate(1386.057 2403.83)" fill="none"/>
+      <g id="Skip_forward" data-name="Skip forward" transform="translate(1389.057 2403.83)">
+        <path id="Path_8917" data-name="Path 8917" d="M334.609,59h-1.06a.746.746,0,0,0-.749.744V82.087a.746.746,0,0,0,.749.744h1.06a.746.746,0,0,0,.749-.744V59.744A.746.746,0,0,0,334.609,59Z" transform="translate(-317.116 -59)" fill="#dadada"/>
+        <path id="Path_8918" data-name="Path 8918" d="M75.326,64.181a.643.643,0,0,0-.9,0l-1.042,1.04a.632.632,0,0,0,0,.889l9.546,9.5-9.552,9.506a.632.632,0,0,0,0,.889l1.042,1.034a.643.643,0,0,0,.9,0L86.394,76.058a.632.632,0,0,0,0-.889Z" transform="translate(-73.2 -63.695)" fill="#dadada"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -10,10 +10,10 @@
 }
 
 .body-text a {
-  color: #0000EE;
+  color: var(--color-action-blue);
   text-decoration: none;
   background-image: linear-gradient(transparent, transparent),
-    linear-gradient(#0000EE, #0000EE);
+    linear-gradient(var(--color-action-blue), var(--color-action-blue));
   background-size: 100% 1px, 0 1px;
   background-position: 100% 100%, 0 100%;
   background-repeat: no-repeat;
@@ -22,7 +22,7 @@
 
 .body-text a:hover,
 .body-text a:focus {
-  color: #0000EE;
+  color: var(--color-action-blue-hover);
   background-size: 0 1px, 100% 1px;
 }
 
@@ -62,16 +62,16 @@
 
 /* Whole-block variants (previously per-paragraph RTE formats) */
 .body-text.dark-blue {
-  background-color: #003366;
-  color: #fff;
+  background-color: var(--color-dark-background);
+  color: var(--color-dark-text);
 }
 .body-text.dark-blue a {
-  color: #fff;
+  color: var(--color-dark-text);
   background-image: linear-gradient(transparent, transparent),
-    linear-gradient(#fff, #fff);
+    linear-gradient(var(--color-dark-text), var(--color-dark-text));
 }
 .body-text.dark-blue a:hover {
-  color: #fff;
+  color: var(--color-dark-text);
 }
 
 /* Padding variants (from the paddingBottom / paddingBottomForForm checkboxes) */
