@@ -1,4 +1,7 @@
-/* Datacom Design System */
+/* ==========================================================================
+   Datacom | Global Design Tokens
+   AEM Edge Delivery Services
+   ========================================================================== */
 
 :root {
   /* colors */
@@ -31,13 +34,9 @@
 
 
 /* ==========================================================================
-   Datacom | Global Design Tokens
-   AEM Edge Delivery Services
-   ========================================================================== */
-
-/* ==========================================================================
    Runtime / Base Variables
    ========================================================================== */
+
   /* ------------------------------------------------------------------------
      Core Colours
      ------------------------------------------------------------------------ */
@@ -396,6 +395,7 @@
 /* ==========================================================================
    Datacom Colour Aliases
    ========================================================================== */
+
   --color-midnight-blue: var(--color-midnight-blue-base);
   --color-midnight-blue-minus1: var(--color-midnight-blue-minus-1);
   --color-midnight-blue-minus3: var(--color-midnight-blue-minus-3);
@@ -491,6 +491,7 @@
 /* ==========================================================================
    Theme Variables
    ========================================================================== */
+
   --color-light-background: var(--color-extra-light-blue-40);
   --color-light-text: var(--color-dark-blue-base);
 
@@ -506,6 +507,7 @@
 /* ==========================================================================
    Common Variables
    ========================================================================== */
+
   --primary-01-120: var(--color-dark-blue-base);
   --primary-01-100: var(--color-datacom-blue-base);
   --primary-01-080: var(--color-datacom-blue-80);
@@ -560,6 +562,7 @@
 /* ==========================================================================
    Component Variables
    ========================================================================== */
+
   --color-background-overlay: rgb(10 24 57 / 50%);
 
   --color-bg-overlay-expanded-tile-1: rgb(0 10 20 / 80%);
@@ -577,6 +580,7 @@
 /* ==========================================================================
    Gradients
    ========================================================================== */
+
   --gradient-first: var(--color-datacom-blue-base);
   --gradient-second: var(--color-datacom-blue-80);
   --gradient-third: var(--color-datacom-blue-60);
@@ -597,6 +601,7 @@
 /* ==========================================================================
    Typography Aliases
    ========================================================================== */
+
   --typography-font-family-v2-200:
     var(--typography-font-family-v-2-200);
 
@@ -643,6 +648,7 @@
 /* ==========================================================================
    Breakpoints
    ========================================================================== */
+
   --breakpoint-400: var(--breakpoint-mobile-01);
   --breakpoint-600: var(--breakpoint-mobile-02);
   --breakpoint-725: var(--breakpoint-mobile-03);
@@ -717,6 +723,7 @@
 }
 
 /* fallback font */
+
 @font-face {
   font-family: montserrat-fallback;
   size-adjust: 100%;
@@ -824,6 +831,7 @@ button {
 }
 
 /* links */
+
 a:any-link {
   color: var(--link-color);
   text-decoration: none;
@@ -836,6 +844,7 @@ a:hover {
 }
 
 /* buttons */
+
 p.button-wrapper {
   margin: 12px 0;
 }
@@ -922,6 +931,7 @@ button.button.secondary:disabled:focus-visible {
 }
 
 /* high-impact call-to-action */
+
 a.button.accent,
 button.button.accent {
   border-color: var(--link-color);
@@ -966,6 +976,7 @@ main img {
 }
 
 /* sections */
+
 main > .section {
   margin: 40px 0;
 }
@@ -1014,8 +1025,8 @@ main .section.highlight {
   }
 }
 
-
 /* Article body content margin */
+
 .article-body-content-margin {
   margin-bottom: var(--spacing-padding-08);
 }
@@ -1026,8 +1037,8 @@ main .section.highlight {
   }
 }
 
-
 /* Tags */
+
 .tags-format {
   margin-bottom: var(--spacing-padding-02);
   padding: var(--spacing-padding-01) var(--spacing-padding-02);
@@ -1041,8 +1052,8 @@ main .section.highlight {
   color: var(--font-color-default);
 }
 
-
 /* Tag type */
+
 .tag-type {
   background-color: var(--color-white);
 }
@@ -1051,8 +1062,8 @@ main .section.highlight {
   color: var(--font-color-default);
 }
 
-
 /* Tag hover */
+
 .tag-hover:hover {
   background-color: var(--color-dark-grey-02);
 }
@@ -1061,8 +1072,8 @@ main .section.highlight {
   color: var(--font-color-default);
 }
 
-
 /* Component heading padding */
+
 .component-heading-padding {
   padding-bottom: var(--spacing-padding-07);
 }
@@ -1083,8 +1094,8 @@ main .section.highlight {
   }
 }
 
-
 /* Section margin bottom */
+
 .section-margin-bottom {
   margin-bottom: var(--cmp-section-padding-bottom-desktop);
 }
@@ -1101,8 +1112,8 @@ main .section.highlight {
   }
 }
 
-
 /* Section margin top */
+
 .section-margin-top {
   margin-top: var(--cmp-section-padding-top-desktop);
 }
@@ -1119,8 +1130,8 @@ main .section.highlight {
   }
 }
 
-
 /* Content margin bottom */
+
 .content-margin-bottom {
   margin-bottom: var(--cmp-content-padding-bottom-desktop);
 }
@@ -1137,8 +1148,8 @@ main .section.highlight {
   }
 }
 
-
 /* Content margin top */
+
 .content-margin-top {
   margin-top: var(--cmp-content-padding-top-desktop);
 }
@@ -1155,11 +1166,11 @@ main .section.highlight {
   }
 }
 
+
 /* =========================================================
    Datacom - Typography / Font Utilities
    Converted from fonts.less for AEM Edge Delivery Services
    ========================================================= */
-
 
 /* ---------------------------------------------------------
    Small text
@@ -1172,7 +1183,6 @@ main .section.highlight {
   font-family: var(--font-family-base);
 }
 
-
 /* ---------------------------------------------------------
    Small text heading
    --------------------------------------------------------- */
@@ -1184,7 +1194,6 @@ main .section.highlight {
   font-family: var(--font-family-bold);
   letter-spacing: var(--letter-spacing-small);
 }
-
 
 /* ---------------------------------------------------------
    Caption
@@ -1199,7 +1208,6 @@ main .section.highlight {
   color: var(--font-color-caption);
 }
 
-
 /* ---------------------------------------------------------
    Tags
    --------------------------------------------------------- */
@@ -1211,7 +1219,6 @@ main .section.highlight {
   font-family: var(--font-family-semiBold);
   letter-spacing: var(--letter-spacing-small);
 }
-
 
 /* ---------------------------------------------------------
    Body text
@@ -1225,7 +1232,6 @@ main .section.highlight {
   letter-spacing: var(--letter-spacing-small);
 }
 
-
 /* ---------------------------------------------------------
    Medium placeholder
    --------------------------------------------------------- */
@@ -1236,7 +1242,6 @@ main .section.highlight {
   font-family: var(--font-family-medium);
   letter-spacing: var(--letter-spacing-small);
 }
-
 
 /* ---------------------------------------------------------
    Large placeholder
@@ -1249,7 +1254,6 @@ main .section.highlight {
   font-family: var(--font-family-medium);
   letter-spacing: var(--letter-spacing-small);
 }
-
 
 /* ---------------------------------------------------------
    Medium paragraph
@@ -1269,7 +1273,6 @@ main .section.highlight {
   }
 }
 
-
 /* ---------------------------------------------------------
    Bold paragraph
    --------------------------------------------------------- */
@@ -1288,7 +1291,6 @@ main .section.highlight {
   }
 }
 
-
 /* ---------------------------------------------------------
    Maximum hero heading
    --------------------------------------------------------- */
@@ -1299,7 +1301,6 @@ main .section.highlight {
   font-family: var(--font-family-bold);
   letter-spacing: var(--letter-spacing-large);
 }
-
 
 /* ---------------------------------------------------------
    H1
@@ -1313,7 +1314,6 @@ main .section.highlight {
   letter-spacing: var(--letter-spacing-large);
 }
 
-
 /* ---------------------------------------------------------
    H2
    --------------------------------------------------------- */
@@ -1326,7 +1326,6 @@ main .section.highlight {
   letter-spacing: var(--letter-spacing-large);
 }
 
-
 /* ---------------------------------------------------------
    Large heading
    --------------------------------------------------------- */
@@ -1338,7 +1337,6 @@ main .section.highlight {
   font-family: var(--font-family-light-v2);
   letter-spacing: var(--letter-spacing-large);
 }
-
 
 /* ---------------------------------------------------------
    H3
@@ -1359,7 +1357,6 @@ main .section.highlight {
   }
 }
 
-
 /* ---------------------------------------------------------
    H4
    --------------------------------------------------------- */
@@ -1372,7 +1369,6 @@ main .section.highlight {
   letter-spacing: var(--letter-spacing-large);
 }
 
-
 /* ---------------------------------------------------------
    Icons
    --------------------------------------------------------- */
@@ -1381,7 +1377,6 @@ main .section.highlight {
   font-size: var(--icon-24-size);
   line-height: var(--icon-24-line-height);
 }
-
 
 /* ---------------------------------------------------------
    CTA link
@@ -1395,7 +1390,6 @@ main .section.highlight {
   color: var(--color-cta);
 }
 
-
 /* ---------------------------------------------------------
    Page link
    --------------------------------------------------------- */
@@ -1406,7 +1400,6 @@ main .section.highlight {
   font-family: var(--font-family-medium);
   letter-spacing: var(--letter-spacing-small);
 }
-
 
 /* ---------------------------------------------------------
    Bold page link
@@ -1419,11 +1412,9 @@ main .section.highlight {
   letter-spacing: var(--letter-spacing-small);
 }
 
-
 /* =========================================================
    TABLET TYPOGRAPHY
    ========================================================= */
-
 
 /* ---------------------------------------------------------
    Maximum hero heading - tablet
@@ -1437,7 +1428,6 @@ main .section.highlight {
   letter-spacing: var(--letter-spacing-small);
 }
 
-
 /* ---------------------------------------------------------
    H1 - tablet
    --------------------------------------------------------- */
@@ -1450,7 +1440,6 @@ main .section.highlight {
   letter-spacing: var(--letter-spacing-large);
 }
 
-
 /* ---------------------------------------------------------
    H2 - tablet
    --------------------------------------------------------- */
@@ -1462,7 +1451,6 @@ main .section.highlight {
   font-family: var(--font-family-light-v2);
   letter-spacing: var(--letter-spacing-large);
 }
-
 
 /* ---------------------------------------------------------
    H3 - tablet
@@ -1482,7 +1470,6 @@ main .section.highlight {
   }
 }
 
-
 /* ---------------------------------------------------------
    H4 - tablet
    --------------------------------------------------------- */
@@ -1500,7 +1487,6 @@ main .section.highlight {
   }
 }
 
-
 /* ---------------------------------------------------------
    Icons - tablet
    --------------------------------------------------------- */
@@ -1510,11 +1496,9 @@ main .section.highlight {
   line-height: var(--icon-20-line-height);
 }
 
-
 /* =========================================================
    MOBILE TYPOGRAPHY
    ========================================================= */
-
 
 /* ---------------------------------------------------------
    H1 - mobile
@@ -1535,7 +1519,6 @@ main .section.highlight {
   }
 }
 
-
 /* ---------------------------------------------------------
    H2 - mobile
    --------------------------------------------------------- */
@@ -1547,7 +1530,6 @@ main .section.highlight {
   font-family: var(--font-family-semiBold-v2);
   letter-spacing: var(--letter-spacing-large);
 }
-
 
 /* ---------------------------------------------------------
    H3 - mobile
@@ -1566,23 +1548,9 @@ main .section.highlight {
   }
 }
 
-
 /* =========================================================
    THEME / TEXT COLOUR
    ========================================================= */
-
-/*
- * LESS:
- *
- * .text-theme(@text-color: @font-color-default) {
- *   h1, h2, h3, h4, h5, h6,
- *   .h1, .h2, .h3, .h4, .h5, .h6 {
- *     color: @text-color;
- *   }
- * }
- *
- * CSS cannot have parameters, so use a custom property.
- */
 
 .text-theme {
   --theme-text-color: var(--font-color-default);
