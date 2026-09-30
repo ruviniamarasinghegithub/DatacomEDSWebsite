@@ -1,4 +1,5 @@
-/* stylelint-disable max-line-length */
+/* Datacom - Font definitions */
+
 @font-face {
   font-family: 'Montserrat Extra Light';
   font-style: normal;
@@ -142,4 +143,3 @@
   font-display: swap;
   src: url('../fonts/Montserrat-BoldItalic.woff2') format('woff2');
 }
-
