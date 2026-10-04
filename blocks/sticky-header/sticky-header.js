@@ -14,6 +14,32 @@ export default function decorate(block) {
 
   if (rows.length > 1) {
     const parsed = rows.reduce((result, row) => {
+      const rowCells = [...row.children];
+      if (rowCells.length > 1) {
+        const label = rowCells[0].textContent.trim().replace(/:$/, '').toLowerCase();
+        const valueCell = rowCells[1];
+        const valueText = valueCell.textContent.trim();
+
+        if (label === 'heading') {
+          return {
+            ...result,
+            headingLabel: 'Heading:',
+            headingText: valueText || result.headingText,
+          };
+        }
+
+        if (label === 'button') {
+          const buttonLink = valueCell.querySelector('a');
+          return {
+            ...result,
+            link: buttonLink || {
+              href: '#',
+              textContent: valueText || 'Read more',
+            },
+          };
+        }
+      }
+
       const text = row.textContent.trim();
       const match = text.match(/^\s*(heading|button)\s*:\s*(.*)$/i);
       if (!match) return result;
