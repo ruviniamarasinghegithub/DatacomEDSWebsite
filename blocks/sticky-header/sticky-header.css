@@ -41,6 +41,26 @@
   text-overflow: ellipsis;
 }
 
+.sticky-header-heading-pair {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  white-space: normal;
+}
+
+.sticky-header-heading-label,
+.sticky-header-heading-value {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.sticky-header-heading-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .sticky-header-button-wrap {
   flex-shrink: 0;
 }

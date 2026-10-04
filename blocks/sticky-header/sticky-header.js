@@ -8,10 +8,11 @@ export default function decorate(block) {
   let headingText = headingCell?.textContent.trim()
     || document.querySelector('main h1')?.textContent.trim()
     || '';
+  let headingLabel = '';
 
   let link = buttonCell?.querySelector('a');
 
-  if (!link && rows.length > 1) {
+  if (rows.length > 1) {
     const parsed = rows.reduce((result, row) => {
       const text = row.textContent.trim();
       const match = text.match(/^\s*(heading|button)\s*:\s*(.*)$/i);
@@ -22,7 +23,11 @@ export default function decorate(block) {
       const lowerType = type.toLowerCase();
 
       if (lowerType === 'heading') {
-        return { ...result, headingText: cleanedValue || result.headingText };
+        return {
+          ...result,
+          headingLabel: `${type.trim()}:`,
+          headingText: cleanedValue || result.headingText,
+        };
       }
 
       if (lowerType === 'button') {
@@ -41,9 +46,10 @@ export default function decorate(block) {
       }
 
       return result;
-    }, { headingText, link: null });
+    }, { headingText, headingLabel, link });
 
     headingText = parsed.headingText;
+    headingLabel = parsed.headingLabel;
     link = parsed.link || link;
   }
 
@@ -59,7 +65,18 @@ export default function decorate(block) {
   if (headingText) {
     const heading = document.createElement('div');
     heading.className = 'sticky-header-heading';
-    heading.textContent = headingText;
+    if (headingLabel) {
+      heading.classList.add('sticky-header-heading-pair');
+      const label = document.createElement('span');
+      label.className = 'sticky-header-heading-label';
+      label.textContent = headingLabel;
+      const value = document.createElement('span');
+      value.className = 'sticky-header-heading-value';
+      value.textContent = headingText;
+      heading.append(label, value);
+    } else {
+      heading.textContent = headingText;
+    }
     headerContent.append(heading);
   }
 
