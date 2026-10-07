@@ -1,0 +1,76 @@
+/* Datacom-EDS | Master brand theme */
+
+.white-theme {
+  background-color: var(--color-white);
+}
+
+.light-theme {
+  background-color: var(--color-extra-light-blue-40);
+}
+
+.dark-gradient-reversed-theme,
+.dark-gradient-theme,
+.dark-theme,
+.electric-blue-theme {
+  color: var(--color-white);
+}
+
+.dark-gradient-reversed-theme h1,
+.dark-gradient-reversed-theme h2,
+.dark-gradient-reversed-theme h3,
+.dark-gradient-reversed-theme h4,
+.dark-gradient-reversed-theme h5,
+.dark-gradient-reversed-theme h6,
+.dark-gradient-theme h1,
+.dark-gradient-theme h2,
+.dark-gradient-theme h3,
+.dark-gradient-theme h4,
+.dark-gradient-theme h5,
+.dark-gradient-theme h6,
+.dark-theme h1,
+.dark-theme h2,
+.dark-theme h3,
+.dark-theme h4,
+.dark-theme h5,
+.dark-theme h6,
+.electric-blue-theme h1,
+.electric-blue-theme h2,
+.electric-blue-theme h3,
+.electric-blue-theme h4,
+.electric-blue-theme h5,
+.electric-blue-theme h6 {
+  color: var(--color-white);
+}
+
+.dark-gradient-reversed-theme a,
+.dark-gradient-theme a,
+.dark-theme a,
+.electric-blue-theme a {
+  color: var(--color-white);
+}
+
+.dark-gradient-reversed-theme a:hover,
+.dark-gradient-theme a:hover,
+.dark-theme a:hover,
+.electric-blue-theme a:hover {
+  color: var(--color-action-blue-hover);
+}
+
+.dark-theme,
+.electric-blue-theme {
+  background-color: var(--color-dark-blue-base);
+}
+
+.light-gradient-reversed-theme,
+.light-gradient-theme,
+.white-theme,
+.light-theme {
+  color: var(--font-color-default);
+}
+
+.dark-gradient-reversed-theme > div,
+.dark-gradient-theme > div,
+.light-gradient-reversed-theme > div,
+.light-gradient-theme > div {
+  position: relative;
+}
