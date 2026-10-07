@@ -24,9 +24,6 @@ function fieldValue(fields, name) {
 }
 
 const TEXT_WITH_IMAGE_FIELDS = new Set([
-  'heading',
-  'sub heading',
-  'body text',
   'image alt',
   'switch image and text',
   'widen image',
@@ -48,6 +45,7 @@ const TEXT_WITH_IMAGE_FIELDS = new Set([
   'video upload date (for schema)',
   'schema title (optional)',
   'video description (for schema)',
+  'theme',
 ]);
 
 function createKeyValueList(rows) {
@@ -247,10 +245,13 @@ function addCta(content, rows, fields, showField, textField, style) {
 export default async function decorate(block) {
   const rows = [...block.children];
   const fields = getFieldRows(block);
+  const keyValueList = createKeyValueList(rows);
   const firstRow = rows[0];
   const cells = firstRow ? [...firstRow.children] : [];
   const imageCell = cells.find((cell) => cell.querySelector('picture'));
-  const contentCell = cells.length > 1 ? cells.find((cell) => cell !== imageCell) : null;
+  const contentCell = cells.length > 1
+    ? cells.find((cell) => cell !== imageCell && cell.textContent.trim().toLowerCase() !== 'image')
+    : null;
   const picture = imageCell?.querySelector('picture') || block.querySelector('picture');
   const switchImage = isTrue(fieldValue(fields, 'switch image and text'))
     || block.classList.contains('image-left');
@@ -314,21 +315,24 @@ export default async function decorate(block) {
   if (contentCell) {
     [...contentCell.children].forEach((child) => content.append(child));
   } else {
-    const heading = fieldValue(fields, 'heading');
-    const subHeading = fieldValue(fields, 'sub heading');
-    const body = fieldValue(fields, 'body text');
-    if (heading) content.insertAdjacentHTML('beforeend', `<h2>${heading}</h2>`);
-    if (subHeading) content.insertAdjacentHTML('beforeend', `<h3>${subHeading}</h3>`);
-    if (body) content.insertAdjacentHTML('beforeend', `<p>${body}</p>`);
+    if (!keyValueList) {
+      const heading = fieldValue(fields, 'heading');
+      const subHeading = fieldValue(fields, 'sub heading');
+      const body = fieldValue(fields, 'body text');
+      if (heading) content.insertAdjacentHTML('beforeend', `<h2>${heading}</h2>`);
+      if (subHeading) content.insertAdjacentHTML('beforeend', `<h3>${subHeading}</h3>`);
+      if (body) content.insertAdjacentHTML('beforeend', `<p>${body}</p>`);
+    }
     addCta(content, rows, fields, 'show cta button', 'cta button text', 'primary');
     addCta(content, rows, fields, 'show secondary cta button', 'secondary cta button text', 'secondary');
-    rows.slice(picture ? 1 : 0).forEach((row) => {
-      if (fields[getRowLabel(row)]) return;
-      [...row.children].forEach((child) => content.append(child));
-    });
+    if (!keyValueList) {
+      rows.slice(picture ? 1 : 0).forEach((row) => {
+        if (fields[getRowLabel(row)]) return;
+        [...row.children].forEach((child) => content.append(child));
+      });
+    }
   }
 
-  const keyValueList = createKeyValueList(rows);
   if (keyValueList) content.append(keyValueList);
 
   content.querySelectorAll('a').forEach((link) => {
