@@ -1,17 +1,21 @@
 .text-with-image {
+  box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--spacing-padding-05, 24px);
   align-items: center;
-  padding: 32px 0;
+  width: 100%;
+  max-width: 1256px;
+  margin: var(--spacing-layout-06, 48px) auto;
+  padding: 0;
   background-color: var(--text-with-image-background, var(--background-color));
   color: var(--text-with-image-color, var(--text-color));
 }
 
 .text-with-image.dark-theme,
 .text-with-image-dark-theme {
-  --text-with-image-background: var(--color-dark-background, var(--dark-color));
-  --text-with-image-color: var(--color-dark-text, var(--background-color));
+  --text-with-image-background: var(--color-midnight-blue-base, var(--color-dark-background, var(--dark-color)));
+  --text-with-image-color: var(--color-white, var(--color-dark-text, var(--background-color)));
 }
 
 .text-with-image-wrapper.text-with-image-dark-theme,
@@ -41,15 +45,46 @@
   --text-with-image-color: var(--text-color);
 }
 
+.text-with-image[class~="dark-theme--datapay"],
+.text-with-image[class~="dark-theme--datascape"],
+.text-with-image[class~="dark-theme--gateway"],
+.text-with-image[class~="dark-theme--timpani"] {
+  --text-with-image-background: var(--color-midnight-blue-base, var(--dark-color));
+  --text-with-image-color: var(--color-white, var(--background-color));
+}
+
+.text-with-image[class~="light-theme--datapay"] {
+  --text-with-image-background: var(--color-datapay-turquoise-minus-3, var(--light-color));
+}
+
+.text-with-image[class~="light-theme--datascape"] {
+  --text-with-image-background: var(--color-theme-datascape, var(--light-color));
+}
+
+.text-with-image[class~="light-theme--gateway"] {
+  --text-with-image-background: var(--color-gateway-gold-minus-3, var(--light-color));
+}
+
+.text-with-image[class~="light-theme--timpani"] {
+  --text-with-image-background: var(--color-theme-timpani, var(--light-color));
+}
+
+.text-with-image[class~="white-theme--datapay"],
+.text-with-image[class~="white-theme--datascape"],
+.text-with-image[class~="white-theme--gateway"],
+.text-with-image[class~="white-theme--timpani"] {
+  --text-with-image-background: var(--color-white, var(--background-color));
+}
+
 .text-with-image-compact {
-  gap: 24px;
-  padding: 24px 0;
+  gap: var(--spacing-padding-04, 16px);
 }
 
 .text-with-image-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding-inline-end: var(--spacing-padding-05, 24px);
   opacity: 0;
 }
 
@@ -86,6 +121,19 @@
   margin-top: 0;
 }
 
+.text-with-image-content > h2 {
+  padding-bottom: var(--spacing-layout-03, 24px);
+}
+
+.text-with-image-content .text-with-image-body-text {
+  margin-bottom: var(--spacing-padding-04, 16px);
+  padding-bottom: 0;
+  font-family: var(--typography-font-family-400, var(--body-font-family));
+  font-size: var(--body-font-size-m, 16px);
+  line-height: var(--font-body-line-height, 24px);
+  letter-spacing: 0.2px;
+}
+
 .text-with-image.dark-theme h2,
 .text-with-image.dark-theme h3,
 .text-with-image.dark-theme h4,
@@ -99,14 +147,41 @@
   color: var(--text-with-image-color);
 }
 
+.text-with-image-size-small {
+  --text-with-image-body-size: var(--body-font-size-s, 14px);
+}
+
+.text-with-image-size-medium {
+  --text-with-image-body-size: var(--body-font-size-m, 16px);
+}
+
+.text-with-image-size-large {
+  --text-with-image-body-size: var(--heading-font-size-s, 18px);
+}
+
+.text-with-image-content:is(.text-with-image-size-small, .text-with-image-size-medium, .text-with-image-size-large)
+  .text-with-image-body-text,
+.text-with-image-content:is(.text-with-image-size-small, .text-with-image-size-medium, .text-with-image-size-large)
+  > p:not(.text-with-image-body-text) {
+  font-size: var(--text-with-image-body-size);
+}
+
+.text-with-image-content > p:first-child:not(.text-with-image-body-text) {
+  margin-bottom: var(--spacing-padding-04, 16px);
+  font-family: var(--typography-font-family-700, var(--heading-font-family));
+}
+
 .text-with-image-media {
+  box-sizing: border-box;
   min-width: 0;
+  height: 52vw;
   overflow: hidden;
+  padding-inline-start: var(--spacing-padding-05, 24px);
 }
 
 .text-with-image-wide {
-  padding-left: 0;
-  padding-right: 0;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .text-with-image-media-wide,
@@ -118,10 +193,10 @@
 .text-with-image-image {
   display: block;
   width: 100%;
+  height: 100%;
 }
 
 .text-with-image-image {
-  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
@@ -197,25 +272,40 @@
 @media (width >= 900px) {
   .text-with-image {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 64px;
-    padding: 64px 0;
+    gap: 0;
+    margin-block: var(--spacing-layout-09, 120px);
+    padding-inline: var(--spacing-padding-08, 48px);
   }
 
   .text-with-image-wide {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 0;
+    max-width: none;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: 0;
+    padding: 0;
+  }
+
+  .text-with-image-content {
+    padding-inline-end: var(--spacing-padding-05, 24px);
+  }
+
+  .text-with-image-media {
+    height: 400px;
   }
 
   .text-with-image-wide .text-with-image-content {
-    max-width: 580px;
-    width: 100%;
-    justify-self: end;
-    padding: 0 64px;
     box-sizing: border-box;
+    width: 100%;
+    max-width: 580px;
+    justify-self: end;
+    margin-block: var(--spacing-layout-09, 120px);
+    padding: 0 var(--spacing-padding-08, 48px);
   }
 
   .text-with-image-wide .text-with-image-media {
     height: 100%;
+    max-height: none;
+    padding: 0;
   }
 
   .text-with-image-wide .text-with-image-media picture {
@@ -223,24 +313,111 @@
     height: 100%;
   }
 
-  .text-with-image-switch .text-with-image-content {
-    grid-column: 2;
-    grid-row: 1;
+  .text-with-image-wide .text-with-image-image {
+    border-radius: 0;
+    object-fit: cover;
   }
 
-  .text-with-image-switch .text-with-image-media {
-    grid-column: 1;
-    grid-row: 1;
+  .text-with-image-wide .text-with-image-video,
+  .text-with-image-wide .text-with-image-lottie,
+  .text-with-image-wide .text-with-image-map {
+    height: 100%;
+    border-radius: 0;
   }
 
+  .text-with-image-compact:not(.text-with-image-wide) {
+    margin-block: var(--spacing-layout-06, 48px);
+  }
+
+  .text-with-image-switch .text-with-image-content,
   .text-with-image.image-left .text-with-image-content {
     grid-column: 2;
     grid-row: 1;
+    padding-inline: var(--spacing-padding-05, 24px) 0;
   }
 
+  .text-with-image-switch .text-with-image-media,
   .text-with-image.image-left .text-with-image-media {
     grid-column: 1;
     grid-row: 1;
+    padding-inline: 0 var(--spacing-padding-05, 24px);
+  }
+
+  .text-with-image-wide.text-with-image-compact .text-with-image-content {
+    margin-block: var(--spacing-layout-06, 48px);
+  }
+
+  .text-with-image-wide.text-with-image-switch .text-with-image-content,
+  .text-with-image-wide.image-left .text-with-image-content {
+    justify-self: start;
+  }
+
+  .text-with-image-wide.text-with-image-switch .text-with-image-media,
+  .text-with-image-wide.image-left .text-with-image-media {
+    padding: 0;
+  }
+
+  .text-with-image-wide.text-with-image-switch,
+  .text-with-image-wide.image-left {
+    margin-right: 0;
+    margin-left: calc(50% - 50vw);
+  }
+}
+
+@media (width > 500px) and (width <= 900px) {
+  .text-with-image {
+    margin-block: var(--spacing-layout-06, 48px);
+  }
+}
+
+@media (width <= 900px) {
+  .text-with-image-wide {
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: 0;
+  }
+
+  .text-with-image-media {
+    grid-row: 1;
+    padding-inline-start: 0;
+  }
+
+  .text-with-image-content {
+    grid-row: 2;
+  }
+
+  .text-with-image-wide .text-with-image-content {
+    max-width: none;
+    margin-block: 0;
+    padding-inline: var(--spacing-padding-05, 24px);
+  }
+
+  .text-with-image-wide .text-with-image-media {
+    width: 100%;
+    height: 52vw;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  .text-with-image-wide .text-with-image-map {
+    height: 360px;
+  }
+}
+
+@media (width <= 500px) {
+  .text-with-image-content > h2 {
+    padding-bottom: var(--spacing-padding-04, 16px);
+  }
+
+  .text-with-image-wide .text-with-image-map {
+    height: 240px;
+  }
+}
+
+@media (width > 900px) and (width <= 1300px) {
+  .text-with-image {
+    margin-block: var(--spacing-layout-08, 80px);
   }
 }
 

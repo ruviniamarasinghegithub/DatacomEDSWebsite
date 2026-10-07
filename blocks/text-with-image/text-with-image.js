@@ -28,8 +28,24 @@ function appendTextField(content, fields, name, tagName) {
   if (!text) return;
 
   const element = document.createElement(tagName);
+  if (name === 'body text') element.classList.add('text-with-image-body-text');
   element.textContent = text;
   content.append(element);
+}
+
+function appendRichText(content, fields, name, text) {
+  const cell = fields[name] instanceof Element ? fields[name] : null;
+  if (cell?.children.length) {
+    [...cell.children].forEach((child) => {
+      child.querySelectorAll('p').forEach((paragraph) => {
+        paragraph.classList.add('text-with-image-body-text');
+      });
+      if (child.matches('p')) child.classList.add('text-with-image-body-text');
+      content.append(child);
+    });
+    return;
+  }
+  appendTextField(content, { [name]: text }, name, 'p');
 }
 
 function isTrue(value) {
@@ -202,13 +218,15 @@ export default async function decorate(block) {
   const wideImage = isTrue(fieldValue(fields, 'widen image'));
   const compact = isTrue(fieldValue(fields, 'compact mode'));
   const alignTop = isTrue(fieldValue(fields, 'align content to the top of the container'));
+  const textSize = fieldValue(fields, 'text size').toLowerCase();
+  const textSizeClass = ['small', 'medium', 'large'].includes(textSize) ? textSize : '';
   const wrapper = block.parentElement;
   const theme = fieldValue(fields, 'theme').toLowerCase();
-  const hasDarkTheme = theme === 'dark' || block.classList.contains('dark-theme')
+  const hasDarkTheme = ['dark', 'dark-theme'].includes(theme) || block.classList.contains('dark-theme')
     || wrapper?.classList.contains('dark-theme');
-  const hasLightTheme = theme === 'light' || block.classList.contains('light-theme')
+  const hasLightTheme = ['light', 'light-theme'].includes(theme) || block.classList.contains('light-theme')
     || wrapper?.classList.contains('light-theme');
-  const hasWhiteTheme = theme === 'white' || block.classList.contains('white-theme')
+  const hasWhiteTheme = ['white', 'white-theme'].includes(theme) || block.classList.contains('white-theme')
     || wrapper?.classList.contains('white-theme');
   const place = fieldValue(fields, 'name of place');
   const city = fieldValue(fields, 'city');
@@ -224,6 +242,7 @@ export default async function decorate(block) {
   const isLottie = block.classList.contains('lottie')
     || block.classList.contains('text-with-image-lottie')
     || Boolean(lottieUrl);
+  const isImage = !isMap && !isVideo && !isLottie && Boolean(picture);
 
   const media = document.createElement('div');
   media.className = 'text-with-image-media';
@@ -257,12 +276,13 @@ export default async function decorate(block) {
   content.className = 'text-with-image-content';
   if (wideImage) content.classList.add('text-with-image-content-wide');
   if (alignTop) content.classList.add('text-with-image-content-top');
+  if (textSizeClass) content.classList.add(`text-with-image-size-${textSizeClass}`);
   if (contentCell) {
     [...contentCell.children].forEach((child) => content.append(child));
   } else {
     appendTextField(content, fields, 'sub heading', 'h3');
     appendTextField(content, fields, 'heading', 'h2');
-    appendTextField(content, fields, 'body text', 'p');
+    appendRichText(content, fields, 'body text', fieldValue(fields, 'body text'));
     addCta(content, rows, fields, 'show cta button', 'cta button text', 'primary');
     addCta(content, rows, fields, 'show secondary cta button', 'secondary cta button text', 'secondary');
   }
@@ -277,6 +297,7 @@ export default async function decorate(block) {
   block.classList.toggle('text-with-image-video-variant', isVideo);
   block.classList.toggle('text-with-image-lottie-variant', isLottie);
   block.classList.toggle('text-with-image-map-variant', isMap);
+  block.classList.toggle('text-with-image-image-variant', isImage);
   block.classList.toggle('text-with-image-dark-theme', hasDarkTheme);
   block.classList.toggle('text-with-image-light-theme', hasLightTheme);
   block.classList.toggle('text-with-image-white-theme', hasWhiteTheme);
