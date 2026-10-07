@@ -23,6 +23,72 @@ function fieldValue(fields, name) {
   return typeof fields[name] === 'string' ? fields[name] : fields[name]?.textContent.trim() || '';
 }
 
+const TEXT_WITH_IMAGE_FIELDS = new Set([
+  'heading',
+  'sub heading',
+  'body text',
+  'image alt',
+  'switch image and text',
+  'widen image',
+  'compact mode',
+  'align content to the top of the container',
+  'show cta button',
+  'cta button text',
+  'show secondary cta button',
+  'secondary cta button text',
+  'name of place',
+  'city',
+  'country',
+  'video link',
+  'lottie asset link',
+  'loop animation',
+  'enable auto play',
+  'alternative text for lottie',
+  'alternative text for video',
+  'video upload date (for schema)',
+  'schema title (optional)',
+  'video description (for schema)',
+]);
+
+function createKeyValueList(rows) {
+  const entries = rows.flatMap((row) => {
+    const cells = [...row.children];
+    if (row.querySelector('picture')) return [];
+
+    const text = cells[0]?.textContent.trim() || '';
+    const separator = text.indexOf(':');
+    const key = cells.length > 1 ? text.replace(/:$/, '').trim() : text.slice(0, separator).trim();
+    const value = cells.length > 1 ? cells[1] : null;
+    const valueText = value
+      ? value.textContent.trim()
+      : text.slice(separator + 1).trim();
+    if (!key || !valueText || TEXT_WITH_IMAGE_FIELDS.has(key.toLowerCase())) return [];
+
+    return [{ key, value, valueText }];
+  });
+
+  if (!entries.length) return null;
+
+  const list = document.createElement('dl');
+  list.className = 'text-with-image-key-value';
+  entries.forEach(({ key, value, valueText }) => {
+    const item = document.createElement('div');
+    item.className = 'text-with-image-key-value-item';
+    const term = document.createElement('dt');
+    term.textContent = key;
+    const description = document.createElement('dd');
+    if (value) {
+      [...value.childNodes].forEach((child) => description.append(child.cloneNode(true)));
+    } else {
+      description.textContent = valueText;
+    }
+    item.append(term, description);
+    list.append(item);
+  });
+
+  return list;
+}
+
 function isTrue(value) {
   return value.toLowerCase() === 'true';
 }
@@ -261,6 +327,9 @@ export default async function decorate(block) {
       [...row.children].forEach((child) => content.append(child));
     });
   }
+
+  const keyValueList = createKeyValueList(rows);
+  if (keyValueList) content.append(keyValueList);
 
   content.querySelectorAll('a').forEach((link) => {
     if (!link.closest('.button-wrapper')) link.classList.add('text-with-image-link');
