@@ -86,28 +86,6 @@
   margin-top: 0;
 }
 
-.text-with-image-key-value {
-  width: 100%;
-  margin: 16px 0 0;
-}
-
-.text-with-image-key-value-item {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  gap: 16px;
-  padding: 12px 0;
-  border-bottom: 1px solid currentcolor;
-}
-
-.text-with-image-key-value-item dt {
-  font-weight: 600;
-}
-
-.text-with-image-key-value-item dd {
-  min-width: 0;
-  margin: 0;
-}
-
 .text-with-image.dark-theme h2,
 .text-with-image.dark-theme h3,
 .text-with-image.dark-theme h4,

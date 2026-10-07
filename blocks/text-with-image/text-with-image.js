@@ -23,68 +23,13 @@ function fieldValue(fields, name) {
   return typeof fields[name] === 'string' ? fields[name] : fields[name]?.textContent.trim() || '';
 }
 
-const TEXT_WITH_IMAGE_FIELDS = new Set([
-  'image alt',
-  'switch image and text',
-  'widen image',
-  'compact mode',
-  'align content to the top of the container',
-  'show cta button',
-  'cta button text',
-  'show secondary cta button',
-  'secondary cta button text',
-  'name of place',
-  'city',
-  'country',
-  'video link',
-  'lottie asset link',
-  'loop animation',
-  'enable auto play',
-  'alternative text for lottie',
-  'alternative text for video',
-  'video upload date (for schema)',
-  'schema title (optional)',
-  'video description (for schema)',
-  'theme',
-]);
+function appendTextField(content, fields, name, tagName) {
+  const text = fieldValue(fields, name);
+  if (!text) return;
 
-function createKeyValueList(rows) {
-  const entries = rows.flatMap((row) => {
-    const cells = [...row.children];
-    if (row.querySelector('picture')) return [];
-
-    const text = cells[0]?.textContent.trim() || '';
-    const separator = text.indexOf(':');
-    const key = cells.length > 1 ? text.replace(/:$/, '').trim() : text.slice(0, separator).trim();
-    const value = cells.length > 1 ? cells[1] : null;
-    const valueText = value
-      ? value.textContent.trim()
-      : text.slice(separator + 1).trim();
-    if (!key || !valueText || TEXT_WITH_IMAGE_FIELDS.has(key.toLowerCase())) return [];
-
-    return [{ key, value, valueText }];
-  });
-
-  if (!entries.length) return null;
-
-  const list = document.createElement('dl');
-  list.className = 'text-with-image-key-value';
-  entries.forEach(({ key, value, valueText }) => {
-    const item = document.createElement('div');
-    item.className = 'text-with-image-key-value-item';
-    const term = document.createElement('dt');
-    term.textContent = key;
-    const description = document.createElement('dd');
-    if (value) {
-      [...value.childNodes].forEach((child) => description.append(child.cloneNode(true)));
-    } else {
-      description.textContent = valueText;
-    }
-    item.append(term, description);
-    list.append(item);
-  });
-
-  return list;
+  const element = document.createElement(tagName);
+  element.textContent = text;
+  content.append(element);
 }
 
 function isTrue(value) {
@@ -245,7 +190,6 @@ function addCta(content, rows, fields, showField, textField, style) {
 export default async function decorate(block) {
   const rows = [...block.children];
   const fields = getFieldRows(block);
-  const keyValueList = createKeyValueList(rows);
   const firstRow = rows[0];
   const cells = firstRow ? [...firstRow.children] : [];
   const imageCell = cells.find((cell) => cell.querySelector('picture'));
@@ -259,11 +203,12 @@ export default async function decorate(block) {
   const compact = isTrue(fieldValue(fields, 'compact mode'));
   const alignTop = isTrue(fieldValue(fields, 'align content to the top of the container'));
   const wrapper = block.parentElement;
-  const hasDarkTheme = block.classList.contains('dark-theme')
+  const theme = fieldValue(fields, 'theme').toLowerCase();
+  const hasDarkTheme = theme === 'dark' || block.classList.contains('dark-theme')
     || wrapper?.classList.contains('dark-theme');
-  const hasLightTheme = block.classList.contains('light-theme')
+  const hasLightTheme = theme === 'light' || block.classList.contains('light-theme')
     || wrapper?.classList.contains('light-theme');
-  const hasWhiteTheme = block.classList.contains('white-theme')
+  const hasWhiteTheme = theme === 'white' || block.classList.contains('white-theme')
     || wrapper?.classList.contains('white-theme');
   const place = fieldValue(fields, 'name of place');
   const city = fieldValue(fields, 'city');
@@ -315,25 +260,12 @@ export default async function decorate(block) {
   if (contentCell) {
     [...contentCell.children].forEach((child) => content.append(child));
   } else {
-    if (!keyValueList) {
-      const heading = fieldValue(fields, 'heading');
-      const subHeading = fieldValue(fields, 'sub heading');
-      const body = fieldValue(fields, 'body text');
-      if (heading) content.insertAdjacentHTML('beforeend', `<h2>${heading}</h2>`);
-      if (subHeading) content.insertAdjacentHTML('beforeend', `<h3>${subHeading}</h3>`);
-      if (body) content.insertAdjacentHTML('beforeend', `<p>${body}</p>`);
-    }
+    appendTextField(content, fields, 'sub heading', 'h3');
+    appendTextField(content, fields, 'heading', 'h2');
+    appendTextField(content, fields, 'body text', 'p');
     addCta(content, rows, fields, 'show cta button', 'cta button text', 'primary');
     addCta(content, rows, fields, 'show secondary cta button', 'secondary cta button text', 'secondary');
-    if (!keyValueList) {
-      rows.slice(picture ? 1 : 0).forEach((row) => {
-        if (fields[getRowLabel(row)]) return;
-        [...row.children].forEach((child) => content.append(child));
-      });
-    }
   }
-
-  if (keyValueList) content.append(keyValueList);
 
   content.querySelectorAll('a').forEach((link) => {
     if (!link.closest('.button-wrapper')) link.classList.add('text-with-image-link');
@@ -345,9 +277,9 @@ export default async function decorate(block) {
   block.classList.toggle('text-with-image-video-variant', isVideo);
   block.classList.toggle('text-with-image-lottie-variant', isLottie);
   block.classList.toggle('text-with-image-map-variant', isMap);
-  block.classList.toggle('text-with-image-dark-theme', block.classList.contains('dark-theme'));
-  block.classList.toggle('text-with-image-light-theme', block.classList.contains('light-theme'));
-  block.classList.toggle('text-with-image-white-theme', block.classList.contains('white-theme'));
+  block.classList.toggle('text-with-image-dark-theme', hasDarkTheme);
+  block.classList.toggle('text-with-image-light-theme', hasLightTheme);
+  block.classList.toggle('text-with-image-white-theme', hasWhiteTheme);
   wrapper?.classList.toggle('text-with-image-dark-theme', hasDarkTheme);
   wrapper?.classList.toggle('text-with-image-light-theme', hasLightTheme);
   wrapper?.classList.toggle('text-with-image-white-theme', hasWhiteTheme);
