@@ -165,11 +165,11 @@ export default async function decorate(block) {
       || getPathLabel(currentPath.split('/').filter(Boolean).at(-1) || '');
     visibleItems = [
       ...ancestors.map((item) => ({ ...item, isCurrent: false })),
-      ...(!hideCurrent ? [{
+      {
         label: currentLabel,
-        path: currentPath,
+        path: hideCurrent ? undefined : currentPath,
         isCurrent: true,
-      }] : []),
+      },
     ];
   } else {
     const navigationItems = showHidden && disableShadowing ? new Map() : await getNavigationItems();
@@ -196,7 +196,10 @@ export default async function decorate(block) {
     const currentItem = items.find((item) => item.isCurrent);
     visibleItems = [
       ...items.filter((item) => item.isVisible && !item.isCurrent),
-      ...(!hideCurrent && currentItem ? [currentItem] : []),
+      ...(currentItem ? [{
+        ...currentItem,
+        path: hideCurrent ? undefined : currentItem.path,
+      }] : []),
     ];
   }
 
