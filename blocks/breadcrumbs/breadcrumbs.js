@@ -1,0 +1,79 @@
+/**
+ * Breadcrumbs that always appear before the current page.
+ * Update this list to maintain ancestor labels, URLs, or ordering.
+ */
+const ANCESTOR_ITEMS = [
+  { label: 'Home', path: 'https://datacom.com' },
+  { label: 'Who we are', path: 'https://datacom.com/nz/en/about-us/who-we-are' },
+  { label: 'Partners', path: 'https://datacom.com/nz/en/about-us/partners' },
+];
+
+/**
+ * Converts a URL segment into a readable breadcrumb label.
+ * @param {string} segment URL path segment
+ * @returns {string} readable label
+ */
+function getLabel(segment) {
+  let decoded = segment;
+  try {
+    decoded = decodeURIComponent(segment);
+  } catch {
+    // Keep malformed URL segments unchanged.
+  }
+
+  return decoded
+    .replace(/\.html$/i, '')
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+/**
+ * Builds an accessible breadcrumb trail from the current URL.
+ * @param {Element} block The breadcrumbs block
+ */
+export default function decorate(block) {
+  const segments = window.location.pathname
+    .replace(/\/index(?:\.html)?$/i, '/')
+    .split('/')
+    .filter(Boolean);
+  const currentSegment = segments.at(-1);
+  const items = [
+    ...ANCESTOR_ITEMS,
+    ...(currentSegment ? [{ label: getLabel(currentSegment) }] : []),
+  ];
+
+  const nav = document.createElement('nav');
+  nav.setAttribute('aria-label', 'Breadcrumb');
+
+  const list = document.createElement('ol');
+  const iconPath = `${window.hlx?.codeBasePath || ''}/icons/breadcrumb-chevron-link.svg`;
+
+  items.forEach(({ label, path: itemPath }, index) => {
+    const item = document.createElement('li');
+    const isCurrentPage = index === items.length - 1;
+    const content = document.createElement(isCurrentPage ? 'span' : 'a');
+
+    content.textContent = label;
+    if (isCurrentPage) {
+      content.setAttribute('aria-current', 'page');
+    } else {
+      content.href = itemPath;
+    }
+
+    item.append(content);
+
+    if (!isCurrentPage) {
+      const chevron = document.createElement('img');
+      chevron.className = 'breadcrumbs-chevron';
+      chevron.src = iconPath;
+      chevron.alt = '';
+      chevron.width = 6;
+      chevron.height = 10;
+      item.append(chevron);
+    }
+    list.append(item);
+  });
+
+  nav.append(list);
+  block.replaceChildren(nav);
+}

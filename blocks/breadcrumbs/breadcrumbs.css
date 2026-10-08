@@ -1,0 +1,48 @@
+main .breadcrumbs {
+  box-sizing: border-box;
+  padding-block: var(--spacing-padding-06);
+  overflow-x: auto;
+}
+
+main .breadcrumbs nav {
+  width: max-content;
+  min-width: 100%;
+}
+
+main .breadcrumbs ol {
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--typography-font-family-500);
+  font-size: var(--font-14-size);
+  font-weight: 500;
+  line-height: var(--font-14-line-height);
+  letter-spacing: var(--letter-spacing-small);
+  white-space: nowrap;
+}
+
+main .breadcrumbs li {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--spacing-padding-02);
+  padding-inline-end: var(--spacing-padding-02);
+}
+
+main .breadcrumbs a:any-link {
+  color: var(--font-color-cta);
+}
+
+main .breadcrumbs a[aria-current='page'],
+main .breadcrumbs span[aria-current='page'] {
+  color: var(--font-color-default);
+}
+
+main .breadcrumbs .breadcrumbs-chevron {
+  display: block;
+  flex: 0 0 6px;
+  width: 6px;
+  height: 10px;
+}
