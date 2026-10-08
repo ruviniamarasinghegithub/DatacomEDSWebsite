@@ -44,5 +44,8 @@ main .breadcrumbs .breadcrumbs-chevron {
   display: block;
   flex: 0 0 6px;
   width: 6px;
-  height: 10px;
+  height: 6px;
+  border-top: 1px solid currentcolor;
+  border-right: 1px solid currentcolor;
+  transform: rotate(45deg);
 }

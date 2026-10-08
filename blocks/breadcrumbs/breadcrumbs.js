@@ -46,7 +46,6 @@ export default function decorate(block) {
   nav.setAttribute('aria-label', 'Breadcrumb');
 
   const list = document.createElement('ol');
-  const iconPath = `${window.hlx?.codeBasePath || ''}/icons/breadcrumb-chevron-link.svg`;
 
   items.forEach(({ label, path: itemPath }, index) => {
     const item = document.createElement('li');
@@ -63,12 +62,9 @@ export default function decorate(block) {
     item.append(content);
 
     if (!isCurrentPage) {
-      const chevron = document.createElement('img');
+      const chevron = document.createElement('span');
       chevron.className = 'breadcrumbs-chevron';
-      chevron.src = iconPath;
-      chevron.alt = '';
-      chevron.width = 6;
-      chevron.height = 10;
+      chevron.setAttribute('aria-hidden', 'true');
       item.append(chevron);
     }
     list.append(item);
