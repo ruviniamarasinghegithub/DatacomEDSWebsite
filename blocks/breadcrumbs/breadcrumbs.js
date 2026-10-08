@@ -71,7 +71,7 @@ export default function decorate(block) {
     ...ancestors,
     ...(currentSegment ? [{
       label: currentOverride?.label || getLabel(currentSegment),
-      path: window.location.pathname,
+      path: currentOverride?.path || window.location.pathname,
       isCurrent: true,
     }] : []),
   ];
@@ -84,12 +84,13 @@ export default function decorate(block) {
   items.forEach(({ label, path: itemPath, isCurrent }, index) => {
     const item = document.createElement('li');
     const isCurrentPage = isCurrent || index === items.length - 1;
-    const content = document.createElement(isCurrentPage || !itemPath ? 'span' : 'a');
+    const content = document.createElement(itemPath ? 'a' : 'span');
 
     content.textContent = label;
     if (isCurrentPage) {
       content.setAttribute('aria-current', 'page');
-    } else if (itemPath) {
+    }
+    if (itemPath) {
       content.href = itemPath;
     }
 

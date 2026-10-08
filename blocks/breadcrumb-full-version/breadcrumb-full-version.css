@@ -33,7 +33,11 @@ main .breadcrumb-full-version-item {
 
 main .breadcrumb-full-version a:any-link {
   color: var(--font-color-cta);
-  text-decoration: none;
+  cursor: pointer;
+}
+
+main .breadcrumb-full-version a:any-link:hover {
+  text-decoration: underline;
 }
 
 main .breadcrumb-full-version [aria-current='page'] {

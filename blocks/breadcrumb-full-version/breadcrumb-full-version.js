@@ -121,12 +121,13 @@ async function getNavigationItems() {
 function createBreadcrumbItem(item, isCurrent) {
   const listItem = document.createElement('li');
   listItem.className = 'breadcrumb-full-version-item';
-  const content = document.createElement(isCurrent || !item.path ? 'span' : 'a');
+  const content = document.createElement(item.path ? 'a' : 'span');
   content.textContent = item.label;
 
   if (isCurrent) {
     content.setAttribute('aria-current', 'page');
-  } else if (item.path) {
+  }
+  if (item.path) {
     content.href = item.path;
   }
 
@@ -159,7 +160,7 @@ export default async function decorate(block) {
   if (authoredSegments.length) {
     const currentOverride = authoredSegments.find((item) => item.isCurrent);
     const ancestors = authoredSegments.filter((item) => !item.isCurrent);
-    const currentPath = window.location.pathname;
+    const currentPath = currentOverride?.path || window.location.pathname;
     const currentLabel = currentOverride?.label
       || getPathLabel(currentPath.split('/').filter(Boolean).at(-1) || '');
     visibleItems = [

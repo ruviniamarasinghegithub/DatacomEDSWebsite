@@ -43,6 +43,11 @@ main .breadcrumbs li {
 
 main .breadcrumbs a:any-link {
   color: var(--font-color-cta);
+  cursor: pointer;
+}
+
+main .breadcrumbs a:any-link:hover {
+  text-decoration: underline;
 }
 
 main .breadcrumbs a[aria-current='page'],
