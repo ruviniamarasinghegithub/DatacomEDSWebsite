@@ -121,6 +121,11 @@
   margin-top: 0;
 }
 
+.text-with-image-content > .text-with-image-sub-heading {
+  margin-bottom: var(--spacing-padding-04, 16px);
+  font-family: var(--typography-font-family-700, var(--heading-font-family));
+}
+
 .text-with-image-content > h2 {
   padding-bottom: var(--spacing-layout-03, 24px);
 }
@@ -164,11 +169,6 @@
 .text-with-image-content:is(.text-with-image-size-small, .text-with-image-size-medium, .text-with-image-size-large)
   > p:not(.text-with-image-body-text) {
   font-size: var(--text-with-image-body-size);
-}
-
-.text-with-image-content > p:first-child:not(.text-with-image-body-text) {
-  margin-bottom: var(--spacing-padding-04, 16px);
-  font-family: var(--typography-font-family-700, var(--heading-font-family));
 }
 
 .text-with-image-media {
@@ -261,8 +261,115 @@
   aspect-ratio: auto;
 }
 
-.text-with-image-content .button-wrapper {
-  margin: 20px 0 0;
+.text-with-image-content .text-with-image-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: var(--spacing-padding-04, 16px);
+}
+
+.text-with-image-content .text-with-image-cta {
+  --cta-background: var(--color-action-blue, #002bfe);
+  --cta-border: var(--color-action-blue, #002bfe);
+  --cta-color: var(--color-white, #fff);
+  --cta-hover-background: var(--color-action-blue-hover, #0022cb);
+  --cta-hover-border: var(--color-action-blue-hover, #0022cb);
+  --cta-hover-color: var(--color-white, #fff);
+  --cta-active-background: var(--color-action-blue-hover, #0022cb);
+  --cta-active-border: var(--color-action-blue-hover, #0022cb);
+  --cta-active-color: var(--color-white, #fff);
+  --cta-focus-outline: var(--color-action-blue, #002bfe);
+
+  display: flex;
+  justify-content: flex-start;
+}
+
+.text-with-image-content .text-with-image-cta-secondary {
+  --cta-background: var(--color-white, #fff);
+  --cta-border: var(--color-action-blue, #002bfe);
+  --cta-color: var(--color-action-blue, #002bfe);
+  --cta-hover-background: var(--color-extra-light-blue-base, #f2f4ff);
+  --cta-hover-border: var(--color-action-blue-hover, #0022cb);
+  --cta-hover-color: var(--color-action-blue-hover, #0022cb);
+  --cta-active-background: var(--color-extra-light-blue-base, #f2f4ff);
+  --cta-active-border: var(--color-action-blue-hover, #0022cb);
+  --cta-active-color: var(--color-action-blue-hover, #0022cb);
+}
+
+.text-with-image-content .text-with-image-cta.dark-theme {
+  --cta-background: var(--color-light-blue-base, #80a0f8);
+  --cta-border: var(--color-light-blue-base, #80a0f8);
+  --cta-color: var(--color-midnight-blue-base, #000a14);
+  --cta-hover-background: var(--color-electric-blue-minus-3, #ccd9fc);
+  --cta-hover-border: var(--color-electric-blue-minus-3, #ccd9fc);
+  --cta-hover-color: var(--color-midnight-blue-base, #000a14);
+  --cta-active-background: var(--color-electric-blue-minus-3, #ccd9fc);
+  --cta-active-border: var(--color-electric-blue-minus-3, #ccd9fc);
+  --cta-active-color: var(--color-midnight-blue-base, #000a14);
+  --cta-focus-outline: var(--color-light-blue-base, #80a0f8);
+}
+
+.text-with-image-content .text-with-image-cta.dark-theme.text-with-image-cta-secondary {
+  --cta-background: var(--color-midnight-blue-base, #000a14);
+  --cta-border: var(--color-light-blue-base, #80a0f8);
+  --cta-color: var(--color-light-blue-base, #80a0f8);
+  --cta-hover-background: var(--color-midnight-blue-minus-1, #1a232c);
+  --cta-hover-border: var(--color-electric-blue-minus-3, #ccd9fc);
+  --cta-hover-color: var(--color-electric-blue-minus-3, #ccd9fc);
+  --cta-active-background: var(--color-midnight-blue-minus-1, #1a232c);
+  --cta-active-border: var(--color-electric-blue-minus-3, #ccd9fc);
+  --cta-active-color: var(--color-electric-blue-minus-3, #ccd9fc);
+}
+
+.text-with-image-content .text-with-image-cta .cta-button-link,
+.text-with-image-content .text-with-image-cta a.cta-button-link:any-link {
+  box-sizing: border-box;
+  display: inline-flex;
+  width: 100%;
+  min-width: 120px;
+  min-height: 48px;
+  padding: 10px 24px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 2px solid var(--cta-border);
+  border-radius: 8px;
+  background-color: var(--cta-background);
+  color: var(--cta-color);
+  font-family: var(--typography-font-family-600, sans-serif);
+  font-size: var(--font-18-size, 18px);
+  line-height: var(--font-18-line-height, 24px);
+  letter-spacing: var(--letter-spacing-small, -0.2px);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.text-with-image-content .text-with-image-cta a.cta-button-link:hover {
+  border-color: var(--cta-hover-border);
+  background-color: var(--cta-hover-background);
+  color: var(--cta-hover-color);
+  text-decoration: none;
+}
+
+.text-with-image-content .text-with-image-cta a.cta-button-link:active {
+  border-color: var(--cta-active-border);
+  background-color: var(--cta-active-background);
+  color: var(--cta-active-color);
+}
+
+.text-with-image-content .text-with-image-cta .cta-button-link:focus-visible {
+  outline: 3px solid var(--cta-focus-outline);
+  outline-offset: 2px;
+}
+
+.text-with-image-content .text-with-image-cta .cta-button-link[aria-disabled="true"] {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.text-with-image-content .text-with-image-cta:not(:last-child) {
+  margin-right: var(--spacing-padding-04, 16px);
 }
 
 .text-with-image-link {
@@ -364,6 +471,13 @@
   }
 }
 
+@media (width >= 500px) {
+  .text-with-image-content .text-with-image-cta .cta-button-link,
+  .text-with-image-content .text-with-image-cta a.cta-button-link:any-link {
+    width: auto;
+  }
+}
+
 @media (width > 500px) and (width <= 900px) {
   .text-with-image {
     margin-block: var(--spacing-layout-06, 48px);
@@ -387,6 +501,10 @@
     grid-row: 2;
   }
 
+  .text-with-image-wrapper:first-child {
+    padding-bottom: var(--spacing-layout-03, 24px);
+  }
+
   .text-with-image-wide .text-with-image-content {
     max-width: none;
     margin-block: 0;
@@ -408,6 +526,21 @@
 @media (width <= 500px) {
   .text-with-image-content > h2 {
     padding-bottom: var(--spacing-padding-04, 16px);
+  }
+
+  .text-with-image-content .text-with-image-cta-group,
+  .text-with-image-content .text-with-image-cta,
+  .text-with-image-content .text-with-image-cta .cta-button-link {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .text-with-image-content .text-with-image-cta:not(:last-child) {
+    margin-right: 0;
+  }
+
+  .text-with-image-content .text-with-image-cta:last-child {
+    margin-top: var(--spacing-padding-02, 8px);
   }
 
   .text-with-image-wide .text-with-image-map {

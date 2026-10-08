@@ -23,12 +23,12 @@ function fieldValue(fields, name) {
   return typeof fields[name] === 'string' ? fields[name] : fields[name]?.textContent.trim() || '';
 }
 
-function appendTextField(content, fields, name, tagName) {
+function appendTextField(content, fields, name, tagName, className) {
   const text = fieldValue(fields, name);
   if (!text) return;
 
   const element = document.createElement(tagName);
-  if (name === 'body text') element.classList.add('text-with-image-body-text');
+  if (className) element.classList.add(className);
   element.textContent = text;
   content.append(element);
 }
@@ -45,7 +45,7 @@ function appendRichText(content, fields, name, text) {
     });
     return;
   }
-  appendTextField(content, { [name]: text }, name, 'p');
+  appendTextField(content, { [name]: text }, name, 'p', 'text-with-image-body-text');
 }
 
 function isTrue(value) {
@@ -187,20 +187,25 @@ function addVideoSchema(url, fields) {
   document.head.append(schema);
 }
 
-function addCta(content, rows, fields, showField, textField, style) {
+function addCta(content, rows, fields, showField, textField, style, darkTheme) {
   const text = fieldValue(fields, textField);
   const sourceLink = getFieldLink(rows, textField);
   if (!isTrue(fieldValue(fields, showField)) || !text) return;
 
-  const wrapper = content.querySelector('.text-with-image-cta')
+  const group = content.querySelector('.text-with-image-cta-group')
     || document.createElement('div');
-  wrapper.className = 'text-with-image-cta button-wrapper';
+  group.className = 'text-with-image-cta-group';
+  if (!group.parentElement) content.append(group);
+
+  const wrapper = document.createElement('div');
+  wrapper.className = `text-with-image-cta cta-button ${style} text-with-image-cta-${style} button-wrapper`;
+  if (darkTheme) wrapper.classList.add('dark-theme');
   const link = document.createElement('a');
-  link.className = `button ${style}`;
+  link.className = 'cta-button-link';
   link.href = sourceLink?.href || '#';
   link.textContent = text;
   wrapper.append(link);
-  if (!wrapper.parentElement) content.append(wrapper);
+  group.append(wrapper);
 }
 
 export default async function decorate(block) {
@@ -280,11 +285,19 @@ export default async function decorate(block) {
   if (contentCell) {
     [...contentCell.children].forEach((child) => content.append(child));
   } else {
-    appendTextField(content, fields, 'sub heading', 'h3');
+    appendTextField(content, fields, 'sub heading', 'p', 'text-with-image-sub-heading');
     appendTextField(content, fields, 'heading', 'h2');
     appendRichText(content, fields, 'body text', fieldValue(fields, 'body text'));
-    addCta(content, rows, fields, 'show cta button', 'cta button text', 'primary');
-    addCta(content, rows, fields, 'show secondary cta button', 'secondary cta button text', 'secondary');
+    addCta(content, rows, fields, 'show cta button', 'cta button text', 'primary', hasDarkTheme);
+    addCta(
+      content,
+      rows,
+      fields,
+      'show secondary cta button',
+      'secondary cta button text',
+      'secondary',
+      hasDarkTheme,
+    );
   }
 
   content.querySelectorAll('a').forEach((link) => {
