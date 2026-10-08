@@ -1,22 +1,51 @@
 import { getMetadata } from '../../scripts/aem.js';
 
 const DEFAULT_START_LEVEL = 2;
+const CONFIGURATION_FIELDS = new Set([
+  'navigation start level',
+  'id',
+  'show hidden navigation items',
+  'hide current page',
+  'disable shadowing',
+]);
 
 function normalizeKey(value) {
   return value.trim().replace(/:$/, '').trim().toLowerCase()
     .replace(/\s+/g, ' ');
 }
 
-function getFields(block) {
-  return [...block.children].reduce((fields, row) => {
+function getFields(rows) {
+  return rows.reduce((fields, row) => {
     const cells = [...row.children];
     if (cells.length < 2) return fields;
 
     const key = normalizeKey(cells[0].textContent);
     const value = cells[1].textContent.trim();
-    if (key) fields[key] = value;
+    if (CONFIGURATION_FIELDS.has(key)) fields[key] = value;
     return fields;
   }, {});
+}
+
+function getAuthoredSegments(rows) {
+  return rows.slice(0, 4).reduce((segments, row) => {
+    const cells = [...row.children];
+    if (cells.length < 2) return segments;
+
+    const key = normalizeKey(cells[0].textContent);
+    if (CONFIGURATION_FIELDS.has(key)) return segments;
+
+    const valueCell = cells[1];
+    const link = valueCell.querySelector('a[href]');
+    const label = (link || valueCell).textContent.trim();
+    if (!label) return segments;
+
+    segments.push({
+      label,
+      path: link?.href,
+      isCurrent: key === 'current page',
+    });
+    return segments;
+  }, []);
 }
 
 function parseBoolean(value, fieldName, defaultValue) {
@@ -92,12 +121,12 @@ async function getNavigationItems() {
 function createBreadcrumbItem(item, isCurrent) {
   const listItem = document.createElement('li');
   listItem.className = 'breadcrumb-full-version-item';
-  const content = document.createElement(isCurrent ? 'span' : 'a');
+  const content = document.createElement(isCurrent || !item.path ? 'span' : 'a');
   content.textContent = item.label;
 
   if (isCurrent) {
     content.setAttribute('aria-current', 'page');
-  } else {
+  } else if (item.path) {
     content.href = item.path;
   }
 
@@ -118,35 +147,46 @@ function createBreadcrumbItem(item, isCurrent) {
  * @param {Element} block The breadcrumb block
  */
 export default async function decorate(block) {
-  const fields = getFields(block);
+  const rows = [...block.children];
+  const fields = getFields(rows);
+  const authoredSegments = getAuthoredSegments(rows);
   const startLevel = parseStartLevel(fields['navigation start level']);
   const showHidden = parseBoolean(fields['show hidden navigation items'], 'Show hidden navigation items', false);
   const hideCurrent = parseBoolean(fields['hide current page'], 'Hide current page', false);
   const disableShadowing = parseBoolean(fields['disable shadowing'], 'Disable shadowing', false);
   const { id } = fields;
-  const navigationItems = showHidden && disableShadowing ? new Map() : await getNavigationItems();
+  let visibleItems;
+  if (authoredSegments.length) {
+    const lastSegment = authoredSegments.length - 1;
+    const authoredCurrent = authoredSegments.findIndex((item) => item.isCurrent);
+    const currentIndex = authoredCurrent >= 0 ? authoredCurrent : lastSegment;
+    visibleItems = authoredSegments
+      .map((item, index) => ({ ...item, isCurrent: index === currentIndex }))
+      .filter((item) => !(hideCurrent && item.isCurrent));
+  } else {
+    const navigationItems = showHidden && disableShadowing ? new Map() : await getNavigationItems();
+    const segments = window.location.pathname
+      .replace(/\/index(?:\.html)?$/i, '/')
+      .split('/')
+      .filter(Boolean);
+    const items = await Promise.all(segments.slice(startLevel).map(async (segment, index) => {
+      const segmentIndex = index + startLevel;
+      const originalPath = `/${segments.slice(0, segmentIndex + 1).join('/')}`;
+      const path = disableShadowing ? originalPath : await resolveRedirect(originalPath);
+      const normalizedPath = normalizePath(path);
+      const navigationLabel = navigationItems.get(normalizedPath);
 
-  const segments = window.location.pathname
-    .replace(/\/index(?:\.html)?$/i, '/')
-    .split('/')
-    .filter(Boolean);
-  const items = await Promise.all(segments.slice(startLevel).map(async (segment, index) => {
-    const segmentIndex = index + startLevel;
-    const originalPath = `/${segments.slice(0, segmentIndex + 1).join('/')}`;
-    const path = disableShadowing ? originalPath : await resolveRedirect(originalPath);
-    const normalizedPath = normalizePath(path);
-    const navigationLabel = navigationItems.get(normalizedPath);
-
-    return {
-      path,
-      label: !disableShadowing && navigationLabel
-        ? navigationLabel
-        : getPathLabel(path.split('/').filter(Boolean).at(-1) || segment),
-      isVisible: showHidden || navigationItems.has(normalizedPath),
-      isCurrent: segmentIndex === segments.length - 1,
-    };
-  }));
-  const visibleItems = items.filter((item) => item.isVisible && !(hideCurrent && item.isCurrent));
+      return {
+        path,
+        label: !disableShadowing && navigationLabel
+          ? navigationLabel
+          : getPathLabel(path.split('/').filter(Boolean).at(-1) || segment),
+        isVisible: showHidden || navigationItems.has(normalizedPath),
+        isCurrent: segmentIndex === segments.length - 1,
+      };
+    }));
+    visibleItems = items.filter((item) => item.isVisible && !(hideCurrent && item.isCurrent));
+  }
 
   const nav = document.createElement('nav');
   nav.setAttribute('aria-label', 'Breadcrumb');
