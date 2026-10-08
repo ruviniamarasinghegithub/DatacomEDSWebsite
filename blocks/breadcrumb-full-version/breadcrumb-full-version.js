@@ -157,12 +157,19 @@ export default async function decorate(block) {
   const { id } = fields;
   let visibleItems;
   if (authoredSegments.length) {
-    const lastSegment = authoredSegments.length - 1;
-    const authoredCurrent = authoredSegments.findIndex((item) => item.isCurrent);
-    const currentIndex = authoredCurrent >= 0 ? authoredCurrent : lastSegment;
-    visibleItems = authoredSegments
-      .map((item, index) => ({ ...item, isCurrent: index === currentIndex }))
-      .filter((item) => !(hideCurrent && item.isCurrent));
+    const currentOverride = authoredSegments.find((item) => item.isCurrent);
+    const ancestors = authoredSegments.filter((item) => !item.isCurrent);
+    const currentPath = window.location.pathname;
+    const currentLabel = currentOverride?.label
+      || getPathLabel(currentPath.split('/').filter(Boolean).at(-1) || '');
+    visibleItems = [
+      ...ancestors.map((item) => ({ ...item, isCurrent: false })),
+      ...(!hideCurrent ? [{
+        label: currentLabel,
+        path: currentPath,
+        isCurrent: true,
+      }] : []),
+    ];
   } else {
     const navigationItems = showHidden && disableShadowing ? new Map() : await getNavigationItems();
     const segments = window.location.pathname
@@ -185,7 +192,11 @@ export default async function decorate(block) {
         isCurrent: segmentIndex === segments.length - 1,
       };
     }));
-    visibleItems = items.filter((item) => item.isVisible && !(hideCurrent && item.isCurrent));
+    const currentItem = items.find((item) => item.isCurrent);
+    visibleItems = [
+      ...items.filter((item) => item.isVisible && !item.isCurrent),
+      ...(!hideCurrent && currentItem ? [currentItem] : []),
+    ];
   }
 
   const nav = document.createElement('nav');

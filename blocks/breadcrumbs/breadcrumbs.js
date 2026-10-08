@@ -8,6 +8,31 @@ const ANCESTOR_ITEMS = [
   { label: 'Partners', path: 'https://datacom.com/nz/en/about-us/partners' },
 ];
 
+function normalizeKey(value) {
+  return value.trim().replace(/:$/, '').trim().toLowerCase()
+    .replace(/\s+/g, ' ');
+}
+
+function getAuthoredSegments(block) {
+  return [...block.children].slice(0, 4).reduce((segments, row) => {
+    const cells = [...row.children];
+    if (cells.length < 2) return segments;
+
+    const key = normalizeKey(cells[0].textContent);
+    const valueCell = cells[1];
+    const link = valueCell.querySelector('a[href]');
+    const label = (link || valueCell).textContent.trim();
+    if (!label) return segments;
+
+    segments.push({
+      label,
+      path: link?.href,
+      isCurrent: key === 'current page',
+    });
+    return segments;
+  }, []);
+}
+
 /**
  * Converts a URL segment into a readable breadcrumb label.
  * @param {string} segment URL path segment
@@ -37,9 +62,18 @@ export default function decorate(block) {
     .split('/')
     .filter(Boolean);
   const currentSegment = segments.at(-1);
+  const authoredSegments = getAuthoredSegments(block);
+  const currentOverride = authoredSegments.find((item) => item.isCurrent);
+  const ancestors = authoredSegments.length
+    ? authoredSegments.filter((item) => !item.isCurrent)
+    : ANCESTOR_ITEMS;
   const items = [
-    ...ANCESTOR_ITEMS,
-    ...(currentSegment ? [{ label: getLabel(currentSegment) }] : []),
+    ...ancestors,
+    ...(currentSegment ? [{
+      label: currentOverride?.label || getLabel(currentSegment),
+      path: window.location.pathname,
+      isCurrent: true,
+    }] : []),
   ];
 
   const nav = document.createElement('nav');
@@ -47,15 +81,15 @@ export default function decorate(block) {
 
   const list = document.createElement('ol');
 
-  items.forEach(({ label, path: itemPath }, index) => {
+  items.forEach(({ label, path: itemPath, isCurrent }, index) => {
     const item = document.createElement('li');
-    const isCurrentPage = index === items.length - 1;
-    const content = document.createElement(isCurrentPage ? 'span' : 'a');
+    const isCurrentPage = isCurrent || index === items.length - 1;
+    const content = document.createElement(isCurrentPage || !itemPath ? 'span' : 'a');
 
     content.textContent = label;
     if (isCurrentPage) {
       content.setAttribute('aria-current', 'page');
-    } else {
+    } else if (itemPath) {
       content.href = itemPath;
     }
 
