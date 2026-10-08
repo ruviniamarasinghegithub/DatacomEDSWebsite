@@ -160,9 +160,9 @@ export default async function decorate(block) {
   if (authoredSegments.length) {
     const currentOverride = authoredSegments.find((item) => item.isCurrent);
     const ancestors = authoredSegments.filter((item) => !item.isCurrent);
-    const currentPath = currentOverride?.path || window.location.pathname;
+    const currentPath = currentOverride?.path;
     const currentLabel = currentOverride?.label
-      || getPathLabel(currentPath.split('/').filter(Boolean).at(-1) || '');
+      || getPathLabel(window.location.pathname.split('/').filter(Boolean).at(-1) || '');
     visibleItems = [
       ...ancestors.map((item) => ({ ...item, isCurrent: false })),
       {
@@ -198,7 +198,7 @@ export default async function decorate(block) {
       ...items.filter((item) => item.isVisible && !item.isCurrent),
       ...(currentItem ? [{
         ...currentItem,
-        path: hideCurrent ? undefined : currentItem.path,
+        path: undefined,
       }] : []),
     ];
   }
