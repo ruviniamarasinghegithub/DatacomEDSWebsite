@@ -1,7 +1,17 @@
 main .breadcrumbs {
   box-sizing: border-box;
-  padding-block: var(--spacing-padding-06);
+  margin: var(--spacing-padding-06) 0;
   overflow-x: auto;
+}
+
+@media (width <= 500px) {
+  main .breadcrumbs {
+    margin-block: var(--spacing-padding-05);
+  }
+
+  main .breadcrumbs ol {
+    display: none;
+  }
 }
 
 main .breadcrumbs nav {
@@ -45,7 +55,27 @@ main .breadcrumbs .breadcrumbs-chevron {
   flex: 0 0 6px;
   width: 6px;
   height: 6px;
+  border-color: var(--color-grey);
   border-top: 1px solid currentcolor;
   border-right: 1px solid currentcolor;
   transform: rotate(45deg);
+}
+
+.dark-theme main .breadcrumbs,
+main .breadcrumbs.dark-theme {
+  color: var(--color-dark-text);
+}
+
+.dark-theme main .breadcrumbs .breadcrumbs-chevron,
+main .breadcrumbs.dark-theme .breadcrumbs-chevron {
+  border-color: var(--color-dark-text);
+}
+
+.dark-theme main .breadcrumbs a:any-link,
+main .breadcrumbs.dark-theme a:any-link,
+.dark-theme main .breadcrumbs a[aria-current='page'],
+.dark-theme main .breadcrumbs span[aria-current='page'],
+main .breadcrumbs.dark-theme a[aria-current='page'],
+main .breadcrumbs.dark-theme span[aria-current='page'] {
+  color: var(--color-dark-text);
 }
