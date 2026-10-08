@@ -214,7 +214,7 @@ export default async function decorate(block) {
   const firstRow = rows[0];
   const cells = firstRow ? [...firstRow.children] : [];
   const imageCell = cells.find((cell) => cell.querySelector('picture'));
-  const contentCell = cells.length > 1
+  const contentCell = imageCell && cells.length > 1
     ? cells.find((cell) => cell !== imageCell && cell.textContent.trim().toLowerCase() !== 'image')
     : null;
   const picture = imageCell?.querySelector('picture') || block.querySelector('picture');
