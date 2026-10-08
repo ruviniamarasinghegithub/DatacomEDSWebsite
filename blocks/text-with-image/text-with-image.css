@@ -493,7 +493,7 @@
   }
 
   .text-with-image-content {
-    margin-bottom: var(--spacing-layout-06, 48px);
+    padding-bottom: var(--spacing-layout-06, 48px);
     grid-row: 2;
   }
 

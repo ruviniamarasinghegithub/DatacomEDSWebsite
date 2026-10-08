@@ -4,13 +4,13 @@
       "id": "library",
       "title": "Library",
       "url": "/tools/sidekick/library.html",
-      "environments": ["edit", "dev"]
+      "environments": ["edit", "dev", "preview", "live"]
     },
 
     { 
       "id": "asset-library", 
       "title": "AEM Assets Selector", 
-      "environments": ["edit", "dev"], 
+      "environments": ["edit", "dev", "preview", "live"],
       "url": "https://experience.adobe.com/solutions/CQ-assets-selectors/static-assets/resources/franklin/asset-selector.html", 
       "isPalette": true, 
       "includePaths": ["**"], 
