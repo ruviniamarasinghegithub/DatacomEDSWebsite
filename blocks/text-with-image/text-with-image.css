@@ -492,13 +492,14 @@
     margin-right: 0;
   }
 
+  .text-with-image-content {
+    margin-bottom: var(--spacing-layout-06, 48px);
+    grid-row: 2;
+  }
+
   .text-with-image-media {
     grid-row: 1;
     padding-inline-start: 0;
-  }
-
-  .text-with-image-content {
-    grid-row: 2;
   }
 
   .text-with-image-wrapper:first-child {
