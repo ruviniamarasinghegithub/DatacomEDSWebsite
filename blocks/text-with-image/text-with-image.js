@@ -218,11 +218,11 @@ export default async function decorate(block) {
     ? cells.find((cell) => cell !== imageCell && cell.textContent.trim().toLowerCase() !== 'image')
     : null;
   const picture = imageCell?.querySelector('picture') || block.querySelector('picture');
-  const switchImage = isTrue(fieldValue(fields, 'switch image and text'))
-    || block.classList.contains('image-left');
-  const wideImage = isTrue(fieldValue(fields, 'widen image'));
-  const compact = isTrue(fieldValue(fields, 'compact mode'));
-  const alignTop = isTrue(fieldValue(fields, 'align content to the top of the container'));
+  // These layout settings are fixed; author-provided values for them are ignored.
+  const switchImage = true;
+  const wideImage = true;
+  const compact = false;
+  const alignTop = false;
   const textSize = fieldValue(fields, 'text size').toLowerCase();
   const textSizeClass = ['small', 'medium', 'large'].includes(textSize) ? textSize : '';
   const wrapper = block.parentElement;
