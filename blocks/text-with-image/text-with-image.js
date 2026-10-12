@@ -187,10 +187,20 @@ function addVideoSchema(url, fields) {
   document.head.append(schema);
 }
 
-function addCta(content, rows, fields, showField, textField, style, darkTheme) {
+function addCta(
+  content,
+  rows,
+  fields,
+  showField,
+  textField,
+  style,
+  darkTheme,
+  defaultShow = false,
+) {
   const text = fieldValue(fields, textField);
   const sourceLink = getFieldLink(rows, textField);
-  if (!isTrue(fieldValue(fields, showField)) || !text) return;
+  const show = fieldValue(fields, showField) || (defaultShow ? 'true' : 'false');
+  if (!isTrue(show) || !text) return;
 
   const group = content.querySelector('.text-with-image-cta-group')
     || document.createElement('div');
@@ -226,7 +236,7 @@ export default async function decorate(block) {
   const textSize = fieldValue(fields, 'text size').toLowerCase();
   const textSizeClass = ['small', 'medium', 'large'].includes(textSize) ? textSize : '';
   const wrapper = block.parentElement;
-  const theme = fieldValue(fields, 'theme').toLowerCase();
+  const theme = (fieldValue(fields, 'theme') || 'dark').toLowerCase();
   const hasDarkTheme = ['dark', 'dark-theme'].includes(theme) || block.classList.contains('dark-theme')
     || wrapper?.classList.contains('dark-theme');
   const hasLightTheme = ['light', 'light-theme'].includes(theme) || block.classList.contains('light-theme')
@@ -288,7 +298,7 @@ export default async function decorate(block) {
     appendTextField(content, fields, 'sub heading', 'p', 'text-with-image-sub-heading');
     appendTextField(content, fields, 'heading', 'h2');
     appendRichText(content, fields, 'body text', fieldValue(fields, 'body text'));
-    addCta(content, rows, fields, 'show cta button', 'cta button text', 'primary', hasDarkTheme);
+    addCta(content, rows, fields, 'show cta button', 'cta button text', 'primary', hasDarkTheme, true);
     addCta(
       content,
       rows,
