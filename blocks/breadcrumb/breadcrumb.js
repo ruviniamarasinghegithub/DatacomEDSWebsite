@@ -118,7 +118,7 @@ async function getNavigationItems() {
   return items;
 }
 
-function createBreadcrumbItem(item, isCurrent) {
+function createBreadcrumbItem(item, isCurrent, isLast) {
   const listItem = document.createElement('li');
   listItem.className = 'breadcrumb-full-version-item';
   const content = document.createElement(item.path ? 'a' : 'span');
@@ -133,7 +133,7 @@ function createBreadcrumbItem(item, isCurrent) {
 
   listItem.append(content);
 
-  if (!isCurrent) {
+  if (!isLast) {
     const chevron = document.createElement('span');
     chevron.className = 'breadcrumb-full-version-chevron';
     chevron.setAttribute('aria-hidden', 'true');
@@ -210,8 +210,8 @@ export default async function decorate(block) {
 
   const list = document.createElement('ol');
   list.className = 'breadcrumb-full-version-list';
-  visibleItems.forEach((item) => {
-    list.append(createBreadcrumbItem(item, item.isCurrent));
+  visibleItems.forEach((item, index) => {
+    list.append(createBreadcrumbItem(item, item.isCurrent, index === visibleItems.length - 1));
   });
 
   nav.append(list);
