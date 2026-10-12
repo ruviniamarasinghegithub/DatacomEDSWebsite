@@ -202,6 +202,7 @@ export default async function decorate(block) {
       }] : []),
     ];
   }
+  visibleItems.pop();
 
   const nav = document.createElement('nav');
   nav.setAttribute('aria-label', 'Breadcrumb');
