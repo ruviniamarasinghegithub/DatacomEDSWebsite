@@ -499,10 +499,6 @@
     padding-inline-start: 0;
   }
 
-  .text-with-image-wrapper:first-child {
-    padding-bottom: var(--spacing-layout-03, 24px);
-  }
-
   .text-with-image-wide .text-with-image-content {
     max-width: none;
     margin-block: 0;
