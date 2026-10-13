@@ -37,6 +37,15 @@ main .breadcrumb-full-version a:any-link {
   text-decoration: none;
 }
 
+main .breadcrumb-full-version a:focus-visible {
+    color: var(--color-action-blue);
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
+    outline: unset;
+    text-decoration-skip-ink: none;
+}
+
 main .breadcrumb-full-version [aria-current='page'] {
   color: var(--font-color-default);
 }

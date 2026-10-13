@@ -153,21 +153,19 @@ export default async function decorate(block) {
   const authoredSegments = getAuthoredSegments(rows);
   const startLevel = parseStartLevel(fields['navigation start level']);
   const showHidden = parseBoolean(fields['show hidden navigation items'], 'Show hidden navigation items', false);
-  const hideCurrent = parseBoolean(fields['hide current page'], 'Hide current page', false);
   const disableShadowing = parseBoolean(fields['disable shadowing'], 'Disable shadowing', false);
   const { id } = fields;
   let visibleItems;
   if (authoredSegments.length) {
     const currentOverride = authoredSegments.find((item) => item.isCurrent);
     const ancestors = authoredSegments.filter((item) => !item.isCurrent);
-    const currentPath = currentOverride?.path;
     const currentLabel = currentOverride?.label
       || getPathLabel(window.location.pathname.split('/').filter(Boolean).at(-1) || '');
     visibleItems = [
       ...ancestors.map((item) => ({ ...item, isCurrent: false })),
       {
         label: currentLabel,
-        path: hideCurrent ? undefined : currentPath,
+        path: undefined,
         isCurrent: true,
       },
     ];
@@ -202,8 +200,6 @@ export default async function decorate(block) {
       }] : []),
     ];
   }
-  visibleItems.pop();
-
   const nav = document.createElement('nav');
   nav.setAttribute('aria-label', 'Breadcrumb');
   if (id) nav.id = id;
