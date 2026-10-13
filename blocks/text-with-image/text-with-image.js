@@ -1,9 +1,15 @@
+function normalizeFieldLabel(value) {
+  const label = value.trim().replace(/:$/, '').trim().toLowerCase();
+  const normalizedLabel = label.replace(/\s+/g, ' ');
+  if (normalizedLabel.startsWith('cta button text (')) return 'cta button text';
+  return normalizedLabel.replace(/\s*\*+$/, '').trim();
+}
+
 function getRowLabel(row) {
   const cells = [...row.children];
   const text = cells[0]?.textContent.trim() || '';
   const separator = text.indexOf(':');
-  return (cells.length > 1 ? text : text.slice(0, separator))
-    .replace(/:$/, '').trim().toLowerCase();
+  return normalizeFieldLabel(cells.length > 1 || separator < 0 ? text : text.slice(0, separator));
 }
 
 function getFieldRows(block) {
@@ -225,7 +231,7 @@ export default async function decorate(block) {
   const cells = firstRow ? [...firstRow.children] : [];
   const imageCell = cells.find((cell) => cell.querySelector('picture'));
   const contentCell = imageCell && cells.length > 1
-    ? cells.find((cell) => cell !== imageCell && cell.textContent.trim().toLowerCase() !== 'image')
+    ? cells.find((cell) => cell !== imageCell && normalizeFieldLabel(cell.textContent) !== 'image')
     : null;
   const picture = imageCell?.querySelector('picture') || block.querySelector('picture');
   // These layout settings are fixed; author-provided values for them are ignored.
