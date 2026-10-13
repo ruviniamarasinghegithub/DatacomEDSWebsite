@@ -68,20 +68,18 @@ main .breadcrumb-full-version.dark-theme [aria-current='page'] {
   color: var(--color-dark-text);
 }
 
-main .breadcrumb-full-version a:any-link:focus,
-main .breadcrumb-full-version a:any-link:focus-visible {
-  color: var(--color-action-blue);
-  text-decoration: underline;
-  text-decoration-thickness: 3px;
-  text-underline-offset: 4px;
-  text-decoration-skip-ink: none;
-  outline: unset;
-  border: 0;
-  box-shadow: none;
-}
-
 main .breadcrumb-full-version a:any-link:not([aria-current='page']):hover {
   text-decoration: underline;
+}
+
+.breadcrumb-full-version a:focus-visible,
+.breadcrumb-full-version a:focus {
+    color: var(--color-action-blue);
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
+    outline: unset;
+    text-decoration-skip-ink: none;
 }
 
 @media (width <= 500px) {
