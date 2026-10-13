@@ -37,15 +37,6 @@ main .breadcrumb-full-version a:any-link {
   text-decoration: none;
 }
 
-main .breadcrumb-full-version a:focus-visible {
-    color: var(--color-action-blue);
-    text-decoration: underline;
-    text-decoration-thickness: 3px;
-    text-underline-offset: 4px;
-    outline: unset;
-    text-decoration-skip-ink: none;
-}
-
 main .breadcrumb-full-version [aria-current='page'] {
   color: var(--font-color-default);
 }
@@ -75,6 +66,15 @@ main .breadcrumb-full-version.dark-theme a:any-link,
 .dark-theme main .breadcrumb-full-version [aria-current='page'],
 main .breadcrumb-full-version.dark-theme [aria-current='page'] {
   color: var(--color-dark-text);
+}
+
+main .breadcrumb-full-version a:any-link:focus-visible {
+  color: var(--color-action-blue);
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+  text-decoration-skip-ink: none;
+  outline: none;
 }
 
 main .breadcrumb-full-version a:any-link:not([aria-current='page']):hover {
