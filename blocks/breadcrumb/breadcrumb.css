@@ -72,10 +72,6 @@ main .breadcrumb-full-version a:any-link:not([aria-current='page']):hover {
   text-decoration: underline;
 }
 
-main .breadcrumb-full-version-list .breadcrumb-full-version-item a {
-  color: red;
-}
-
 main .breadcrumb-full-version-list .breadcrumb-full-version-item a:focus-visible,
 main .breadcrumb-full-version-list .breadcrumb-full-version-item a:focus {
     color: var(--color-action-blue);
