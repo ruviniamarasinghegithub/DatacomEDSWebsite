@@ -48,12 +48,6 @@ a:hover {
   color: var(--color-action-blue-hover);
 }
 
-a:any-link {
-    color: var( --color-action-blue);
-    text-decoration: none;
-    overflow-wrap: break-word;
-}
-
 input:focus,
 textarea:focus,
 select:focus {

@@ -61,6 +61,10 @@ main .breadcrumb-full-version.dark-theme .breadcrumb-full-version-chevron {
   border-color: var(--color-dark-text);
 }
 
+main .breadcrumb-full-version-list .breadcrumb-full-version-item a {
+  color: var(  --color-action-blue);
+}
+
 .dark-theme main .breadcrumb-full-version a:any-link,
 main .breadcrumb-full-version.dark-theme a:any-link,
 .dark-theme main .breadcrumb-full-version [aria-current='page'],
@@ -72,8 +76,7 @@ main .breadcrumb-full-version a:any-link:not([aria-current='page']):hover {
   text-decoration: underline;
 }
 
-main .breadcrumb-full-version-list .breadcrumb-full-version-item a:focus-visible,
-main .breadcrumb-full-version-list .breadcrumb-full-version-item a:focus {
+main .breadcrumb-full-version-list .breadcrumb-full-version-item a:focus-visible {
     color: var(--color-action-blue);
     text-decoration: underline;
     text-decoration-thickness: 3px;
