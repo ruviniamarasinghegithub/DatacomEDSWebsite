@@ -298,17 +298,17 @@ export default async function decorate(block) {
     appendTextField(content, fields, 'sub heading', 'p', 'text-with-image-sub-heading');
     appendTextField(content, fields, 'heading', 'h2');
     appendRichText(content, fields, 'body text', fieldValue(fields, 'body text'));
-    addCta(content, rows, fields, 'show cta button', 'cta button text', 'primary', hasDarkTheme, true);
-    addCta(
-      content,
-      rows,
-      fields,
-      'show secondary cta button',
-      'secondary cta button text',
-      'secondary',
-      hasDarkTheme,
-    );
   }
+  addCta(content, rows, fields, 'show cta button', 'cta button text', 'primary', hasDarkTheme, true);
+  addCta(
+    content,
+    rows,
+    fields,
+    'show secondary cta button',
+    'secondary cta button text',
+    'secondary',
+    hasDarkTheme,
+  );
 
   content.querySelectorAll('a').forEach((link) => {
     if (!link.closest('.button-wrapper')) link.classList.add('text-with-image-link');
