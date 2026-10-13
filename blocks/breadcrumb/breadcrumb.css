@@ -62,7 +62,11 @@ main .breadcrumb-full-version.dark-theme .breadcrumb-full-version-chevron {
 }
 
 main .breadcrumb-full-version-list .breadcrumb-full-version-item a {
-  color: var(  --color-action-blue);
+  color: var(--color-action-blue);
+}
+
+main .breadcrumb-full-version-list .breadcrumb-full-version-item a:hover {
+  color: var(--color-action-blue-hover);
 }
 
 .dark-theme main .breadcrumb-full-version a:any-link,
