@@ -22,7 +22,8 @@ export default function decorate(block) {
   const authoredLink = linkCell?.querySelector('a[href]');
   const href = authoredLink?.getAttribute('href') || linkCell?.textContent.trim();
   const buttonText = textCell?.textContent.trim();
-  const optionsCell = getFieldCell(block, 'Type of the button') || getFieldCell(block, 'Options');
+  const optionsCell = getFieldCell(block, 'Button style')
+    || getFieldCell(block, 'Type of the button') || getFieldCell(block, 'Options');
   const options = optionsCell?.textContent.trim().toLowerCase().split(/[,\s]+/).filter(Boolean)
     || [];
   const appearances = ['primary', 'secondary', 'tertiary'];
