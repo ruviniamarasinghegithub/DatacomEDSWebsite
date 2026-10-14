@@ -43,14 +43,23 @@
   color: var(--text-color);
 }
 
+.heading.white-theme .heading-text,
+.heading.light-theme .heading-text {
+  color: var(--font-color-default);
+}
+
 .heading.light-theme {
-  background-color: var(--color-light-background);
-  color: var(--color-light-text);
+  background-color: var(--color-light-background, var(--color-white));
+  color: var(--color-light-text, var(--font-color-default));
 }
 
 .heading.dark-theme {
-  background-color: var(--color-dark-background);
-  color: var(--color-dark-text);
+  background-color: var(--color-dark-background, var(--color-dark-blue-base));
+  color: var(--color-dark-text, var(--color-white));
+}
+
+.heading.dark-theme .heading-text {
+  color: var(--color-dark-text, var(--color-white));
 }
 
 @media (width <= 600px) {
