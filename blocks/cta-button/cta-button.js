@@ -30,13 +30,15 @@ export default function decorate(block) {
   const options = optionsCell?.textContent.trim().toLowerCase().split(/[,\s]+/).filter(Boolean)
     || [];
   const appearances = ['primary', 'secondary', 'tertiary'];
-  const selectedOptions = options.length ? options : [
+  const selectedOptions = optionsCell ? options : [
     ...appearances.filter((appearance) => block.classList.contains(appearance)),
     ...(block.classList.contains('dark-theme') ? ['dark-theme'] : []),
   ];
   const selectedAppearances = selectedOptions.filter((option) => appearances.includes(option));
-  const themeValue = getFieldCell(block, 'Button Theme')?.textContent.trim().toLowerCase();
-  const theme = themeValue || (selectedOptions.includes('dark-theme') ? 'dark' : 'white');
+  const themeCell = getFieldCell(block, 'Button Theme');
+  const themeValue = themeCell?.textContent.trim().toLowerCase();
+  const theme = themeValue
+    || (!themeCell && selectedOptions.includes('dark-theme') ? 'dark' : 'white');
   const errors = [];
   if (!['white', 'light', 'dark', 'white-theme', 'light-theme', 'dark-theme'].includes(theme)) {
     errors.push('Button Theme must be white, light, or dark.');
