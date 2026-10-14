@@ -428,3 +428,26 @@ p,
       var(--color-dark-blue-base);
   }
 }
+
+
+/* sections */
+main > .section {
+  margin: 40px 0;
+}
+
+main > .section > div {
+  padding: 0 var(--spacing-padding-08);
+  max-width: var(--max-width-desktop);  
+  margin: 0px auto;
+  width: auto;  
+}
+
+main > .section:first-of-type {
+  margin-top: 0;
+}
+
+@media (width >= 900px) {
+  main > .section > div {
+    padding: 0 32px;
+  }
+}
