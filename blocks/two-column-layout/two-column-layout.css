@@ -33,7 +33,7 @@
   max-width: 100%;
 }
 
-@media (width <= 130px) {
+@media (width <= 1300px) {
   .two-column-layout > .two-column-layout-row {
     gap: 32px;
   }
