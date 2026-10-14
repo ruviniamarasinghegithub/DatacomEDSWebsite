@@ -98,7 +98,6 @@ main .full-width-banner .full-width-banner-subheading {
   margin: 0 0 var(--spacing-padding-02);
   font-family: var(--typography-font-family-700);
   font-size: var(--font-18-size);
-  font-weight: 600;
   letter-spacing: var(--letter-spacing-small);
   line-height: var(--font-18-line-height);
 }
@@ -110,9 +109,8 @@ main .full-width-banner .full-width-banner-heading {
 
 main .full-width-banner .full-width-banner-description {
   margin-top: var(--spacing-padding-03);
-  font-family: var(--typography-font-family-500);
+  font-family: var(--typography-font-family-400);
   font-size: var(--font-16-size);
-  font-weight: 600;
   letter-spacing: var(--letter-spacing-small);
   line-height: var(--font-16-line-height);
   overflow-wrap: break-word;
