@@ -19,24 +19,24 @@
   --cta-background: var(--color-white);
   --cta-border: var(--color-action-blue);
   --cta-color: var(--color-action-blue);
-  --cta-hover-background: var(--color-extra-light-blue-base);
+  --cta-hover-background: var(--color-midnight-blue-minus-5);
   --cta-hover-border: var(--color-action-blue-hover);
   --cta-hover-color: var(--color-action-blue-hover);
-  --cta-active-background: var(--color-extra-light-blue-base);
+  --cta-active-background: var(--color-midnight-blue-minus-5);
   --cta-active-border: var(--color-action-blue-hover);
   --cta-active-color: var(--color-action-blue-hover);
 }
 
 .cta-button.tertiary {
   --cta-background: var(--color-white);
-  --cta-border: transparent;
+  --cta-border: var(--color-white);
   --cta-color: var(--color-action-blue);
   --cta-hover-background: var(--color-midnight-blue-minus-5);
   --cta-hover-border: var(--color-midnight-blue-minus-5);
   --cta-hover-color: var(--color-action-blue-hover);
   --cta-active-background: var(--color-midnight-blue-minus-5);
   --cta-active-border: var(--color-midnight-blue-minus-5);
-  --cta-active-color: var(--color-action-blue-hover);
+  --cta-active-color: var(--color-action-blue);
 }
 
 .cta-button.dark-theme {
@@ -83,9 +83,9 @@
   box-sizing: border-box;
   display: inline-flex;
   width: 100%;
-  min-width: 120px;
-  min-height: 48px;
-  padding: 10px 24px;
+  min-width: 130px;
+  height: 48px;
+  padding: 0 var(--spacing-padding-05, 24px);
   align-items: center;
   justify-content: center;
   gap: 12px;
@@ -102,6 +102,11 @@
   cursor: pointer;
 }
 
+.cta-button a.cta-button-link:any-link:focus-visible {
+  outline: 3px solid var(--cta-focus-outline);
+  outline-offset: 1px;
+}
+
 .cta-button a.cta-button-link:any-link:hover {
   border-color: var(--cta-hover-border);
   background-color: var(--cta-hover-background);
@@ -115,21 +120,17 @@
   color: var(--cta-active-color);
 }
 
-.cta-button .cta-button-link:focus-visible {
-  outline: 3px solid var(--cta-focus-outline);
-  outline-offset: 2px;
-}
-
 .cta-button .cta-button-link[aria-disabled="true"] {
   pointer-events: none;
   cursor: not-allowed;
 }
 
 .cta-button .cta-button-text {
-  flex: 0 1 auto;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
-@media (width >= 500px) {
+@media (width > 500px) {
   .cta-button .cta-button-link,
   .cta-button a.cta-button-link:any-link {
     width: auto;
