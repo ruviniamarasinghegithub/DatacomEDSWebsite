@@ -1,6 +1,9 @@
 function normalizeFieldName(value) {
-  return value.trim().replace(/\s*\([^)]*\)\s*$/, '')
-    .toLowerCase().replace(/[^a-z0-9]/g, '');
+  return value.trim()
+    .replace(/\s*\*+\s*$/, '')
+    .replace(/\s*\([^)]*\)\s*$/, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '');
 }
 
 function getFieldCell(block, fieldName) {
@@ -18,7 +21,7 @@ function getFieldCell(block, fieldName) {
  */
 export default function decorate(block) {
   const textCell = getFieldCell(block, 'Button text');
-  const linkCell = getFieldCell(block, 'Link');
+  const linkCell = getFieldCell(block, 'Button Link') || getFieldCell(block, 'Link');
   const authoredLink = linkCell?.querySelector('a[href]');
   const href = authoredLink?.getAttribute('href') || linkCell?.textContent.trim();
   const buttonText = textCell?.textContent.trim();
