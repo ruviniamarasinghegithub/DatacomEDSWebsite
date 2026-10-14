@@ -6,7 +6,7 @@ function convertTable(table) {
   const name = header?.textContent.trim() || '';
   const [, blockName, variants = ''] = name.match(/^([^()]+)(?:\(([^)]+)\))?$/) || [];
   if (!blockName || !toClassName(blockName)) {
-    throw new Error('Column block: nested block tables must have a block name in the first row.');
+    throw new Error('Two column layout: nested block tables must have a block name in the first row.');
   }
 
   const block = document.createElement('div');
@@ -29,9 +29,9 @@ function convertTable(table) {
 export default async function decorate(block) {
   const rows = [...block.children];
   rows.forEach((row) => {
-    row.classList.add('column-block-row');
+    row.classList.add('two-column-layout-row');
     [...row.children].forEach((column) => {
-      column.classList.add('column-block-column');
+      column.classList.add('two-column-layout-column');
     });
   });
 

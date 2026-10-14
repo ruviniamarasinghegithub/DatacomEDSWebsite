@@ -1,4 +1,4 @@
-.column-block {
+.two-column-layout {
   box-sizing: border-box;
   display: flex;
   width: 100%;
@@ -10,7 +10,7 @@
   gap: 48px;
 }
 
-.column-block > .column-block-row {
+.two-column-layout > .two-column-layout-row {
   box-sizing: border-box;
   display: flex;
   padding: 0 48px;
@@ -19,7 +19,7 @@
   align-self: stretch;
 }
 
-.column-block > .column-block-row > .column-block-column {
+.two-column-layout > .two-column-layout-row > .two-column-layout-column {
   display: flex;
   flex: 1 1 0;
   min-width: 0;
@@ -28,18 +28,18 @@
   gap: 32px;
 }
 
-.column-block > .column-block-row > .column-block-column > * {
+.two-column-layout > .two-column-layout-row > .two-column-layout-column > * {
   min-width: 0;
   max-width: 100%;
 }
 
 @media (width < 900px) {
-  .column-block > .column-block-row {
+  .two-column-layout > .two-column-layout-row {
     padding-inline: 24px;
     flex-direction: column;
   }
 
-  .column-block > .column-block-row > .column-block-column {
+  .two-column-layout > .two-column-layout-row > .two-column-layout-column {
     flex-basis: auto;
     width: 100%;
   }
