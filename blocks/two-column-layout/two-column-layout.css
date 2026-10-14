@@ -15,7 +15,7 @@
   display: flex;
   padding: 0;
   align-items: flex-start;
-  gap: 16px;
+  gap: 48px;
   align-self: stretch;
 }
 
@@ -33,10 +33,17 @@
   max-width: 100%;
 }
 
-@media (width < 900px) {
+@media (width <= 130px) {
+  .two-column-layout > .two-column-layout-row {
+    gap: 32px;
+  }
+}
+
+@media (width <= 900px) {
   .two-column-layout > .two-column-layout-row {
     padding-inline: 24px;
     flex-direction: column;
+    gap: 16px;
   }
 
   .two-column-layout > .two-column-layout-row > .two-column-layout-column {
