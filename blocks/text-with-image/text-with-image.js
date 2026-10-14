@@ -1,8 +1,8 @@
+import { decorateBlock, loadBlock, toClassName } from '../../scripts/aem.js';
+
 function normalizeFieldLabel(value) {
   const label = value.trim().replace(/:$/, '').trim().toLowerCase();
-  const normalizedLabel = label.replace(/\s+/g, ' ');
-  if (normalizedLabel.startsWith('cta button text (')) return 'cta button text';
-  return normalizedLabel.replace(/\s*\*+$/, '').trim();
+  return label.replace(/\s+/g, ' ').replace(/\s*\*+$/, '').trim();
 }
 
 function getRowLabel(row) {
@@ -27,6 +27,49 @@ function getFieldRows(block) {
 
 function fieldValue(fields, name) {
   return typeof fields[name] === 'string' ? fields[name] : fields[name]?.textContent.trim() || '';
+}
+
+function repairCta(cta) {
+  [...cta.querySelectorAll('p')].forEach((paragraph) => {
+    const cells = [...paragraph.children].filter((child) => child.tagName === 'DIV');
+    if (cells.length >= 2) paragraph.replaceWith(...paragraph.childNodes);
+  });
+}
+
+function takeCtas(block) {
+  [...block.querySelectorAll('table')].forEach((table) => {
+    const rows = [...table.rows].filter((row) => row.closest('table') === table);
+    const header = rows.shift()?.textContent.trim() || '';
+    const [, name, variants = ''] = header.match(/^([^()]+)(?:\(([^)]+)\))?$/) || [];
+    if (!name || toClassName(name) !== 'cta-button') return;
+
+    const cta = document.createElement('div');
+    cta.className = 'cta-button';
+    variants.split(',').map((variant) => toClassName(variant)).filter(Boolean)
+      .forEach((variant) => cta.classList.add(variant));
+    rows.forEach((row) => {
+      const ctaRow = document.createElement('div');
+      [...row.cells].forEach((cell) => {
+        const ctaCell = document.createElement('div');
+        ctaCell.append(...cell.childNodes);
+        ctaRow.append(ctaCell);
+      });
+      cta.append(ctaRow);
+    });
+    table.replaceWith(cta);
+  });
+
+  const ctas = [...block.querySelectorAll('.cta-button')];
+  ctas.forEach((cta) => {
+    let node = cta.parentElement;
+    cta.remove();
+    while (node && node !== block && !node.children.length && !node.textContent.trim()) {
+      const { parentElement } = node;
+      node.remove();
+      node = parentElement;
+    }
+  });
+  return ctas;
 }
 
 function appendTextField(content, fields, name, tagName, className) {
@@ -193,38 +236,8 @@ function addVideoSchema(url, fields) {
   document.head.append(schema);
 }
 
-function addCta(
-  content,
-  rows,
-  fields,
-  showField,
-  textField,
-  style,
-  darkTheme,
-  defaultShow = false,
-) {
-  const text = fieldValue(fields, textField);
-  const sourceLink = getFieldLink(rows, textField);
-  const show = fieldValue(fields, showField) || (defaultShow ? 'true' : 'false');
-  if (!isTrue(show) || !text) return;
-
-  const group = content.querySelector('.text-with-image-cta-group')
-    || document.createElement('div');
-  group.className = 'text-with-image-cta-group';
-  if (!group.parentElement) content.append(group);
-
-  const wrapper = document.createElement('div');
-  wrapper.className = `text-with-image-cta cta-button ${style} text-with-image-cta-${style} button-wrapper`;
-  if (darkTheme) wrapper.classList.add('dark-theme');
-  const link = document.createElement('a');
-  link.className = 'cta-button-link';
-  link.href = sourceLink?.href || '#';
-  link.textContent = text;
-  wrapper.append(link);
-  group.append(wrapper);
-}
-
 export default async function decorate(block) {
+  const ctas = takeCtas(block);
   const rows = [...block.children];
   const fields = getFieldRows(block);
   const firstRow = rows[0];
@@ -305,19 +318,15 @@ export default async function decorate(block) {
     appendTextField(content, fields, 'heading', 'h2');
     appendRichText(content, fields, 'body text', fieldValue(fields, 'body text'));
   }
-  addCta(content, rows, fields, 'show cta button', 'cta button text', 'primary', hasDarkTheme, true);
-  addCta(
-    content,
-    rows,
-    fields,
-    'show secondary cta button',
-    'secondary cta button text',
-    'secondary',
-    hasDarkTheme,
-  );
+  if (ctas.length) {
+    const ctaGroup = document.createElement('div');
+    ctaGroup.className = 'text-with-image-cta-group';
+    ctaGroup.append(...ctas);
+    content.append(ctaGroup);
+  }
 
   content.querySelectorAll('a').forEach((link) => {
-    if (!link.closest('.button-wrapper')) link.classList.add('text-with-image-link');
+    if (!link.closest('.button-wrapper, .cta-button')) link.classList.add('text-with-image-link');
   });
 
   block.classList.toggle('text-with-image-switch', switchImage);
@@ -335,6 +344,13 @@ export default async function decorate(block) {
   wrapper?.classList.toggle('text-with-image-white-theme', hasWhiteTheme);
   block.textContent = '';
   block.append(content, media);
+
+  const nestedCtas = [...block.querySelectorAll('.cta-button')];
+  await Promise.all(nestedCtas.map(async (cta) => {
+    repairCta(cta);
+    decorateBlock(cta);
+    await loadBlock(cta);
+  }));
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
