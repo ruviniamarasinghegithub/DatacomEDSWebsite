@@ -8,6 +8,29 @@
   text-align: center;
 }
 
+.heading .heading-text a {
+  color: var(--color-action-blue);
+  text-decoration: none;
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(var(--color-action-blue), var(--color-action-blue));
+  background-size: 100% 1px, 0 1px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.1s linear;
+}
+
+.heading .heading-text a:hover,
+.heading .heading-text a:focus {
+  color: var(--color-action-blue-hover);
+  background-size: 0 1px, 100% 1px;
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(var(--color-action-blue-hover), var(--color-action-blue-hover));
+}
+
+.heading .heading-text a:focus-visible {
+  outline: none;
+}
+
 /* Visual style overrides — independent of the actual semantic tag */
 .heading .heading-text.h1 { font-size: var(--heading-font-size-xxl); }
 .heading .heading-text.h2 { font-size: var(--heading-font-size-xl); }
@@ -30,7 +53,7 @@
   color: var(--color-dark-text);
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .heading .heading-text.h3,
   .heading .heading-text.h4 {
     font-size: 1.1rem;

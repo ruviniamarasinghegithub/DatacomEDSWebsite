@@ -8,10 +8,6 @@ export default function decorate(block) {
   const headingTag = sizeMap.find((tag) => block.classList.contains(tag)) || 'h2';
   const isCentered = block.classList.contains('center');
 
-  const existingLink = contentRow.querySelector('a');
-  const text = existingLink ? existingLink.textContent.trim() : contentRow.textContent.trim();
-  const href = existingLink ? existingLink.getAttribute('href') : null;
-
   // Optional extra rows: "id:", "linktitle:", "style:"
   let id = null;
   let linkTitle = null;
@@ -35,14 +31,19 @@ export default function decorate(block) {
   heading.className = classes.join(' ');
   if (id) heading.id = id;
 
-  if (href) {
-    const anchor = document.createElement('a');
-    anchor.href = href;
-    anchor.textContent = text;
-    if (linkTitle) anchor.title = linkTitle;
-    heading.append(anchor);
-  } else {
-    heading.textContent = text;
+  if (contentRow) {
+    const content = contentRow.cloneNode(true);
+    // Unwrap authoring cells and paragraphs without losing inline text or formatting.
+    content.querySelectorAll('div, p, h1, h2, h3, h4, h5, h6').forEach((wrapper) => {
+      const separator = wrapper.nextSibling ? [document.createTextNode(' ')] : [];
+      wrapper.replaceWith(...wrapper.childNodes, ...separator);
+    });
+    content.querySelectorAll('a.button').forEach((anchor) => {
+      anchor.classList.remove('button', 'primary', 'secondary', 'accent');
+    });
+    const firstLink = content.querySelector('a');
+    if (firstLink && linkTitle) firstLink.title = linkTitle;
+    heading.append(...content.childNodes);
   }
 
   block.textContent = '';
