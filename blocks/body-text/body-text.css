@@ -24,6 +24,12 @@
 .body-text a:focus {
   color: var(--color-action-blue-hover);
   background-size: 0 1px, 100% 1px;
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(var(--color-action-blue-hover), var(--color-action-blue-hover));
+}
+
+.body-text a:focus-visible {
+  outline: none;
 }
 
 .body-text h1,

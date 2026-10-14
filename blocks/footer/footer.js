@@ -78,10 +78,14 @@ function decorateLinks(container) {
         link.classList.add('footer-external-link');
         link.setAttribute('target', '_blank');
         link.setAttribute('rel', 'noopener noreferrer');
-        const icon = document.createElement('i');
-        icon.className = 'far fa-long-arrow-up footer-external-link-icon';
-        icon.setAttribute('aria-hidden', 'true');
-        link.append(icon);
+        if (!link.querySelector('img, picture, .icon')) {
+          const icon = document.createElement('img');
+          icon.className = 'footer-external-link-icon';
+          icon.src = `${window.hlx.codeBasePath}/icons/footer-external-link.svg`;
+          icon.alt = '';
+          icon.setAttribute('aria-hidden', 'true');
+          link.append(icon);
+        }
       }
     } catch {
       // Leave malformed authored links unchanged.
@@ -260,9 +264,10 @@ async function decorateRegionSelector(container, idPrefix) {
   trigger.href = `#${dialogId}`;
   const triggerLabel = document.createElement('span');
   triggerLabel.textContent = heading.textContent.trim();
-  const triggerIcon = document.createElement('i');
-  triggerIcon.className = 'fal fa-globe footer-region-selector-trigger-icon';
-  triggerIcon.setAttribute('aria-hidden', 'true');
+  const triggerIcon = document.createElement('img');
+  triggerIcon.className = 'footer-region-selector-trigger-icon';
+  triggerIcon.src = `${window.hlx.codeBasePath}/icons/footer-globe-placeholder.svg`;
+  triggerIcon.alt = '';
   trigger.append(triggerLabel, triggerIcon);
   trigger.setAttribute('aria-haspopup', 'dialog');
   trigger.setAttribute('aria-controls', dialogId);
@@ -453,6 +458,8 @@ async function decorateHardcodedRegionSelector(container, idPrefix) {
     await decorateRegionSelector(container, idPrefix);
     return;
   }
+  if (getMetadata('hide-change-location')?.toLowerCase() === 'true') return;
+
   const column = container.querySelector('.footer-copyright-column')
     || container.querySelector('.footer-column:last-child');
   if (!column) return;
@@ -554,6 +561,8 @@ function getTableFooterRows(fragment) {
       linkText,
       media,
       url,
+      id: authoredLink?.id,
+      adobeAnalytics: authoredLink?.getAttribute('adobe-analytics'),
     };
   }).filter((row) => row?.linkText);
 }
@@ -603,6 +612,8 @@ function createFooterLink(row) {
 
   const link = document.createElement('a');
   link.href = row.url;
+  if (row.id) link.id = row.id;
+  if (row.adobeAnalytics) link.setAttribute('adobe-analytics', row.adobeAnalytics);
   link.append(row.linkText);
   if (row.media) link.append(row.media);
   item.append(link);
