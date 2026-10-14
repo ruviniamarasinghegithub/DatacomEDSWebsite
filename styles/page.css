@@ -446,8 +446,14 @@ main > .section:first-of-type {
   margin-top: 0;
 }
 
+@media (width >= 900px) {
+  main > .section > div {
+    padding: 0 var(--spacing-layout-04);
+  }
+}
+
 @media (width < 900px) {
   main > .section > div {
-    padding: 0 var(--spacing-padding-03);
+    padding: 0 0 var(--spacing-layout-02) 0;
   }
 }
