@@ -1,13 +1,5 @@
 /* Datacom-EDS | Master brand theme */
 
-.white-theme {
-  background-color: var(--color-white);
-}
-
-.light-theme {
-  background-color: var(--color-extra-light-blue-40);
-}
-
 .dark-gradient-reversed-theme,
 .dark-gradient-theme,
 .dark-theme,
