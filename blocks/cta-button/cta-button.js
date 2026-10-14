@@ -1,5 +1,5 @@
 function normalizeFieldName(value) {
-  return value.trim().replace(/\s*\((required|optional)\)\s*$/i, '')
+  return value.trim().replace(/\s*\([^)]*\)\s*$/, '')
     .toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
@@ -22,7 +22,7 @@ export default function decorate(block) {
   const authoredLink = linkCell?.querySelector('a[href]');
   const href = authoredLink?.getAttribute('href') || linkCell?.textContent.trim();
   const buttonText = textCell?.textContent.trim();
-  const optionsCell = getFieldCell(block, 'Options');
+  const optionsCell = getFieldCell(block, 'Type of the button') || getFieldCell(block, 'Options');
   const options = optionsCell?.textContent.trim().toLowerCase().split(/[,\s]+/).filter(Boolean)
     || [];
   const appearances = ['primary', 'secondary', 'tertiary'];
@@ -57,8 +57,7 @@ export default function decorate(block) {
     return;
   }
   block.classList.remove(...appearances, 'dark-theme');
-  block.classList.add(selectedAppearances[0] || 'primary');
-  if (selectedOptions.includes('dark-theme')) block.classList.add('dark-theme');
+  block.classList.add(selectedAppearances[0] || 'primary', 'dark-theme');
 
   const link = authoredLink || document.createElement('a');
   link.className = 'cta-button-link';
