@@ -536,14 +536,18 @@ function createLinkGroup(heading, idPrefix, columnIndex, groupIndex) {
 }
 
 function getTableFooterRows(fragment) {
-  const table = fragment.querySelector(
-    '.footer-links table, table.footer-links, .group table, table.group, .footer-links, .group',
-  );
-  if (!table) return [];
+  const wrapper = fragment.querySelector('.footer-links, .group');
+  if (!wrapper) return [];
+  const table = wrapper.matches('table') ? wrapper : wrapper.querySelector('table');
+  const rowContainer = table || wrapper;
 
-  const rows = table.matches('tr') ? [table] : [...table.querySelectorAll('tr')];
+  const rows = table
+    ? [...table.querySelectorAll('tr')]
+    : [...rowContainer.children].filter((row) => row.children.length);
   return rows.map((row) => {
-    const cells = [...row.children].filter((cell) => cell.matches('th, td'));
+    const cells = [...row.children].filter((cell) => (
+      cell.matches('th, td') || (!table && cell.tagName === 'DIV')
+    ));
     if (cells.length && cells.every((cell) => cell.matches('th'))) return null;
     if (cells.length < 3) {
       if (!row.textContent.trim()) return null;
