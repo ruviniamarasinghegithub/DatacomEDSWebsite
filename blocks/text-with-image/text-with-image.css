@@ -443,6 +443,7 @@
     grid-column: 2;
     grid-row: 1;
     padding-inline: var(--spacing-padding-08, 48px) 0;
+    padding: 0 var(--spacing-padding-08, 48px) 0;
   }
 
   .text-with-image-switch .text-with-image-media,

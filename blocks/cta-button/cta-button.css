@@ -1,0 +1,137 @@
+.cta-button {
+  --cta-background: var(--color-action-blue);
+  --cta-border: var(--color-action-blue);
+  --cta-color: var(--color-white);
+  --cta-hover-background: var(--color-action-blue-hover);
+  --cta-hover-border: var(--color-action-blue-hover);
+  --cta-hover-color: var(--color-white);
+  --cta-active-background: var(--color-action-blue-hover);
+  --cta-active-border: var(--color-action-blue-hover);
+  --cta-active-color: var(--color-white);
+  --cta-focus-outline: var(--color-action-blue);
+
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.cta-button.secondary {
+  --cta-background: var(--color-white);
+  --cta-border: var(--color-action-blue);
+  --cta-color: var(--color-action-blue);
+  --cta-hover-background: var(--color-extra-light-blue-base);
+  --cta-hover-border: var(--color-action-blue-hover);
+  --cta-hover-color: var(--color-action-blue-hover);
+  --cta-active-background: var(--color-extra-light-blue-base);
+  --cta-active-border: var(--color-action-blue-hover);
+  --cta-active-color: var(--color-action-blue-hover);
+}
+
+.cta-button.tertiary {
+  --cta-background: var(--color-white);
+  --cta-border: transparent;
+  --cta-color: var(--color-action-blue);
+  --cta-hover-background: var(--color-midnight-blue-minus-5);
+  --cta-hover-border: var(--color-midnight-blue-minus-5);
+  --cta-hover-color: var(--color-action-blue-hover);
+  --cta-active-background: var(--color-midnight-blue-minus-5);
+  --cta-active-border: var(--color-midnight-blue-minus-5);
+  --cta-active-color: var(--color-action-blue-hover);
+}
+
+.cta-button.dark-theme {
+  --cta-background: var(--color-light-blue-base);
+  --cta-border: var(--color-light-blue-base);
+  --cta-color: var(--color-midnight-blue-base);
+  --cta-hover-background: var(--color-electric-blue-minus-3);
+  --cta-hover-border: var(--color-electric-blue-minus-3);
+  --cta-hover-color: var(--color-midnight-blue-base);
+  --cta-active-background: var(--color-electric-blue-minus-3);
+  --cta-active-border: var(--color-electric-blue-minus-3);
+  --cta-active-color: var(--color-midnight-blue-base);
+  --cta-focus-outline: var(--color-light-blue-base);
+
+  background: unset;
+}
+
+.cta-button.dark-theme.secondary {
+  --cta-background: var(--color-midnight-blue-base);
+  --cta-border: var(--color-light-blue-base);
+  --cta-color: var(--color-light-blue-base);
+  --cta-hover-background: var(--color-midnight-blue-minus-1);
+  --cta-hover-border: var(--color-electric-blue-minus-3);
+  --cta-hover-color: var(--color-electric-blue-minus-3);
+  --cta-active-background: var(--color-midnight-blue-minus-1);
+  --cta-active-border: var(--color-electric-blue-minus-3);
+  --cta-active-color: var(--color-electric-blue-minus-3);
+}
+
+.cta-button.dark-theme.tertiary {
+  --cta-background: var(--color-midnight-blue-base);
+  --cta-border: var(--color-midnight-blue-base);
+  --cta-color: var(--color-light-blue-base);
+  --cta-hover-background: var(--color-midnight-blue-minus-1);
+  --cta-hover-border: var(--color-midnight-blue-minus-1);
+  --cta-hover-color: var(--color-electric-blue-minus-3);
+  --cta-active-background: var(--color-midnight-blue-minus-1);
+  --cta-active-border: var(--color-midnight-blue-minus-1);
+  --cta-active-color: var(--color-electric-blue-minus-3);
+}
+
+.cta-button .cta-button-link,
+.cta-button a.cta-button-link:any-link {
+  box-sizing: border-box;
+  display: inline-flex;
+  width: 100%;
+  min-width: 120px;
+  min-height: 48px;
+  padding: 10px 24px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 2px solid var(--cta-border);
+  border-radius: 8px;
+  background-color: var(--cta-background);
+  color: var(--cta-color);
+  font-family: var(--typography-font-family-600);
+  font-size: var(--font-18-size);
+  line-height: var(--font-18-line-height);
+  letter-spacing: var(--letter-spacing-small);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cta-button a.cta-button-link:any-link:hover {
+  border-color: var(--cta-hover-border);
+  background-color: var(--cta-hover-background);
+  color: var(--cta-hover-color);
+  text-decoration: none;
+}
+
+.cta-button a.cta-button-link:any-link:active {
+  border-color: var(--cta-active-border);
+  background-color: var(--cta-active-background);
+  color: var(--cta-active-color);
+}
+
+.cta-button .cta-button-link:focus-visible {
+  outline: 3px solid var(--cta-focus-outline);
+  outline-offset: 2px;
+}
+
+.cta-button .cta-button-link[aria-disabled="true"] {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.cta-button .cta-button-text {
+  flex: 0 1 auto;
+}
+
+@media (width >= 500px) {
+  .cta-button .cta-button-link,
+  .cta-button a.cta-button-link:any-link {
+    width: auto;
+  }
+}

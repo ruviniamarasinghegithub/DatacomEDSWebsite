@@ -1,0 +1,243 @@
+main > .section.full-width-banner-container > .full-width-banner-wrapper {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+main .full-width-banner {
+  display: grid;
+  height: 384px;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--color-electric-blue-base);
+  color: var(--color-white);
+}
+
+main .full-width-banner .full-width-banner-media,
+main .full-width-banner .full-width-banner-overlay {
+  grid-area: 1 / 1;
+}
+
+main .full-width-banner .full-width-banner-media {
+  position: relative;
+  overflow: hidden;
+}
+
+main .full-width-banner .full-width-banner-media picture,
+main .full-width-banner .full-width-banner-media img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+main .full-width-banner .full-width-banner-overlay {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-image: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--color-electric-blue-base) 60%, transparent) 0%,
+    color-mix(in srgb, var(--color-electric-blue-base) 60%, transparent) 39%,
+    transparent 100%
+  );
+}
+
+main .full-width-banner .full-width-banner-inner {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--max-width-desktop);
+  margin: 0 auto;
+  padding: var(--spacing-padding-05);
+}
+
+main .full-width-banner .full-width-banner-copy {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+main .full-width-banner .full-width-banner-copy:has(.full-width-banner-actions) {
+  justify-content: flex-end;
+}
+
+main .full-width-banner .full-width-banner-logo {
+  overflow: hidden;
+  height: 60px;
+  margin-bottom: var(--spacing-padding-02);
+}
+
+main .full-width-banner .full-width-banner-logo picture {
+  display: block;
+  height: 100%;
+}
+
+main .full-width-banner .full-width-banner-logo img {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+main .full-width-banner .full-width-banner-subheading p {
+  margin: 0;
+}
+
+main .full-width-banner .full-width-banner-subheading {
+  margin: 0 0 var(--spacing-padding-02);
+  font-family: var(--typography-font-family-700);
+  font-size: var(--font-18-size);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-small);
+  line-height: var(--font-18-line-height);
+}
+
+main .full-width-banner .full-width-banner-heading {
+  margin: 0;
+  color: var(--color-white);
+}
+
+main .full-width-banner .full-width-banner-description {
+  margin-top: var(--spacing-padding-03);
+  font-family: var(--typography-font-family-500);
+  font-size: var(--font-16-size);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-small);
+  line-height: var(--font-16-line-height);
+  overflow-wrap: break-word;
+}
+
+main .full-width-banner .full-width-banner-description :is(p, ul, ol) {
+  margin: 0;
+}
+
+main .full-width-banner .full-width-banner-description :is(p, ul, ol) + :is(p, ul, ol) {
+  margin-top: var(--spacing-layout-02);
+}
+
+main .full-width-banner .full-width-banner-description a:any-link {
+  color: var(--color-white);
+  text-decoration: underline;
+}
+
+main .full-width-banner .full-width-banner-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-padding-03);
+  margin-top: var(--spacing-padding-05);
+  overflow: hidden;
+}
+
+main .full-width-banner .full-width-banner-actions:focus-within {
+  overflow: visible;
+}
+
+@keyframes full-width-banner-rise {
+  from {
+    transform: translateY(110%);
+    visibility: hidden;
+  }
+
+  to {
+    transform: translateY(0);
+    visibility: visible;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main .full-width-banner .full-width-banner-animation-line {
+    display: block;
+    overflow: hidden;
+  }
+
+  main .full-width-banner .full-width-banner-animation-line > span,
+  main .full-width-banner .full-width-banner-animation-fallback,
+  main .full-width-banner .full-width-banner-logo > :is(picture, img),
+  main .full-width-banner .full-width-banner-actions > .cta-button {
+    visibility: hidden;
+  }
+
+  main .full-width-banner.full-width-banner-animate .full-width-banner-animation-line > span,
+  main .full-width-banner.full-width-banner-animate .full-width-banner-animation-fallback {
+    display: block;
+    animation: full-width-banner-rise 0.6s ease-out both;
+  }
+
+  main .full-width-banner.full-width-banner-animate
+    .full-width-banner-logo > :is(picture, img) {
+    animation: full-width-banner-rise 0.6s ease-out 0.4s both;
+  }
+
+  main .full-width-banner.full-width-banner-animate
+    .full-width-banner-actions > .cta-button {
+    animation: full-width-banner-rise 0.6s ease-out 0.5s both;
+  }
+}
+
+@media(width >= 500px) {
+  main .full-width-banner .full-width-banner-copy,
+  main .full-width-banner .full-width-banner-copy:has(.full-width-banner-actions) {
+    justify-content: center;
+  }
+}
+
+@media (width >= 600px) {
+  main .full-width-banner .full-width-banner-subheading {
+    font-family: var(--typography-font-family-v-2-400);
+    font-size: var(--font-24-size);
+    letter-spacing: var(--letter-spacing-large);
+    line-height: var(--font-24-line-height);
+  }
+
+  main .full-width-banner .full-width-banner-actions {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media (width >= 900px) {
+  main .full-width-banner {
+    height: 350px;
+  }
+
+  main .full-width-banner .full-width-banner-inner {
+    padding: 0 var(--spacing-padding-08);
+  }
+
+  main .full-width-banner .full-width-banner-copy,
+  main .full-width-banner .full-width-banner-copy:has(.full-width-banner-actions) {
+    width: 85%;
+  }
+
+  main .full-width-banner .full-width-banner-logo {
+    height: 80px;
+  }
+
+  main .full-width-banner .full-width-banner-description {
+    font-size: var(--font-18-size);
+    line-height: var(--font-18-line-height);
+  }
+}
+
+@media (width >= 1200px) {
+  main .full-width-banner {
+    height: 400px;
+  }
+
+  main .full-width-banner .full-width-banner-copy,
+  main .full-width-banner .full-width-banner-copy:has(.full-width-banner-actions) {
+    width: 65%;
+  }
+}
