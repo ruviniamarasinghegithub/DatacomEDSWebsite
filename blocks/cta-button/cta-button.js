@@ -36,10 +36,10 @@ export default function decorate(block) {
   ];
   const selectedAppearances = selectedOptions.filter((option) => appearances.includes(option));
   const themeValue = getFieldCell(block, 'Button Theme')?.textContent.trim().toLowerCase();
-  const theme = themeValue || 'dark';
+  const theme = themeValue || (selectedOptions.includes('dark-theme') ? 'dark' : 'white');
   const errors = [];
-  if (!['light', 'dark', 'light-theme', 'dark-theme'].includes(theme)) {
-    errors.push('Button Theme must be light or dark.');
+  if (!['white', 'light', 'dark', 'white-theme', 'light-theme', 'dark-theme'].includes(theme)) {
+    errors.push('Button Theme must be white, light, or dark.');
   }
   if (!buttonText) errors.push('Button text is required.');
   if (buttonText && buttonText.length > 40) errors.push('Button text must be at most 40 characters.');
@@ -65,9 +65,9 @@ export default function decorate(block) {
     block.replaceChildren();
     return;
   }
-  block.classList.remove(...appearances, 'dark-theme', 'light-theme');
+  block.classList.remove(...appearances, 'white-theme', 'dark-theme', 'light-theme');
   block.classList.add(selectedAppearances[0] || 'primary');
-  block.classList.add(theme.startsWith('light') ? 'light-theme' : 'dark-theme');
+  block.classList.add(theme.endsWith('-theme') ? theme : `${theme}-theme`);
 
   const link = authoredLink || document.createElement('a');
   link.className = 'cta-button-link';
