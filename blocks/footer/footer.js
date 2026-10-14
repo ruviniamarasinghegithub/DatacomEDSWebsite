@@ -536,12 +536,17 @@ function createLinkGroup(heading, idPrefix, columnIndex, groupIndex) {
 }
 
 function getTableFooterRows(fragment) {
-  const table = fragment.querySelector('.group, .footer-links');
+  const table = fragment.querySelector(
+    '.footer-links table, table.footer-links, .group table, table.group, .footer-links, .group',
+  );
   if (!table) return [];
 
-  return [...table.children].map((row) => {
-    const cells = [...row.children];
+  const rows = table.matches('tr') ? [table] : [...table.querySelectorAll('tr')];
+  return rows.map((row) => {
+    const cells = [...row.children].filter((cell) => cell.matches('th, td'));
+    if (cells.length && cells.every((cell) => cell.matches('th'))) return null;
     if (cells.length < 3) {
+      if (!row.textContent.trim()) return null;
       // eslint-disable-next-line no-console
       console.warn('Footer: link rows need Group, Link text, and Link cells.', row);
       return null;
