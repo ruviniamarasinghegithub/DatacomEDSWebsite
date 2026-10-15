@@ -1,3 +1,7 @@
+main .breadcrumb-wrapper {
+  margin-block: var(--spacing-padding-06) 0;
+}
+
 main .breadcrumb-full-version {
   box-sizing: border-box;
   margin: var(--spacing-padding-06) 0;

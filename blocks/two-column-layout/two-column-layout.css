@@ -3,11 +3,11 @@
   display: flex;
   width: 100%;
   max-width: 100%;
-  margin-inline: auto;
-  padding-top: 48px;
+  margin-inline: auto;  
   flex-direction: column;
   align-items: flex-start;
   gap: 48px;
+  padding: var(--spacing-padding-04) 0 var(--spacing-padding-08) 0;
 }
 
 .two-column-layout > .two-column-layout-row {
