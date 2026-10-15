@@ -73,18 +73,17 @@ main .full-width-banner .full-width-banner-copy:has(.full-width-banner-actions) 
 
 main .full-width-banner .full-width-banner-logo {
   overflow: hidden;
-  height: 60px;
   margin-bottom: var(--spacing-padding-02);
 }
 
 main .full-width-banner .full-width-banner-logo picture {
   display: block;
-  height: 100%;
 }
 
 main .full-width-banner .full-width-banner-logo img {
+  display: block;
   width: auto;
-  height: 100%;
+  height: auto;
   max-width: 100%;
   object-fit: contain;
   object-position: left center;
@@ -217,10 +216,6 @@ main .full-width-banner .full-width-banner-actions:focus-within {
   main .full-width-banner .full-width-banner-copy,
   main .full-width-banner .full-width-banner-copy:has(.full-width-banner-actions) {
     width: 85%;
-  }
-
-  main .full-width-banner .full-width-banner-logo {
-    height: 80px;
   }
 
   main .full-width-banner .full-width-banner-description {
