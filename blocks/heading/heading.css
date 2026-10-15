@@ -8,6 +8,10 @@
   text-align: center;
 }
 
+.heading .heading-text.right-aligned {
+  text-align: right;
+}
+
 .heading .heading-text a {
   color: var(--color-action-blue);
   text-decoration: none;

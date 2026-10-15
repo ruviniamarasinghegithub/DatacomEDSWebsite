@@ -6,7 +6,10 @@ export default function decorate(block) {
   rows.forEach((row) => {
     const [label, value] = row.children;
     if (label && value) {
-      fields.set(label.textContent.trim().replace(/:$/, '').toLowerCase(), value);
+      const name = label.textContent.replace(/\s*\(.*\)\s*$/, '').trim()
+        .replace(/:$/, '').trim()
+        .toLowerCase();
+      fields.set(name, value);
     }
   });
   const isFieldTable = fields.has('text');
@@ -14,12 +17,15 @@ export default function decorate(block) {
   const fieldValue = (name) => (isFieldTable ? fields.get(name)?.textContent.trim() || '' : '');
 
   const sizeMap = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+  const element = fieldValue('element').toLowerCase();
   const style = fieldValue('style').toLowerCase();
-  const headingTag = (sizeMap.includes(style) ? style : null)
+  const headingTag = (sizeMap.slice(0, 4).includes(element) ? element : null)
+    || (sizeMap.includes(style) ? style : null)
     || sizeMap.find((tag) => block.classList.contains(tag)) || 'h2';
-  const alignment = fieldValue('alignment').toLowerCase();
-  const isCentered = ['left', 'center'].includes(alignment)
-    ? alignment === 'center' : block.classList.contains('center');
+  const authoredAlignment = fieldValue('alignment').toLowerCase();
+  const alignments = ['left', 'center', 'right'];
+  const alignment = alignments.includes(authoredAlignment) ? authoredAlignment
+    : alignments.find((value) => block.classList.contains(value)) || 'left';
   const theme = fieldValue('theme').toLowerCase().replace(/-theme$/, '');
   if (['white', 'light', 'dark'].includes(theme)) {
     block.classList.remove('white-theme', 'light-theme', 'dark-theme');
@@ -29,7 +35,8 @@ export default function decorate(block) {
   // Optional extra rows: "id:", "linktitle:", "style:"
   let id = fieldValue('id');
   let linkTitle = fieldValue('linktitle');
-  let visualStyle = null;
+  const authoredClass = fieldValue('class').toLowerCase();
+  let visualStyle = sizeMap.slice(0, 4).includes(authoredClass) ? authoredClass : null;
   (isFieldTable ? [] : rows.slice(1)).forEach((row) => {
     const rowText = row.textContent.trim();
     const lower = rowText.toLowerCase();
@@ -44,7 +51,7 @@ export default function decorate(block) {
   });
 
   const heading = document.createElement(headingTag);
-  const classes = ['heading-text', isCentered ? 'center-aligned' : 'left-aligned'];
+  const classes = ['heading-text', `${alignment}-aligned`];
   if (visualStyle) classes.push(visualStyle);
   heading.className = classes.join(' ');
   if (id) heading.id = id;
