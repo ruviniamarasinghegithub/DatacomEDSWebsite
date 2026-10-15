@@ -26,9 +26,28 @@
 .heading .heading-text a:hover,
 .heading .heading-text a:focus {
   color: var(--color-action-blue-hover);
-  background-size: 0 1px, 100% 1px;
   background-image: linear-gradient(transparent, transparent),
     linear-gradient(var(--color-action-blue-hover), var(--color-action-blue-hover));
+}
+
+.heading h1.heading-text a:hover,
+.heading .heading-text a:focus {
+  background-size: 0 1px, 100% 4px;
+}
+
+.heading h2.heading-text a:hover,
+.heading h2.heading-text a:focus {
+  background-size: 0 1px, 100% 3px;
+}
+
+.heading h3.heading-text a:hover,
+.heading h3.heading-text a:focus {
+  background-size: 0 1px, 100% 2px;
+}
+
+.heading h4.heading-text a:hover,
+.heading h4.heading-text a:focus {
+  background-size: 0 1px, 100% 1.5px;
 }
 
 .heading .heading-text a:focus-visible {
