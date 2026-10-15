@@ -352,6 +352,7 @@
 
   .text-with-image-wide.text-with-image-compact .text-with-image-content {
     margin-block: var(--spacing-layout-06, 48px);
+    margin-block: 0;
   }
 
   .text-with-image-wide.text-with-image-switch .text-with-image-content,
