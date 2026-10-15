@@ -203,36 +203,36 @@ h6,
 
 h1,
 .h1 {
-  font-family: var(--typography-font-family-v-2-700);
-  font-size: var(--font-64-size);
   font-weight: 300;
+  font-family: var(--typography-font-family-v-2-700);
+  font-size: var(--font-64-size);  
   letter-spacing: var(--letter-spacing-large);
   line-height: var(--font-64-line-height);
 }
 
 h2,
 .h2 {
-  font-family: var(--typography-font-family-v-2-700);
-  font-size: var(--font-48-size);
   font-weight: 300;
+  font-family: var(--typography-font-family-v-2-700);
+  font-size: var(--font-48-size);  
   letter-spacing: var(--letter-spacing-large);
   line-height: var(--font-48-line-height);
 }
 
 h3,
 .h3 {
-  font-family: var(--typography-font-family-v-2-400);
-  font-size: var(--font-32-size);
   font-weight: 600;
+  font-family: var(--typography-font-family-v-2-400);
+  font-size: var(--font-32-size);  
   letter-spacing: var(--letter-spacing-large);
   line-height: var(--font-32-line-height);
 }
 
 h4,
 .h4 {
-  font-family: var(--typography-font-family-v-2-400);
-  font-size: var(--font-24-size);
   font-weight: 600;
+  font-family: var(--typography-font-family-v-2-400);
+  font-size: var(--font-24-size);  
   letter-spacing: var(--letter-spacing-large);
   line-height: var(--font-24-line-height);
 }

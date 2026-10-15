@@ -35,12 +35,6 @@
   outline: none;
 }
 
-/* Visual style overrides — independent of the actual semantic tag */
-.heading .heading-text.h1 { font-size: var(--heading-font-size-xxl); }
-.heading .heading-text.h2 { font-size: var(--heading-font-size-xl); }
-.heading .heading-text.h3 { font-size: var(--heading-font-size-l); }
-.heading .heading-text.h4 { font-size: var(--heading-font-size-m); }
-
 /* themes */
 .heading.white-theme {
   background-color: var(--background-color);
@@ -64,12 +58,4 @@
 
 .heading.dark-theme .heading-text {
   color: var(--color-dark-text, var(--color-white));
-}
-
-@media (width <= 600px) {
-  .heading .heading-text.h3,
-  .heading .heading-text.h4 {
-    font-size: 1.1rem;
-    line-height: 1.3;
-  }
 }
