@@ -15,6 +15,24 @@ function getFieldCell(block, fieldName) {
   return row?.children[1] || null;
 }
 
+function getParentTheme(block) {
+  const parent = block.parentElement?.closest('.full-width-banner, .text-with-image');
+  if (!parent) return null;
+
+  let container = parent;
+  while (container) {
+    const classNames = [...container.classList];
+    const theme = ['white', 'light', 'dark'].find((value) => (
+      classNames.some((name) => name === `${value}-theme`
+        || name === `text-with-image-${value}-theme`
+        || name.startsWith(`${value}-theme--`))
+    ));
+    if (theme) return theme;
+    container = container.parentElement;
+  }
+  return null;
+}
+
 /**
  * Decorates a CTA button block.
  * @param {Element} block The CTA button block.
@@ -37,7 +55,9 @@ export default function decorate(block) {
   const selectedAppearances = selectedOptions.filter((option) => appearances.includes(option));
   const themeCell = getFieldCell(block, 'Button Theme');
   const themeValue = themeCell?.textContent.trim().toLowerCase();
+  const inheritedTheme = !selectedOptions.length && !themeValue ? getParentTheme(block) : null;
   const theme = themeValue
+    || inheritedTheme
     || (!themeCell && selectedOptions.includes('dark-theme') ? 'dark' : 'white');
   const errors = [];
   if (!['white', 'light', 'dark', 'white-theme', 'light-theme', 'dark-theme'].includes(theme)) {
