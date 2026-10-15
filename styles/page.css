@@ -454,6 +454,6 @@ main > .section:first-of-type {
 
 @media (width < 900px) {
   main > .section > div {
-    padding: 0 0 var(--spacing-layout-02) 0;
+    padding: 0;
   }
 }
