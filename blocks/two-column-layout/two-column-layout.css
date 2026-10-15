@@ -52,7 +52,7 @@
   }
 }
 
-@media (width <= 900px) {
+@media (width <= 500px) {
   .two-column-layout {
     padding: var(--spacing-padding-06) 0;
   }
