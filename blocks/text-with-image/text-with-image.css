@@ -431,6 +431,7 @@
 @media (width > 900px) and (width <= 1300px) {
   .text-with-image {
     margin-block: var(--spacing-layout-08, 80px);
+    margin-block: 0;
   }
 }
 
