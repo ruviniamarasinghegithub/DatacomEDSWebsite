@@ -51,3 +51,9 @@
     width: 100%;
   }
 }
+
+@media (width <= 900px) {
+  .two-column-layout {
+    padding: var(--spacing-padding-06) 0;
+  }
+}

@@ -93,11 +93,12 @@ main .breadcrumb-full-version-list .breadcrumb-full-version-item a:focus-visible
     text-decoration-skip-ink: none;
     outline: none;
 }
-@media (width <= 500px) {
+@media (width <= 900px) {
   main div.breadcrumb-wrapper {
     padding: 0 var(--spacing-padding-05);
   }
 }
+
 @media (width <= 500px) {
   main .breadcrumb-container {
     display: none;
