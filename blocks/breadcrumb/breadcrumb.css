@@ -1,5 +1,5 @@
 main .breadcrumb-wrapper {
-  margin-block: var(--spacing-padding-06) 0;
+  margin: var(--spacing-padding-06) 0;
 }
 
 main .breadcrumb-full-version {
