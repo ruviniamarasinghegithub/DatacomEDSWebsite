@@ -81,7 +81,7 @@ function decorateLinks(container) {
         if (!link.querySelector('img, picture, .icon')) {
           const icon = document.createElement('img');
           icon.className = 'footer-external-link-icon';
-          icon.src = `${window.hlx.codeBasePath}/icons/footer-external-link.svg`;
+          icon.src = `${window.hlx.codeBasePath}/icons/footer-arrow-up-right.svg`;
           icon.alt = '';
           icon.setAttribute('aria-hidden', 'true');
           link.append(icon);
@@ -123,6 +123,22 @@ function isShieldedSiteLink(anchor) {
   return title === 'shielded-site' || label === 'shielded site';
 }
 
+function decorateDefaultIcons(container) {
+  container.querySelectorAll('a[href]').forEach((link) => {
+    if (link.querySelector('img, picture, .icon')) return;
+    let asset;
+    if (isShieldedSiteLink(link)) asset = 'footer-shielded-site.png';
+    else if (link.textContent.trim().toLowerCase() === 'rainbow tick') asset = 'footer-rainbow-tick.svg';
+    if (!asset) return;
+
+    const icon = document.createElement('img');
+    icon.src = `${window.hlx.codeBasePath}/icons/${asset}`;
+    icon.alt = '';
+    icon.setAttribute('aria-hidden', 'true');
+    link.append(icon);
+  });
+}
+
 async function decorateShieldedSite(container) {
   const link = [...container.querySelectorAll('a[href]')].find(isShieldedSiteLink);
   if (!link) return;
@@ -157,7 +173,9 @@ function isIconImage(img) {
 }
 
 function decorateLinkIcons(container) {
-  [...container.querySelectorAll('img')].filter(isIconImage).forEach((img) => {
+  [...container.querySelectorAll('img')].filter((img) => (
+    !img.classList.contains('footer-external-link-icon') && isIconImage(img)
+  )).forEach((img) => {
     const icon = img.closest('picture, .icon') || img;
     const item = img.closest('li') || img.closest('p');
     const link = img.closest('a[href]') || item?.querySelector('a[href]');
@@ -266,7 +284,7 @@ async function decorateRegionSelector(container, idPrefix) {
   triggerLabel.textContent = heading.textContent.trim();
   const triggerIcon = document.createElement('img');
   triggerIcon.className = 'footer-region-selector-trigger-icon';
-  triggerIcon.src = `${window.hlx.codeBasePath}/icons/footer-globe-placeholder.svg`;
+  triggerIcon.src = `${window.hlx.codeBasePath}/icons/footer-globe.svg`;
   triggerIcon.alt = '';
   trigger.append(triggerLabel, triggerIcon);
   trigger.setAttribute('aria-haspopup', 'dialog');
@@ -768,6 +786,7 @@ export default async function decorate(block) {
     || buildDocumentFooter(fragment, idPrefix);
 
   block.replaceChildren(tableFooter.content);
+  decorateDefaultIcons(tableFooter.content);
   decorateLinks(tableFooter.content);
   decorateLinkIcons(tableFooter.content);
   decorateCopyright(tableFooter.content);

@@ -1,0 +1,136 @@
+/* Datacom OneTrust banner — match AEM / production cookie bar look */
+
+#onetrust-consent-sdk #onetrust-banner-sdk {
+  background-color: var(--color-midnight-blue-base, #000a14) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#onetrust-consent-sdk #onetrust-banner-sdk .ot-sdk-container,
+#onetrust-consent-sdk #onetrust-banner-sdk .ot-sdk-row {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+#onetrust-consent-sdk #onetrust-policy {
+  margin: 0;
+  padding: 24px;
+}
+
+#onetrust-consent-sdk #onetrust-policy-text {
+  color: #fff !important;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: var(--body-font-family, sans-serif);
+}
+
+#onetrust-consent-sdk #onetrust-policy-text a {
+  color: #fff !important;
+  text-decoration: underline !important;
+}
+
+#onetrust-consent-sdk #onetrust-policy-text a:hover {
+  opacity: 0.85;
+}
+
+#onetrust-consent-sdk #onetrust-button-group-parent {
+  margin-top: 24px;
+}
+
+#onetrust-consent-sdk #onetrust-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+}
+
+#onetrust-consent-sdk #onetrust-button-group-parent button {
+  flex-grow: 1;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  margin: 0 !important;
+  letter-spacing: -0.2px;
+  min-width: 140px;
+  cursor: pointer;
+  font-family: var(--body-font-family, sans-serif);
+  color: var(--color-electric-blue-base, #002bfe);
+  background-color: #fff;
+}
+
+#onetrust-consent-sdk #onetrust-button-group-parent button:hover {
+  background-color: var(--color-midnight-blue-minus-5, #e6e7e8);
+  border-color: var(--color-midnight-blue-minus-5, #e6e7e8);
+  color: var(--color-electric-blue-plus-1, #0022cb);
+  opacity: 1;
+}
+
+#onetrust-consent-sdk #onetrust-accept-btn-handler {
+  background-color: var(--color-electric-blue-base, #002bfe) !important;
+  border: 2px solid var(--color-electric-blue-base, #002bfe) !important;
+  color: #fff !important;
+  order: -1;
+}
+
+#onetrust-consent-sdk #onetrust-accept-btn-handler:hover {
+  background-color: var(--color-electric-blue-plus-1, #0022cb) !important;
+  border-color: var(--color-electric-blue-plus-1, #0022cb) !important;
+  color: #fff !important;
+  opacity: 1;
+}
+
+#onetrust-consent-sdk #onetrust-pc-btn-handler,
+#onetrust-consent-sdk #onetrust-reject-all-handler {
+  background-color: #fff !important;
+  border: 2px solid #fff !important;
+  color: var(--color-electric-blue-base, #002bfe) !important;
+}
+
+/* Preference centre tweaks (from AEM one-trust-cookie.less) */
+#onetrust-consent-sdk #onetrust-pc-sdk {
+  max-width: 750px;
+  min-width: unset;
+  width: 100%;
+}
+
+#onetrust-consent-sdk #onetrust-pc-sdk a {
+  text-decoration: none;
+}
+
+#onetrust-consent-sdk #onetrust-pc-sdk .ot-pc-header {
+  display: none;
+}
+
+#onetrust-consent-sdk #onetrust-pc-sdk .ot-pc-footer {
+  background-color: #fff;
+  max-height: none;
+  z-index: 1;
+}
+
+#onetrust-consent-sdk #onetrust-pc-sdk .ot-tgl .category-switch-handler[checked] + .ot-switch .ot-switch-nob {
+  background-color: var(--color-electric-blue-base, #002bfe);
+}
+
+#onetrust-consent-sdk #onetrust-pc-sdk .ot-cat-item:hover {
+  background-color: #e6e7e8;
+}
+
+@media (width <= 900px) {
+  #onetrust-consent-sdk #onetrust-button-group-parent {
+    margin-top: 0;
+    padding: 0 24px 24px;
+  }
+}
+
+@media (width <= 600px) {
+  #onetrust-consent-sdk #onetrust-policy-text {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  #onetrust-consent-sdk #onetrust-banner-sdk .ot-sdk-row {
+    padding: 0;
+  }
+}
