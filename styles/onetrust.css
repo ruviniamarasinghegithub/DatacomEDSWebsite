@@ -43,8 +43,20 @@
 #onetrust-consent-sdk #onetrust-button-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   align-items: stretch;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+#onetrust-consent-sdk #onetrust-button-group .accept-reject-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  order: -1;
+  width: 100%;
+  margin: 0;
 }
 
 #onetrust-consent-sdk button:focus-visible {
@@ -61,7 +73,11 @@
 }
 
 #onetrust-consent-sdk #onetrust-button-group-parent button {
+  box-sizing: border-box;
   flex-grow: 1;
+  float: none;
+  width: 100%;
+  max-width: none;
   border: 2px solid #fff;
   border-radius: 8px;
   font-size: 14px;
@@ -71,6 +87,7 @@
   letter-spacing: -0.2px;
   min-width: 140px;
   cursor: pointer;
+  font-family: var(--typography-font-family-600, sans-serif);
   color: var(--color-electric-blue-base, #002bfe);
   background-color: #fff;
 }
@@ -176,11 +193,7 @@
 
 @media (width <= 600px) {
   #onetrust-consent-sdk #onetrust-policy-text {
-    font-size: 14px;
+    font-size: 14px !important;
     line-height: 18px;
-  }
-
-  #onetrust-consent-sdk #onetrust-banner-sdk .ot-sdk-row {
-    padding: 0;
   }
 }
