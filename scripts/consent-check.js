@@ -12,6 +12,7 @@ const CDN_HOST = 'https://cdn-au.onetrust.com';
 const MARKETING_GROUP = 'C0005';
 
 let consentedLoaded = false;
+let toggleOrderObserver;
 
 function isProdHost() {
   const { hostname } = window.location;
@@ -41,10 +42,30 @@ function hasMarketingConsent(activeGroups) {
     || (activeGroups || '').includes('C0004');
 }
 
+function arrangeCategoryToggles() {
+  const consentSdk = document.getElementById('onetrust-consent-sdk');
+  if (!consentSdk || toggleOrderObserver) return;
+
+  const moveToggles = () => {
+    consentSdk.querySelectorAll('.ot-acc-hdr').forEach((header) => {
+      const toggle = header.querySelector(':scope > .ot-tgl');
+      const heading = header.querySelector(':scope > .ot-cat-header');
+      if (toggle && heading && toggle.nextElementSibling !== heading) {
+        header.insertBefore(toggle, heading);
+      }
+    });
+  };
+
+  moveToggles();
+  toggleOrderObserver = new MutationObserver(moveToggles);
+  toggleOrderObserver.observe(consentSdk, { childList: true, subtree: true });
+}
+
 /**
  * OneTrust invokes this when the banner initializes and when preferences change.
  */
 window.OptanonWrapper = () => {
+  arrangeCategoryToggles();
   const activeGroups = window.OnetrustActiveGroups || '';
   const consented = hasMarketingConsent(activeGroups);
   window.dispatchEvent(new CustomEvent('consent.update', {

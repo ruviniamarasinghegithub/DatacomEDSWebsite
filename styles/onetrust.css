@@ -178,6 +178,13 @@
 #onetrust-consent-sdk .ot-cookie-policy-link {
   background-image: linear-gradient(var(--color-white, #fff), var(--color-white, #fff));
 }
+
+#onetrust-consent-sdk #onetrust-pc-sdk #ot-pc-content .ot-cat-grp .ot-cat-item .ot-arw {
+    color: var(--font-color-default)!important;
+    height: 40px!important;
+    width: 15px!important;
+}
+
 @media (width > 500px) {
   #onetrust-banner-sdk.ot-buttons-fw:not(.ot-iab-2) #onetrust-button-group button:last-of-type {
     margin-bottom: 0 !important;
