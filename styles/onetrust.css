@@ -1,7 +1,7 @@
 /* Datacom OneTrust banner — match AEM / production cookie bar look */
 
-#onetrust-consent-sdk #onetrust-banner-sdk {
-  background-color: var(--color-midnight-blue-base, #000a14)  ;
+#onetrust-consent-sdk #onetrust-banner-sdk {  
+  background-color: #00125e;
   border: none;
   box-shadow: none;
 }
@@ -22,9 +22,9 @@
 
 #onetrust-consent-sdk #onetrust-policy-text {
   color: #fff;
-  font-size: 16px;
+  font-size: 16px !important;
   line-height: 1.5;
-  font-family: var(--typography-font-family-400);
+  font-family: var(--typography-font-family-400) !important;
 }
 
 #onetrust-consent-sdk #onetrust-policy-text a {
@@ -94,6 +94,10 @@
   background-color: #fff;
   border: 2px solid #fff;
   color: var(--color-electric-blue-base, #002bfe);
+}
+
+#onetrust-consent-sdk #onetrust-pc-btn-handler {
+  order: 1;
 }
 
 #onetrust-consent-sdk #onetrust-pc-btn-handler:hover,
