@@ -178,7 +178,7 @@
 #onetrust-consent-sdk .ot-cookie-policy-link {
   background-image: linear-gradient(var(--color-white, #fff), var(--color-white, #fff));
 }
-@media (width < 500px) {
+@media (width > 500px) {
   #onetrust-banner-sdk.ot-buttons-fw:not(.ot-iab-2) #onetrust-button-group button:last-of-type {
     margin-bottom: 0 !important;
   }
