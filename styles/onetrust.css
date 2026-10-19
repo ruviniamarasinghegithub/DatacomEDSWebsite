@@ -185,7 +185,7 @@
     width: 15px!important;
 }
 
-#onetrust-consent-sdk .onetrust-pc-dark-filter,
+#onetrust-consent-sdk #ot-pc-title,
 #onetrust-consent-sdk #ot-category-title {
   font-family: var(--typography-font-family-600)!important;
   font-size: var(--font-24-size, 24px)!important;
