@@ -185,6 +185,13 @@
     width: 15px!important;
 }
 
+#onetrust-consent-sdk .onetrust-pc-dark-filter,
+#onetrust-consent-sdk #ot-category-title {
+  font-family: var(--typography-font-family-400)!important;
+  font-size: var(--font-size-default, 16px)!important;
+  line-height: var(--line-height-default, 24px)!important;
+}
+
 @media (width > 500px) {
   #onetrust-banner-sdk.ot-buttons-fw:not(.ot-iab-2) #onetrust-button-group button:last-of-type {
     margin-bottom: 0 !important;
