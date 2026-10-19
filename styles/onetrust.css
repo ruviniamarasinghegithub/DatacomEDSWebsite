@@ -192,6 +192,11 @@
   line-height: var(--font-24-line-height, 32px)!important;
 }
 
+#onetrust-pc-sdk .ot-accordion-layout.ot-cat-item {
+  border-right: none!important;
+  border-left: none!important;
+}
+
 @media (width > 500px) {
   #onetrust-banner-sdk.ot-buttons-fw:not(.ot-iab-2) #onetrust-button-group button:last-of-type {
     margin-bottom: 0 !important;
