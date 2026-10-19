@@ -1,168 +1,177 @@
 import { getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../fragment/fragment.js';
 
-// media query match that indicates mobile/tablet width
-const isDesktop = window.matchMedia('(min-width: 900px)');
+const DATACOM_ORIGIN = 'https://datacom.com';
+const DEFAULT_ALT = 'Datacom';
+const SUPPORTED_REGIONS = ['nz', 'au'];
 
-function closeOnEscape(e) {
-  if (e.code === 'Escape') {
-    const nav = document.getElementById('nav');
-    const navSections = nav.querySelector('.nav-sections');
-    if (!navSections) return;
-    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleAllNavSections(navSections);
-      navSectionExpanded.focus();
-    } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleMenu(nav, navSections);
-      nav.querySelector('button').focus();
-    }
+async function loadHeaderContent(block) {
+  if (block.children.length) return block;
+  const path = (getMetadata('nav') || '/nav').trim();
+  if (!path.startsWith('/') || path.startsWith('//')) return block;
+
+  try {
+    const response = await fetch(`${path.replace(/(\.plain)?\.html$/, '')}.plain.html`);
+    if (!response.ok) return block;
+    const content = document.createElement('main');
+    content.innerHTML = await response.text();
+    return content.querySelector('.header') || block;
+  } catch {
+    return block;
   }
 }
 
-function closeOnFocusLost(e) {
-  const nav = e.currentTarget;
-  if (!nav.contains(e.relatedTarget)) {
-    const navSections = nav.querySelector('.nav-sections');
-    if (!navSections) return;
-    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleAllNavSections(navSections, false);
-    } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleMenu(nav, navSections, false);
-    }
-  }
-}
-
-function openOnKeydown(e) {
-  const focused = document.activeElement;
-  const isNavDrop = focused.className === 'nav-drop';
-  if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
-    const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
-    // eslint-disable-next-line no-use-before-define
-    toggleAllNavSections(focused.closest('.nav-sections'));
-    focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
-  }
-}
-
-function focusNavSection() {
-  document.activeElement.addEventListener('keydown', openOnKeydown);
-}
-
-/**
- * Toggles all nav sections
- * @param {Element} sections The container element
- * @param {Boolean} expanded Whether the element should be expanded or collapsed
- */
-function toggleAllNavSections(sections, expanded = false) {
-  if (!sections) return;
-  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
-    section.setAttribute('aria-expanded', expanded);
+function readHeaderConfig(block) {
+  const config = {};
+  const fields = ['logo', 'logoAlt', 'region'];
+  [...block.children].forEach((row, index) => {
+    const cells = [...row.children];
+    const key = cells.length > 1
+      ? fields.find((field) => field.toLowerCase() === cells[0].textContent.trim().replace(/[\s-]/g, '').toLowerCase())
+      : fields[index];
+    const cell = cells.length > 1 ? cells[1] : cells[0];
+    if (!key || !cell) return;
+    const image = cell.querySelector('img');
+    const link = cell.querySelector('a[href]');
+    config[key] = key === 'logo'
+      ? image?.getAttribute('src') || link?.getAttribute('href') || cell.textContent.trim()
+      : cell.textContent.trim();
   });
+  return config;
 }
 
 /**
- * Toggles the entire nav
- * @param {Element} nav The container element
- * @param {Element} navSections The nav sections within the container element
- * @param {*} forceExpanded Optional param to force nav expand behavior when not null
+ * Resolve site region (nz | au) from page meta, path, or default nz.
+ * Meta: <meta name="region" content="au">
+ * @returns {'nz'|'au'}
  */
-function toggleMenu(nav, navSections, forceExpanded = null) {
-  const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
-  const button = nav.querySelector('.nav-hamburger button');
-  document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
-  nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
-  button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-  // enable nav dropdown keyboard accessibility
-  if (navSections) {
-    const navDrops = navSections.querySelectorAll('.nav-drop');
-    if (isDesktop.matches) {
-      navDrops.forEach((drop) => {
-        if (!drop.hasAttribute('tabindex')) {
-          drop.setAttribute('tabindex', 0);
-          drop.addEventListener('focus', focusNavSection);
-        }
-      });
-    } else {
-      navDrops.forEach((drop) => {
-        drop.removeAttribute('tabindex');
-        drop.removeEventListener('focus', focusNavSection);
-      });
-    }
-  }
+function getRegion(authoredRegion = '') {
+  const selectedRegion = authoredRegion.trim().toLowerCase();
+  if (SUPPORTED_REGIONS.includes(selectedRegion)) return selectedRegion;
+  const meta = (getMetadata('region') || getMetadata('search-region') || '').trim().toLowerCase();
+  if (SUPPORTED_REGIONS.includes(meta)) return meta;
 
-  // enable menu collapse on escape keypress
-  if (!expanded || isDesktop.matches) {
-    // collapse menu on escape press
-    window.addEventListener('keydown', closeOnEscape);
-    // collapse menu on focus lost
-    nav.addEventListener('focusout', closeOnFocusLost);
-  } else {
-    window.removeEventListener('keydown', closeOnEscape);
-    nav.removeEventListener('focusout', closeOnFocusLost);
+  const path = window.location.pathname.replace(/^\/content\/datacom/, '');
+  const match = path.match(/^\/(nz|au)(?:\/|$)/i);
+  if (match) return match[1].toLowerCase();
+
+  return 'nz';
+}
+
+/** Read meta by either kebab-case or camelCase (UE page fields). */
+function getMeta(...names) {
+  for (let i = 0; i < names.length; i += 1) {
+    const value = (getMetadata(names[i]) || '').trim();
+    if (value) return value;
   }
+  return '';
 }
 
 /**
- * loads and decorates the header, mainly the nav
- * @param {Element} block The header block element
+ * Homepage URL for region, e.g. https://datacom.com/nz/en
+ * @param {string} region
+ * @returns {string}
+ */
+function getHomeUrl(region) {
+  const origin = (getMetadata('datacom-origin') || DATACOM_ORIGIN).replace(/\/$/, '');
+  return `${origin}/${region}/en`;
+}
+
+/**
+ * Search URL for region, e.g. https://datacom.com/nz/en/search
+ * @param {string} region
+ * @returns {string}
+ */
+function getSearchUrl(region) {
+  return `${getHomeUrl(region)}/search`;
+}
+
+/**
+ * Logo alt text from meta or default (mirrors AEM header-mega altText).
+ * @returns {string}
+ */
+function getLogoAlt() {
+  return getMeta('logoAlt', 'logo-alt', 'logoalt') || DEFAULT_ALT;
+}
+
+/**
+ * Optional authored logo image URL from page meta (UE field: logo).
+ * @returns {string}
+ */
+function getLogoSrc() {
+  return getMeta('logo');
+}
+
+function createLogoLink(region, config) {
+  const homeUrl = getHomeUrl(region);
+  const alt = config.logoAlt || getLogoAlt();
+  const logoSrc = config.logo || getLogoSrc();
+
+  const link = document.createElement('a');
+  link.className = 'nav-brand';
+  link.href = homeUrl;
+  link.setAttribute('aria-label', alt);
+
+  if (logoSrc) {
+    const img = document.createElement('img');
+    img.className = 'nav-brand-logo';
+    img.src = logoSrc;
+    img.alt = alt;
+    img.loading = 'eager';
+    img.width = 140;
+    img.height = 24;
+    link.append(img);
+  } else {
+    // Wordmark fallback matching datacom.com header when no logo asset is set
+    const wordmark = document.createElement('span');
+    wordmark.className = 'nav-brand-wordmark';
+    wordmark.textContent = 'DATACOM';
+    wordmark.setAttribute('aria-hidden', 'true');
+    link.append(wordmark);
+  }
+
+  return link;
+}
+
+function createSearchControl(region) {
+  const searchUrl = getSearchUrl(region);
+
+  const tools = document.createElement('div');
+  tools.className = 'nav-tools';
+
+  const searchLink = document.createElement('a');
+  searchLink.className = 'nav-search';
+  searchLink.href = searchUrl;
+  searchLink.setAttribute('aria-label', 'Search');
+  searchLink.title = 'Search';
+  const searchIcon = document.createElement('i');
+  searchIcon.className = 'fal fa-search nav-search-icon';
+  searchIcon.setAttribute('aria-hidden', 'true');
+  searchLink.append(searchIcon);
+
+  tools.append(searchLink);
+  return tools;
+}
+
+/**
+ * Datacom header: logo (alt + region homepage) + search icon → region search URL.
+ * Region from meta `region` (au|nz), path, or default nz.
+ * Optional meta: logo, logo-alt, datacom-origin.
+ * @param {Element} block
  */
 export default async function decorate(block) {
-  // load nav as fragment
-  const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
-  const fragment = await loadFragment(navPath);
+  const content = await loadHeaderContent(block);
+  const config = readHeaderConfig(content);
+  const region = getRegion(config.region);
 
-  // decorate nav DOM
   block.textContent = '';
+
   const nav = document.createElement('nav');
   nav.id = 'nav';
-  while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
+  nav.className = 'header-simple';
+  nav.setAttribute('aria-label', 'Main');
+  nav.dataset.region = region;
 
-  const classes = ['brand', 'sections', 'tools'];
-  classes.forEach((c, i) => {
-    const section = nav.children[i];
-    if (section) section.classList.add(`nav-${c}`);
-  });
-
-  const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
-  if (brandLink) {
-    brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
-  }
-
-  const navSections = nav.querySelector('.nav-sections');
-  if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
-        if (isDesktop.matches) {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        }
-      });
-    });
-  }
-
-  // hamburger for mobile
-  const hamburger = document.createElement('div');
-  hamburger.classList.add('nav-hamburger');
-  hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
-      <span class="nav-hamburger-icon"></span>
-    </button>`;
-  hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-  nav.prepend(hamburger);
-  nav.setAttribute('aria-expanded', 'false');
-  // prevent mobile nav behavior on window resize
-  toggleMenu(nav, navSections, isDesktop.matches);
-  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+  nav.append(createLogoLink(region, config), createSearchControl(region));
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
