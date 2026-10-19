@@ -187,9 +187,9 @@
 
 #onetrust-consent-sdk .onetrust-pc-dark-filter,
 #onetrust-consent-sdk #ot-category-title {
-  font-family: var(--typography-font-family-400)!important;
-  font-size: var(--font-size-default, 16px)!important;
-  line-height: var(--line-height-default, 24px)!important;
+  font-family: var(--typography-font-family-600)!important;
+  font-size: var(--font-24-size, 24px)!important;
+  line-height: var(--font-24-line-height, 32px)!important;
 }
 
 @media (width > 500px) {
