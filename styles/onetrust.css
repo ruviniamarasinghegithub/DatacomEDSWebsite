@@ -178,6 +178,11 @@
 #onetrust-consent-sdk .ot-cookie-policy-link {
   background-image: linear-gradient(var(--color-white, #fff), var(--color-white, #fff));
 }
+@media (width < 500px) {
+  #onetrust-banner-sdk.ot-buttons-fw:not(.ot-iab-2) #onetrust-button-group button:last-of-type {
+    margin-bottom: 0 !important;
+  }
+}
 
 @media (width <= 900px) {
   #onetrust-consent-sdk #onetrust-button-group-parent {
@@ -186,9 +191,9 @@
   }
 }
 
-@media (width <= 600px) {
+@media (width <= 500px) {
   #onetrust-consent-sdk #onetrust-policy-text {
     font-size: 14px !important;
-    line-height: 18px;
+    line-height: 18px !important;
   }
 }
