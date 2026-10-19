@@ -41,8 +41,8 @@
 }
 
 #onetrust-consent-sdk #onetrust-button-group {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
   gap: 12px;
   align-items: stretch;
   width: 100%;
@@ -50,13 +50,8 @@
   margin: 0;
 }
 
-#onetrust-consent-sdk #onetrust-button-group .accept-reject-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  order: -1;
-  width: 100%;
-  margin: 0;
+#onetrust-consent-sdk #onetrust-button-group :is(.accept-reject-container, .banner-actions-container) {
+  display: contents !important;
 }
 
 #onetrust-consent-sdk button:focus-visible {
@@ -93,17 +88,17 @@
 }
 
 #onetrust-consent-sdk #onetrust-accept-btn-handler {
-  background-color: var(--color-electric-blue-base, #002bfe);
-  border: 2px solid var(--color-electric-blue-base, #002bfe);
-  color: #fff;
-  order: -1;
+  background-color: var(--color-electric-blue-base, #002bfe) !important;
+  border: 2px solid var(--color-electric-blue-base, #002bfe) !important;
+  color: #fff !important;
+  order: -1 !important;
 }
 
 #onetrust-consent-sdk #onetrust-accept-btn-handler:hover {
-  background-color: var(--color-electric-blue-plus-1, #0022cb);
-  border-color: var(--color-electric-blue-plus-1, #0022cb);
-  color: #fff;
-  opacity: 1;
+  background-color: var(--color-electric-blue-plus-1, #0022cb) !important;
+  border-color: var(--color-electric-blue-plus-1, #0022cb) !important;
+  color: #fff !important;
+  opacity: 1 !important;
 }
 
 #onetrust-consent-sdk #onetrust-pc-btn-handler,
@@ -114,7 +109,7 @@
 }
 
 #onetrust-consent-sdk #onetrust-pc-btn-handler {
-  order: 1;
+  order: 1 !important;
 }
 
 #onetrust-consent-sdk #onetrust-pc-btn-handler:hover,

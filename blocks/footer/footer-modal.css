@@ -137,6 +137,10 @@ footer .footer .footer-region-selector-field-icon {
   transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+footer .footer .footer-region-selector-field-icon::before {
+  content: none;
+}
+
 footer .footer .footer-region-selector-field label {
   position: absolute;
   z-index: 1;

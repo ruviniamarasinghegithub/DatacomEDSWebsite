@@ -313,7 +313,6 @@ async function decorateRegionSelector(container, idPrefix) {
   const closeIcon = document.createElement('i');
   closeIcon.className = 'fal fa-times';
   closeIcon.setAttribute('aria-hidden', 'true');
-  closeIcon.textContent = '\u00d7';
   close.append(closeIcon);
 
   heading.id = headingId;
