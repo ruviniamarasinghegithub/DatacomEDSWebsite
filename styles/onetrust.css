@@ -8,7 +8,6 @@
 
 #onetrust-consent-sdk #onetrust-banner-sdk .ot-sdk-container,
 #onetrust-consent-sdk #onetrust-banner-sdk .ot-sdk-row {
-  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -77,13 +76,6 @@
   background-color: #fff;
 }
 
-#onetrust-consent-sdk #onetrust-button-group-parent button:hover {
-  background-color: var(--color-midnight-blue-minus-5, #e6e7e8);
-  border-color: var(--color-midnight-blue-minus-5, #e6e7e8);
-  color: var(--color-electric-blue-plus-1, #0022cb);
-  opacity: 1;
-}
-
 #onetrust-consent-sdk #onetrust-accept-btn-handler {
   background-color: var(--color-electric-blue-base, #002bfe) !important;
   border: 2px solid var(--color-electric-blue-base, #002bfe) !important;
@@ -103,6 +95,14 @@
   background-color: #fff !important;
   border: 2px solid #fff !important;
   color: var(--color-electric-blue-base, #002bfe) !important;
+}
+
+#onetrust-consent-sdk #onetrust-pc-btn-handler:hover,
+#onetrust-consent-sdk #onetrust-reject-all-handler:hover {
+  background-color: var(--color-midnight-blue-minus-5, #e6e7e8) !important;
+  border-color: var(--color-midnight-blue-minus-5, #e6e7e8) !important;
+  color: var(--color-electric-blue-plus-1, #0022cb) !important;
+  opacity: 1 !important;
 }
 
 /* Preference centre tweaks (from AEM one-trust-cookie.less) */
