@@ -184,6 +184,14 @@ function decorateLinkIcons(container) {
     if (!link.contains(icon)) link.append(icon);
     link.classList.add('footer-link-with-icon');
     icon.classList.add('footer-link-icon');
+    if (isShieldedSiteLink(link)
+      || link.textContent.trim().toLowerCase() === 'rainbow tick'
+      || /^(rainbow tick|shielded site)$/i.test(img.alt.trim())) {
+      icon.classList.add('footer-badge-icon');
+      img.width = 20;
+      img.height = 20;
+      img.loading = 'lazy';
+    }
   });
 }
 

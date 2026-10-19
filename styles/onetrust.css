@@ -17,6 +17,10 @@
   padding: 24px;
 }
 
+#onetrust-consent-sdk #onetrust-pc-sdk a {
+  text-decoration: none;
+}
+
 #onetrust-consent-sdk #onetrust-policy-text {
   color: #fff !important;
   font-size: 16px;
@@ -42,6 +46,19 @@
   flex-direction: column;
   gap: 10px;
   align-items: stretch;
+}
+
+#onetrust-consent-sdk button:focus-visible {
+  outline: 3px solid var(--color-action-blue, #002bfe) !important;
+  outline-offset: 1px !important;
+  border-radius: 8px !important;
+  z-index: 9999 !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+}
+
+#onetrust-consent-sdk .ot-cat-item button:focus-visible {
+  outline-offset: 0 !important;
 }
 
 #onetrust-consent-sdk #onetrust-button-group-parent button {
@@ -95,10 +112,6 @@
   width: 100%;
 }
 
-#onetrust-consent-sdk #onetrust-pc-sdk a {
-  text-decoration: none;
-}
-
 #onetrust-consent-sdk #onetrust-pc-sdk .ot-pc-header {
   display: none;
 }
@@ -115,6 +128,40 @@
 
 #onetrust-consent-sdk #onetrust-pc-sdk .ot-cat-item:hover {
   background-color: #e6e7e8;
+}
+
+#onetrust-consent-sdk [class~="ot-floating-button__open"]:focus-visible,
+#onetrust-consent-sdk [class~="ot-floating-button__close"]:focus-visible {
+  outline: 3px solid var(--color-action-blue, #002bfe) !important;
+  outline-offset: 1px !important;
+  border-radius: 999px !important;
+}
+
+#onetrust-consent-sdk .ot-tgl input:focus-visible + .ot-switch {
+  outline: 3px solid var(--color-action-blue, #002bfe) !important;
+  outline-offset: 1px !important;
+}
+
+#onetrust-consent-sdk :is(#onetrust-banner-sdk, #onetrust-pc-sdk) :is(.privacy-notice-link, .ot-cookie-policy-link) {
+  border-radius: 0 !important;
+  background-size: 0% 1px !important;
+  background-position: 0 100% !important;
+  background-repeat: no-repeat !important;
+  transition: background-size 0.3s ease-in-out !important;
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+#onetrust-consent-sdk :is(#onetrust-banner-sdk, #onetrust-pc-sdk) :is(.privacy-notice-link, .ot-cookie-policy-link):focus-visible {
+  background-size: 100% 1px !important;
+}
+
+#onetrust-consent-sdk .privacy-notice-link {
+  background-image: linear-gradient(var(--color-action-blue, #002bfe), var(--color-action-blue, #002bfe)) !important;
+}
+
+#onetrust-consent-sdk .ot-cookie-policy-link {
+  background-image: linear-gradient(var(--color-white, #fff), var(--color-white, #fff)) !important;
 }
 
 @media (width <= 900px) {

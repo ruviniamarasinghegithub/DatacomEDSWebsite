@@ -164,6 +164,12 @@ footer .footer img.footer-link-icon {
   object-fit: contain;
 }
 
+footer .footer .footer-link-icon.footer-badge-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
 footer .footer .footer-copyright-column {
   padding: var(--spacing-padding-05) 0;
 }
