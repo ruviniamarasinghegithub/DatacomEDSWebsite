@@ -11,7 +11,7 @@ footer {
 
 footer .footer[data-block-status="loaded"] {
   max-width: var(--max-width-desktop);
-  padding: var(--spacing-padding-06);
+  padding: var(--spacing-padding-08);
   margin: 0 auto;
 }
 
@@ -183,12 +183,6 @@ footer .footer .footer-copyright {
   font-size: 12px;
   line-height: var(--font-14-line-height);
   letter-spacing: -0.12px;
-}
-
-@media (width >= 500px) {  
-  footer .footer > .footer-content {
-    padding: var(--spacing-padding-08) 48px 52px;
-  }
 }
 
 @media (width >= 901px) {
