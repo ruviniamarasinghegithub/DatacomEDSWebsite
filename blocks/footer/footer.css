@@ -9,7 +9,7 @@ footer {
   line-height: var(--font-14-line-height);
 }
 
-header .header[data-block-status="loaded"] {
+footer .footer[data-block-status="loaded"] {
   max-width: var(--max-width-desktop);
   padding: var(--spacing-padding-06);
   margin: 0 auto;
@@ -195,8 +195,6 @@ footer .footer .footer-copyright {
   footer .footer > .footer-content {
     box-sizing: border-box;
     flex-direction: row;
-    max-width: var(--max-width-desktop);
-    padding: var(--spacing-padding-08) 0 52px;
   }
 
   footer .footer .footer-column {
