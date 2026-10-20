@@ -221,11 +221,15 @@ footer .footer .footer-copyright {
 @media (901px <= width < 1300px) {
   footer .footer > .footer-content {
     column-gap: clamp(12px, calc(6vw - 42px), 36px);
-    padding-right: 48px;
-    padding-left: 48px;
   }
 
   footer .footer .footer-copyright-column {
     padding-left: clamp(16px, calc(9vw - 65px), 52px);
+  }
+}
+
+@media (width <= 900px) {
+  footer .footer[data-block-status="loaded"] {
+    padding: var(--spacing-padding-06) var(--spacing-padding-05);
   }
 }
