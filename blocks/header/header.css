@@ -46,7 +46,6 @@ header nav.header-simple {
   justify-content: space-between;
   height: var(--nav-height, 72px);
   margin: 0 auto;
-  padding: 0 24px;
   color: var(--color-datacom-blue-base, #00125e);
   font-family: var(--body-font-family, roboto-fallback, sans-serif);
 }
@@ -122,7 +121,6 @@ header nav.header-simple .nav-search-icon {
 
   header nav.header-simple {
     height: var(--nav-height, 80px);
-    padding: 0 40px;
   }
 
   header nav.header-simple .nav-brand-wordmark {
