@@ -183,7 +183,13 @@ footer .footer .footer-copyright {
   letter-spacing: -0.12px;
 }
 
-@media (width >= 901px) {
+@media (width >= 500px) {  
+  footer .footer > .footer-content {
+    padding: var(--spacing-padding-08) 48px 52px;
+  }
+}
+
+@media (width >= 1300px) {
   footer .footer > .footer-content {
     box-sizing: border-box;
     flex-direction: row;
