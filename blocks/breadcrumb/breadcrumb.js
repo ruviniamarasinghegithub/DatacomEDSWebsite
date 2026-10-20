@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { getRegionalDocumentPath, getSiteRegion } from '../../scripts/regional-content.js';
 
 const DEFAULT_START_LEVEL = 2;
 const CONFIGURATION_FIELDS = new Set([
@@ -26,6 +26,19 @@ function getFields(rows) {
   }, {});
 }
 
+function getRegionalLink(path) {
+  const region = getSiteRegion();
+  if (!path || !region) return path;
+
+  const url = new URL(path, window.location.href);
+  const isSiteLink = url.origin === window.location.origin
+    || /(^|\.)datacom\.com$/i.test(url.hostname);
+  if (!['http:', 'https:'].includes(url.protocol) || !isSiteLink) return path;
+
+  url.pathname = url.pathname.replace(/^\/(nz|au)\/en(?=\/|$)/i, `/${region}/en`);
+  return url.href;
+}
+
 function getAuthoredSegments(rows) {
   return rows.slice(0, 4).reduce((segments, row) => {
     const cells = [...row.children];
@@ -41,7 +54,7 @@ function getAuthoredSegments(rows) {
 
     segments.push({
       label,
-      path: link?.href,
+      path: getRegionalLink(link?.href),
       isCurrent: key === 'current page',
     });
     return segments;
@@ -96,8 +109,8 @@ async function resolveRedirect(path) {
 }
 
 async function getNavigationItems() {
-  const navMetadata = getMetadata('nav');
-  const navPath = navMetadata ? new URL(navMetadata, window.location.href).pathname : '/nav';
+  const navPath = new URL(getRegionalDocumentPath('nav'), window.location.href).pathname
+    .replace(/(\.plain)?\.html$/, '');
   const response = await fetch(`${navPath}.plain.html`);
   if (!response.ok) {
     throw new Error(`Failed to load breadcrumb navigation from ${navPath}: ${response.status}`);
