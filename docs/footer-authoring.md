@@ -1,7 +1,10 @@
 # Footer authoring in DA
 
-Author the shared footer on `/footer`. Page metadata named `footer` can point to
-a different footer document. Preview/publish the content separately from code.
+Author regional footers on `/au/en/footer` and `/nz/en/footer`. AU/NZ pages load
+the corresponding regional document automatically. Pages without a supported
+country prefix use `/footer`. Page metadata named `footer` overrides this default
+and can point to a different footer document. Preview/publish the content
+separately from code.
 
 ## Link table
 
@@ -37,6 +40,12 @@ the cell. External links automatically receive an external-link indicator. A
 three-cell format (Group, Link text, Link) also works. Keep the same group name
 for rows belonging to the same column, and provide a link label on every row.
 Empty separator rows are ignored.
+
+When changing a hyperlink in DA, update its actual destination using the link
+editor, not just its displayed URL text. Each Link cell should contain one
+complete hyperlink or one plain URL, not several linked URL fragments. Datacom
+NZ/AU destinations in the rendered footer are localized to the current page's
+country; the raw authoring document still retains its authored destinations.
 
 Groups appear in first-occurrence order. The first three groups become mobile
 accordions with headings; the fourth and later groups become utility columns

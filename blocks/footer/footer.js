@@ -776,7 +776,11 @@ function decorateCopyright(container) {
  */
 export default async function decorate(block) {
   const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
+  const country = getCountryCode(window.location.href);
+  const defaultFooterPath = ['nz', 'au'].includes(country) ? `/${country}/en/footer` : '/footer';
+  const footerPath = footerMeta
+    ? new URL(footerMeta, window.location).pathname
+    : defaultFooterPath;
   let fragment;
   try {
     fragment = await loadFooterDocument(footerPath);
