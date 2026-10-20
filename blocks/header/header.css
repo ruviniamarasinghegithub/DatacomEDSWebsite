@@ -12,6 +12,19 @@
   src: local('Arial');
 }
 
+header .header.block{
+    position: fixed;
+    top: 0px;
+    transition: height 0.3s ease-in-out, top 0.3s ease-in-out;
+    background-color: var(--color-white);
+    z-index: 5;
+    width: 100%;
+    border-bottom: 1px solid var(--color-light-grey);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 header .header {
   --nav-height: 72px;
 }
@@ -19,8 +32,11 @@ header .header {
 header .nav-wrapper {
   position: relative;
   z-index: 100;
-  width: 100%;
   background-color: #fff;
+  max-width: var(--max-width-desktop);
+  margin: 0 auto;
+  padding: 0 var(--spacing-padding-08);
+  width: auto;
 }
 
 header nav.header-simple {
