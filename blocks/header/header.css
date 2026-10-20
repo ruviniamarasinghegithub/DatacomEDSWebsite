@@ -12,7 +12,7 @@
   src: local('Arial');
 }
 
-header .header.block{
+header .header.block {
     position: fixed;
     top: 0px;
     transition: height 0.3s ease-in-out, top 0.3s ease-in-out;
@@ -114,7 +114,7 @@ header nav.header-simple .nav-search-icon {
   object-fit: contain;
 }
 
-@media (width >= 900px) {
+@media (width > 900px) {
   header .header {
     --nav-height: 80px;
   }
@@ -130,5 +130,11 @@ header nav.header-simple .nav-search-icon {
 
   header nav.header-simple .nav-brand-logo {
     height: 28px;
+  }
+}
+
+@media (width <= 900px) {
+  header .nav-wrapper {
+    padding: 0 var(--spacing-padding-05);
   }
 }

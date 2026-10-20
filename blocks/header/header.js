@@ -5,15 +5,20 @@ const DEFAULT_ALT = 'Datacom';
 const SUPPORTED_REGIONS = ['nz', 'au'];
 
 async function loadHeaderContent(block) {
-  if (block.children.length) return block;
+  if (block.textContent.trim() || block.querySelector('img, a[href]')) return block;
   const path = (getMetadata('nav') || '/nav').trim();
   if (!path.startsWith('/') || path.startsWith('//')) return block;
 
   try {
-    const response = await fetch(`${path.replace(/(\.plain)?\.html$/, '')}.plain.html`);
+    const documentPath = `${path.replace(/(\.plain)?\.html$/, '')}.plain.html`;
+    const response = await fetch(documentPath);
     if (!response.ok) return block;
     const content = document.createElement('main');
     content.innerHTML = await response.text();
+    const sourceUrl = new URL(response.url || documentPath, window.location.href);
+    content.querySelectorAll('img[src]').forEach((image) => {
+      image.src = new URL(image.getAttribute('src'), sourceUrl).href;
+    });
     return content.querySelector('.header') || block;
   } catch {
     return block;
