@@ -110,8 +110,9 @@ header nav.header-simple .nav-search:focus-visible {
 
 header nav.header-simple .nav-search-icon {
   display: block;
-  font-size: 22px;
-  line-height: 1;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 @media (width >= 900px) {

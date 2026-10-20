@@ -143,8 +143,12 @@ function createSearchControl(region) {
   searchLink.href = searchUrl;
   searchLink.setAttribute('aria-label', 'Search');
   searchLink.title = 'Search';
-  const searchIcon = document.createElement('i');
-  searchIcon.className = 'fal fa-search nav-search-icon';
+  const searchIcon = document.createElement('img');
+  searchIcon.className = 'nav-search-icon';
+  searchIcon.src = `${window.hlx?.codeBasePath || ''}/icons/header-search.svg`;
+  searchIcon.alt = '';
+  searchIcon.width = 24;
+  searchIcon.height = 24;
   searchIcon.setAttribute('aria-hidden', 'true');
   searchLink.append(searchIcon);
 
