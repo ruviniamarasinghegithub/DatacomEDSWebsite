@@ -102,19 +102,22 @@
   cursor: pointer;
 }
 
-.cta-button a.cta-button-link:any-link:focus-visible {
+.cta-button a.cta-button-link:any-link:focus-visible,
+.cta-button button.cta-button-link:enabled:focus-visible {
   outline: 3px solid var(--cta-focus-outline);
   outline-offset: 1px;
 }
 
-.cta-button a.cta-button-link:any-link:hover {
+.cta-button a.cta-button-link:any-link:hover,
+.cta-button button.cta-button-link:enabled:hover {
   border-color: var(--cta-hover-border);
   background-color: var(--cta-hover-background);
   color: var(--cta-hover-color);
   text-decoration: none;
 }
 
-.cta-button a.cta-button-link:any-link:active {
+.cta-button a.cta-button-link:any-link:active,
+.cta-button button.cta-button-link:enabled:active {
   border-color: var(--cta-active-border);
   background-color: var(--cta-active-background);
   color: var(--cta-active-color);

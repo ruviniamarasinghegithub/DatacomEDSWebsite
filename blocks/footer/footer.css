@@ -33,11 +33,12 @@ footer .footer .footer-link-group {
 }
 
 footer .footer .footer-link-group-header {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--color-light-grey);
-  padding: var(--spacing-padding-05) 0;
+  padding: var(--spacing-padding-05) 32px var(--spacing-padding-05) 0;
 }
 
 footer .footer .footer-link-group-header h2,
@@ -56,13 +57,14 @@ footer .footer .footer-link-group-header h6 {
 }
 
 footer .footer .footer-link-group-toggle {
+  position: absolute;
+  inset: 0;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  flex: 0 0 32px;
-  width: 32px;
-  height: 32px;
-  margin: -7px 0 -7px var(--spacing-padding-04);
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  margin: 0;
   border: 0;
   padding: 0;
   background: transparent;
@@ -152,7 +154,7 @@ footer .footer .footer-link-icon {
   align-items: center;
   width: 16px;
   height: 16px;
-  margin-left: 4px;
+  margin-left: 8px;
   vertical-align: middle;
 }
 
@@ -185,8 +187,8 @@ footer .footer .footer-copyright {
   footer .footer > .footer-content {
     box-sizing: border-box;
     flex-direction: row;
-    max-width: 1708px;
-    padding: var(--spacing-padding-08) 54px 52px;
+    max-width: var(--max-width-desktop);
+    padding: var(--spacing-padding-08) 0 52px;
   }
 
   footer .footer .footer-column {
