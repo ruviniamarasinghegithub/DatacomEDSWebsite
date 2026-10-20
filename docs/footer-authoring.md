@@ -2,11 +2,14 @@
 
 Author regional footers on `/au/en/footer` and `/nz/en/footer`. AU/NZ pages load
 the corresponding regional document automatically. A supported `region` metadata
-value (`au` or `nz`) takes precedence over the URL country prefix, including on
-unprefixed pages such as `/index-copy`. Pages without either use `/footer`.
-Page metadata named `footer` overrides this default
-and can point to a different footer document. Preview/publish the content
-separately from code.
+value (`au` or `nz`) takes precedence over legacy `search-region` metadata and
+the URL country prefix, including on unprefixed pages such as `/index-copy`.
+Pages without a supported region use `/footer`. Page metadata named `footer`
+overrides this default and can point to a different footer document. Header and
+footer use the shared resolver in `scripts/regional-content.js`; country-prefixed
+pages do not need repeated nav/footer metadata. Preview/publish the regional
+documents separately from code before deploying. A missing regional footer is
+reported as a loading error rather than silently loading a different footer.
 
 ## Link table
 

@@ -1,12 +1,12 @@
 import { getMetadata } from '../../scripts/aem.js';
+import { getRegionalDocumentPath, getSiteRegion } from '../../scripts/regional-content.js';
 
 const DATACOM_ORIGIN = 'https://datacom.com';
 const DEFAULT_ALT = 'Datacom';
-const SUPPORTED_REGIONS = ['nz', 'au'];
 
 async function loadHeaderContent(block) {
   if (block.textContent.trim() || block.querySelector('img, a[href]')) return block;
-  const path = (getMetadata('nav') || '/nav').trim();
+  const path = getRegionalDocumentPath('nav');
   if (!path.startsWith('/') || path.startsWith('//')) return block;
 
   try {
@@ -42,24 +42,6 @@ function readHeaderConfig(block) {
       : cell.textContent.trim();
   });
   return config;
-}
-
-/**
- * Resolve site region (nz | au) from page meta, path, or default nz.
- * Meta: <meta name="region" content="au">
- * @returns {'nz'|'au'}
- */
-function getRegion(authoredRegion = '') {
-  const selectedRegion = authoredRegion.trim().toLowerCase();
-  if (SUPPORTED_REGIONS.includes(selectedRegion)) return selectedRegion;
-  const meta = (getMetadata('region') || getMetadata('search-region') || '').trim().toLowerCase();
-  if (SUPPORTED_REGIONS.includes(meta)) return meta;
-
-  const path = window.location.pathname.replace(/^\/content\/datacom/, '');
-  const match = path.match(/^\/(nz|au)(?:\/|$)/i);
-  if (match) return match[1].toLowerCase();
-
-  return 'nz';
 }
 
 /** Read meta by either kebab-case or camelCase (UE page fields). */
@@ -170,7 +152,7 @@ function createSearchControl(region) {
 export default async function decorate(block) {
   const content = await loadHeaderContent(block);
   const config = readHeaderConfig(content);
-  const region = getRegion(config.region);
+  const region = getSiteRegion(config.region) || 'nz';
 
   block.textContent = '';
 

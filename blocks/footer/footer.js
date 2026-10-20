@@ -1,4 +1,5 @@
 import { decorateIcons, getMetadata, loadCSS } from '../../scripts/aem.js';
+import { getRegionalDocumentPath, getSiteRegion } from '../../scripts/regional-content.js';
 
 const HEADING_SELECTOR = 'h2, h3, h4, h5, h6';
 const SHIELDED_SITE_SCRIPT = 'https://staticcdn.co.nz/embed/embed.js';
@@ -46,11 +47,6 @@ function getCountryCode(url) {
   }
 }
 
-function getFooterCountry() {
-  const region = getMetadata('region').trim().toLowerCase();
-  return ['nz', 'au'].includes(region) ? region : getCountryCode(window.location.href);
-}
-
 function localizeDatacomLink(link, currentCountry) {
   if (!['nz', 'au'].includes(currentCountry)) return;
 
@@ -71,7 +67,7 @@ function localizeDatacomLink(link, currentCountry) {
 }
 
 function decorateLinks(container) {
-  const currentCountry = getFooterCountry();
+  const currentCountry = getSiteRegion();
   container.querySelectorAll('a[href]').forEach((link) => {
     try {
       localizeDatacomLink(link, currentCountry);
@@ -780,12 +776,7 @@ function decorateCopyright(container) {
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  const footerMeta = getMetadata('footer');
-  const country = getFooterCountry();
-  const defaultFooterPath = ['nz', 'au'].includes(country) ? `/${country}/en/footer` : '/footer';
-  const footerPath = footerMeta
-    ? new URL(footerMeta, window.location).pathname
-    : defaultFooterPath;
+  const footerPath = new URL(getRegionalDocumentPath('footer'), window.location).pathname;
   let fragment;
   try {
     fragment = await loadFooterDocument(footerPath);
