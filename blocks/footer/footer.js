@@ -46,6 +46,11 @@ function getCountryCode(url) {
   }
 }
 
+function getFooterCountry() {
+  const region = getMetadata('region').trim().toLowerCase();
+  return ['nz', 'au'].includes(region) ? region : getCountryCode(window.location.href);
+}
+
 function localizeDatacomLink(link, currentCountry) {
   if (!['nz', 'au'].includes(currentCountry)) return;
 
@@ -66,7 +71,7 @@ function localizeDatacomLink(link, currentCountry) {
 }
 
 function decorateLinks(container) {
-  const currentCountry = getCountryCode(window.location.href);
+  const currentCountry = getFooterCountry();
   container.querySelectorAll('a[href]').forEach((link) => {
     try {
       localizeDatacomLink(link, currentCountry);
@@ -776,7 +781,7 @@ function decorateCopyright(container) {
  */
 export default async function decorate(block) {
   const footerMeta = getMetadata('footer');
-  const country = getCountryCode(window.location.href);
+  const country = getFooterCountry();
   const defaultFooterPath = ['nz', 'au'].includes(country) ? `/${country}/en/footer` : '/footer';
   const footerPath = footerMeta
     ? new URL(footerMeta, window.location).pathname
