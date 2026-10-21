@@ -16,5 +16,6 @@ export function getRegionalDocumentPath(name) {
   if (explicitPath) return explicitPath;
 
   const region = getSiteRegion();
-  return region ? `/${region}/en/${name}` : `/${name}`;
+  const isLanguageMaster = /^\/language-masters\/en(?:\/|$)/i.test(window.location.pathname);
+  return region || isLanguageMaster ? `/language-masters/en/${name}` : `/${name}`;
 }
