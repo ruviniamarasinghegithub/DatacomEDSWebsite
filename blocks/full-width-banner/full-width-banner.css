@@ -56,7 +56,8 @@ main .full-width-banner .full-width-banner-inner {
   width: 100%;
   max-width: var(--max-width-desktop);
   margin: 0 auto;
-  padding: 0 var(--spacing-padding-08);
+  padding: 0;
+  
 }
 
 main .full-width-banner .full-width-banner-copy {
@@ -139,6 +140,12 @@ main .full-width-banner .full-width-banner-actions {
 
 main .full-width-banner .full-width-banner-actions:focus-within {
   overflow: visible;
+}
+
+@media(width <= 1300px) {
+  main .full-width-banner .full-width-banner-inner {
+    padding: 0 var(--spacing-padding-08);
+  }
 }
 
 @keyframes full-width-banner-rise {
