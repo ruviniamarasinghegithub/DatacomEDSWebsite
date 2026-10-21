@@ -257,6 +257,7 @@ footer .footer img.footer-region-selector-option-icon {
 
 footer .footer .footer-region-selector-field.is-open .footer-region-selector-field-icon {
   transform: translateY(-50%) rotate(225deg);
+  top: 50%;
 }
 
 footer .footer .footer-region-selector-field.is-open .footer-region-selector-options {

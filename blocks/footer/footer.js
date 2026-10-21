@@ -423,14 +423,12 @@ async function decorateRegionSelector(container, idPrefix) {
     dropdown.focus();
   };
 
-  const currentCountry = getCountryCode(window.location.href);
+  const currentCountry = getSiteRegion() || 'nz';
   const currentOption = options
-    .find((option) => getCountryCode(option.dataset.value) === currentCountry);
-  if (currentOption) {
-    selectedValue = currentOption.dataset.value;
-    updateRegionSelectorValue(value, options, currentOption);
-    submit.disabled = false;
-  }
+    .find((option) => getCountryCode(option.dataset.value) === currentCountry) || options[0];
+  selectedValue = currentOption.dataset.value;
+  updateRegionSelectorValue(value, options, currentOption);
+  submit.disabled = false;
 
   dropdown.addEventListener('click', () => {
     if (!field.classList.contains('is-open')) openDropdown();

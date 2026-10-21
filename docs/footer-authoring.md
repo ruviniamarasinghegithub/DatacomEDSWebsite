@@ -1,15 +1,23 @@
 # Footer authoring in DA
 
-Author regional footers on `/au/en/footer` and `/nz/en/footer`. AU/NZ pages load
-the corresponding regional document automatically. A supported `region` metadata
+Author the shared footer on `/language-masters/en/footer`. AU/NZ pages and
+Language Master previews load this same document automatically. A supported `region` metadata
 value (`au` or `nz`) takes precedence over legacy `search-region` metadata and
 the URL country prefix, including on unprefixed pages such as `/index-copy`.
-Pages without a supported region use `/footer`. Page metadata named `footer`
+Non-master pages without a supported region use `/footer`. Page metadata named `footer`
 overrides this default and can point to a different footer document. Header and
 footer use the shared resolver in `scripts/regional-content.js`; country-prefixed
-pages do not need repeated nav/footer metadata. Preview/publish the regional
-documents separately from code before deploying. A missing regional footer is
+pages do not need repeated nav/footer metadata. Remove old `footer` metadata
+pointing at regional copies to use the shared master instead. Country-specific
+footers can still be selected with explicit metadata when their content differs.
+Preview/publish the master document separately from code before deploying. A missing selected footer is
 reported as a loading error rather than silently loading a different footer.
+
+Updating a label in the master updates every page that loads it after the
+document is previewed/published and the consuming page is refreshed. There is
+no copy or rollout step. Selecting the master is separate from country-specific
+URL rewriting: NZ/AU Datacom links use each consuming page's resolved region.
+Root-relative non-regional links such as `/discover` are not rewritten.
 
 ## Link table
 
@@ -72,7 +80,13 @@ and lists. Content without headings is preserved.
 
 ## Location selector
 
-The default location selector offers New Zealand and Australia. To author custom
+The default location selector offers New Zealand and Australia and preselects
+the page's resolved region, including metadata overrides. Without a supported
+region it defaults to New Zealand. A custom list without a matching country
+uses its first option, so the selector always starts with a selected location
+and Continue enabled.
+
+To author custom
 locations, use ordinary document content with a heading **Change location**,
 an optional description, and a list of linked locations immediately after it.
 The authored list replaces the default location choices.

@@ -33,8 +33,8 @@ trails; they are not automatically hidden based on their suffix.
 For URL-derived breadcrumbs without authored items, the existing navigation
 start level, ID, visibility, and shadowing behavior is unchanged. Navigation
 document selection now matches the Header: explicit `nav` metadata, otherwise
-the regional `/au/en/nav`
-or `/nz/en/nav`, otherwise `/nav` for unprefixed pages without region metadata.
+`/language-masters/en/nav` for regional pages and Language Master previews,
+otherwise `/nav` for unprefixed non-master pages without region metadata.
 
 Preview and publish changed content separately from code. Test the same table
 on both regional pages and on an unprefixed page with a region metadata override.

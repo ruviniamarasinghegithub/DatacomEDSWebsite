@@ -1,18 +1,21 @@
 # Header Authoring
 
-Create regional shared documents at `/nz/en/nav` and `/au/en/nav` with a
-two-column table. Keep `/nav` for pages without a selected region. Merge the
+Create the shared document at `/language-masters/en/nav` with a two-column table.
+Keep `/nav` for pages without a selected region. Merge the
 first row and name it **Header**. Do not add a separate field-name header row.
 
 | Header | |
 | --- | --- |
 | logo | Insert the logo image or a link to its asset |
 | logoAlt | Datacom |
-| region | nz |
+| region | |
 
 These rows match the supplied Header model: `logo` is an optional image reference,
-`logoAlt` is its accessible label (default `Datacom`), and `region` is `nz` or `au`
-(default `nz`). Leave the logo value empty to use the `DATACOM` wordmark. Use the
+`logoAlt` is its accessible label (default `Datacom`), and `region` is optional.
+Leave `region` blank in the shared master so each page supplies its own country.
+An authored `nz` or `au` overrides the page region and is only appropriate for
+an explicitly country-specific header. Leave the logo value empty to use the
+`DATACOM` wordmark. Use the
 authoring UI to insert an image rather than pasting HTML. Plain asset paths also
 work. Keep image references root-relative, such as `/icons/logos/example.svg`.
 
@@ -22,21 +25,25 @@ block; the site-wide header reads its configuration from the selected shared
 document.
 
 Page metadata `nav` can select a different shared document, for example
-`/au/en/nav`. Otherwise, the header automatically selects `/au/en/nav` or
-`/nz/en/nav` using valid `region` metadata, then legacy `search-region` metadata,
-then the URL country prefix. Without a supported region it uses `/nav`.
+`/au/en/nav` for a country-specific override. Otherwise, regional pages and
+Language Master previews select `/language-masters/en/nav`. Region detection
+uses valid `region` metadata, then legacy `search-region` metadata, then the URL
+country prefix. Non-master pages without a supported region use `/nav`.
 Header and footer share this resolution logic in `scripts/regional-content.js`.
 Preview and publish the documents separately from the code before deploying.
 
 | Page URL | Default nav document | Default footer document |
 | --- | --- | --- |
-| /nz/en/discover | /nz/en/nav | /nz/en/footer |
-| /au/en/discover | /au/en/nav | /au/en/footer |
+| /nz/en/discover | /language-masters/en/nav | /language-masters/en/footer |
+| /au/en/discover | /language-masters/en/nav | /language-masters/en/footer |
+| /language-masters/en/footer | /language-masters/en/nav | /language-masters/en/footer |
 | /discover | /nav | /footer |
 
 These defaults assume no region or document metadata overrides. An unprefixed
-page such as `/index-copy` with `region: au` uses AU documents automatically.
-Pages under a country prefix no longer need repeated nav/footer metadata.
+page such as `/index-copy` with `region: au` uses the master documents with AU
+links. Pages under a country prefix do not need repeated nav/footer metadata.
+Remove old nav/footer metadata pointing at regional copies when switching to
+the master. Explicit overrides continue to take precedence.
 
 Authored values take precedence over page metadata. Empty values fall back to
 `logo`, `logo-alt` (or `logoAlt`), and `region` metadata. An unsupported or missing
