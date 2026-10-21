@@ -166,10 +166,10 @@ footer .footer .footer-region-selector-input {
   background-color: var(--color-white);
   color: var(--color-midnight-blue-base);
   font-size: var(--font-16-size);
-  line-height: var(--font-16-line-height);
-  font-family: var(--typography-font-family-400);
+  line-height: var(--font-16-line-height);  
   text-align: left;
   cursor: pointer;
+  font-family: var(--typography-font-family-400);
 }
 
 footer .footer .footer-region-selector-input:focus-visible,
