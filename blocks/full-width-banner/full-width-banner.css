@@ -134,8 +134,8 @@ main .full-width-banner .full-width-banner-actions {
   flex-direction: column;
   align-items: flex-start;
   gap: var(--spacing-padding-03);
-  overflow: hidden;
-  padding: var(--spacing-padding-05) 0;
+  margin-top: var(--spacing-padding-05);
+  overflow: hidden;  
 }
 
 main .full-width-banner .full-width-banner-actions:focus-within {
@@ -152,6 +152,13 @@ main .full-width-banner .full-width-banner-actions:focus-within {
 @media(width <= 900px) {
   main .full-width-banner .full-width-banner-inner {
     padding: 0 var(--spacing-padding-05);
+  }
+}
+
+@media(width <= 500px) {
+  main .full-width-banner .full-width-banner-actions {
+    padding: var(--spacing-padding-05) 0;
+    margin: 0;
   }
 }
 
