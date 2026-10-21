@@ -114,6 +114,31 @@ function takeCtas(block) {
     });
     table.replaceWith(cta);
   });
+
+  [...block.children].filter((row) => {
+    const label = row.firstElementChild?.textContent.trim().toLowerCase()
+      .replace(/[^a-z0-9]/g, '');
+    return label === 'cta' || label === 'ctabutton' || label === 'calltoaction';
+  }).forEach((row) => {
+    const valueCell = row.children[1];
+    if (!valueCell || valueCell.querySelector('.cta-button, table')) return;
+
+    const ctaRows = [...valueCell.children].filter((fieldRow) => {
+      const label = fieldRow.firstElementChild?.textContent.trim()
+        .replace(/\s*\([^)]*\)\s*\*?\s*$/, '')
+        .replace(/\s*\*+\s*$/, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, '');
+      return ['buttontext', 'buttonlink', 'link', 'buttonstyle', 'buttontheme'].includes(label);
+    });
+    if (!ctaRows.length) return;
+
+    const cta = document.createElement('div');
+    cta.className = 'cta-button';
+    cta.append(...valueCell.childNodes);
+    valueCell.append(cta);
+  });
+
   const ctas = [...block.querySelectorAll('.cta-button')];
   ctas.forEach((cta) => {
     let node = cta.parentElement;
@@ -128,8 +153,11 @@ function takeCtas(block) {
 }
 
 function normalizeLabel(value) {
-  return value.trim().replace(/\s*\((required|optional)\)\s*$/i, '')
-    .toLowerCase().replace(/[^a-z0-9]/g, '');
+  return value.trim()
+    .replace(/\s*\*+\s*$/, '')
+    .replace(/\s*\([^)]*\)\s*$/, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '');
 }
 
 function documentField(row) {

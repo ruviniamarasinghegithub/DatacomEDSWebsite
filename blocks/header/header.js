@@ -28,11 +28,18 @@ async function loadHeaderContent(block) {
 function readHeaderConfig(block) {
   const config = {};
   const fields = ['logo', 'logoAlt', 'region'];
+  const fieldAliases = {
+    logo: 'logo',
+    logoalt: 'logoAlt',
+    logoalttext: 'logoAlt',
+    region: 'region',
+  };
   [...block.children].forEach((row, index) => {
     const cells = [...row.children];
-    const key = cells.length > 1
-      ? fields.find((field) => field.toLowerCase() === cells[0].textContent.trim().replace(/[\s-]/g, '').toLowerCase())
-      : fields[index];
+    const fieldName = cells.length > 1
+      ? cells[0].textContent.trim().replace(/[^a-z\d]/gi, '').toLowerCase()
+      : '';
+    const key = cells.length > 1 ? fieldAliases[fieldName] : fields[index];
     const cell = cells.length > 1 ? cells[1] : cells[0];
     if (!key || !cell) return;
     const image = cell.querySelector('img');

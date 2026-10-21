@@ -6,14 +6,14 @@ first row and name it **Header**. Do not add a separate field-name header row.
 
 | Header | |
 | --- | --- |
-| logo | Insert the logo image or a link to its asset |
-| logoAlt | Datacom |
-| region | |
+| Logo | Insert the logo image or a link to its asset |
+| Logo Alt Text | Datacom |
+| Region | |
 
-These rows match the supplied Header model: `logo` is an optional image reference,
-`logoAlt` is its accessible label (default `Datacom`), and `region` is optional.
-Leave `region` blank in the shared master so each page supplies its own country.
-An authored `nz` or `au` overrides the page region and is only appropriate for
+These Title Case labels map to the Header model fields: **Logo** is an optional
+image reference, **Logo Alt Text** is its accessible label (default `Datacom`),
+and **Region** is optional. Leave **Region** blank in the shared master so each
+page supplies its own country. An authored `nz` or `au` overrides the page region and is only appropriate for
 an explicitly country-specific header. Leave the logo value empty to use the
 `DATACOM` wordmark. Use the
 authoring UI to insert an image rather than pasting HTML. Plain asset paths also
