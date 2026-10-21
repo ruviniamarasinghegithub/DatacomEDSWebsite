@@ -56,7 +56,7 @@ main .full-width-banner .full-width-banner-inner {
   width: 100%;
   max-width: var(--max-width-desktop);
   margin: 0 auto;
-  padding: var(--spacing-padding-05);
+  padding: 0 var(--spacing-padding-08);
 }
 
 main .full-width-banner .full-width-banner-copy {
