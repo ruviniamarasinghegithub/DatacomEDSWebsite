@@ -149,6 +149,12 @@ main .full-width-banner .full-width-banner-actions:focus-within {
   }
 }
 
+@media(width <= 900px) {
+  main .full-width-banner .full-width-banner-inner {
+    padding: 0 var(--spacing-padding-05);
+  }
+}
+
 @keyframes full-width-banner-rise {
   from {
     transform: translateY(110%);
