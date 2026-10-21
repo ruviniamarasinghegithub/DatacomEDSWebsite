@@ -151,6 +151,7 @@ footer .footer .footer-region-selector-field label {
   color: var(--color-midnight-blue-base);
   font-size: 75%;
   line-height: var(--font-14-line-height);
+  font-family: var(--typography-font-family-400);
 }
 
 footer .footer .footer-region-selector-input {
@@ -166,6 +167,7 @@ footer .footer .footer-region-selector-input {
   color: var(--color-midnight-blue-base);
   font-size: var(--font-16-size);
   line-height: var(--font-16-line-height);
+  font-family: var(--typography-font-family-400);
   text-align: left;
   cursor: pointer;
 }
