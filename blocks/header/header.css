@@ -126,15 +126,15 @@ header nav.header-simple .nav-search-icon {
   header nav.header-simple .nav-brand-wordmark {
     font-size: 1.25rem;
     letter-spacing: 0.16em;
-  }
-
-  header nav.header-simple .nav-brand-logo {
-    height: 28px;
-  }
+  }  
 }
 
 @media (width <= 900px) {
   header .nav-wrapper {
     padding: 0 var(--spacing-padding-05);
+  }
+
+  header nav.header-simple .nav-brand-logo {
+    height: 20px;
   }
 }
