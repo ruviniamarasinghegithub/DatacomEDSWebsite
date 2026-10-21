@@ -209,10 +209,6 @@ main .full-width-banner .full-width-banner-actions:focus-within {
     height: 350px;
   }
 
-  main .full-width-banner .full-width-banner-inner {
-    padding: 0 var(--spacing-padding-08);
-  }
-
   main .full-width-banner .full-width-banner-copy,
   main .full-width-banner .full-width-banner-copy:has(.full-width-banner-actions) {
     width: 85%;
