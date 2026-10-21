@@ -443,7 +443,7 @@ main > .section > div {
 }
 
 main > .section:first-of-type {
-  margin-top: 0;
+  margin-top: 80px;
 }
 
 @media (width >= 900px) {
@@ -453,6 +453,10 @@ main > .section:first-of-type {
 }
 
 @media (width < 900px) {
+  main > .section:first-of-type {
+    margin-top: 73px;
+  }
+
   main > .section > div {
     padding: 0;
   }
