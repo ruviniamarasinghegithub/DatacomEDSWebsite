@@ -75,6 +75,7 @@ main .full-width-banner .full-width-banner-copy:has(.full-width-banner-actions) 
 main .full-width-banner .full-width-banner-logo {
   overflow: hidden;
   margin-bottom: var(--spacing-padding-02);
+  max-width: 300px;
 }
 
 main .full-width-banner .full-width-banner-logo picture {
