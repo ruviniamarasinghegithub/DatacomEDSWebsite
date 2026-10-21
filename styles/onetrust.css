@@ -85,6 +85,7 @@
   font-family: var(--typography-font-family-600, sans-serif);
   color: var(--color-electric-blue-base, #002bfe);
   background-color: #fff;
+  padding: var(--spacing-padding-02) var(--spacing-padding-04);
 }
 
 #onetrust-consent-sdk #onetrust-accept-btn-handler {
