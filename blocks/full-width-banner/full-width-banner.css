@@ -145,6 +145,7 @@ main .full-width-banner .full-width-banner-actions:focus-within {
 @media(width <= 1300px) {
   main .full-width-banner .full-width-banner-inner {
     padding: 0 var(--spacing-padding-08);
+    margin: 0;
   }
 }
 
