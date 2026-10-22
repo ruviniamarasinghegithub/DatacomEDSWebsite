@@ -454,7 +454,7 @@ main > .section:first-of-type {
 
 @media (width < 900px) {
   main > .section:first-of-type {
-    margin-top: 73px;
+    margin-top: 60px;
   }
 
   main > .section > div {
