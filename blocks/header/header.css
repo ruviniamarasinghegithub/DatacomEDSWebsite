@@ -44,7 +44,7 @@ header nav.header-simple {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--nav-height, 72px);
+  height: 60px;
   margin: 0 auto;
   color: var(--color-datacom-blue-base, #00125e);
   font-family: var(--body-font-family, roboto-fallback, sans-serif);
