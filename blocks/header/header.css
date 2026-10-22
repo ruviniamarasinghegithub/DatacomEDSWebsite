@@ -32,7 +32,7 @@ header .header {
 header .nav-wrapper {
   position: relative;
   z-index: 100;
-  background-color: #fff;
+  background-color: #ffffff;
   max-width: var(--max-width-desktop);
   margin: 0 auto;
   padding: 0 var(--spacing-padding-08);
