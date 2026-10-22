@@ -10,7 +10,6 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
-  getMetadata,
 } from './aem.js';
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -151,21 +150,20 @@ export function decorateMain(main) {
   decorateButtons(main);
 }
 
+function updatePageTitle(doc) {
+  const segments = window.location.pathname.split('/').filter(Boolean);
+  const pageName = segments.pop()?.replace(/\.html$/i, '') || '';
+  const pageTitle = /^(en|mi|index)$/i.test(pageName) || !pageName
+    ? 'Home'
+    : decodeURIComponent(pageName).replace(/[-_]+/g, ' ')
+      .replace(/\b\w/g, (character) => character.toUpperCase());
+  doc.title = pageTitle;
+}
+
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
-function updatePageTitle(doc) {
-  const authoredTitle = getMetadata('title').trim();
-  const segments = window.location.pathname.split('/').filter(Boolean);
-  const pageName = segments.pop()?.replace(/\.html$/i, '') || '';
-  const fallbackTitle = /^(en|mi|index)$/i.test(pageName) || !pageName
-    ? 'Home'
-    : decodeURIComponent(pageName).replace(/[-_]+/g, ' ')
-      .replace(/\b\w/g, (character) => character.toUpperCase());
-  doc.title = authoredTitle || fallbackTitle;
-}
-
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   updatePageTitle(doc);
