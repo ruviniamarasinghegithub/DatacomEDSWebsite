@@ -91,7 +91,7 @@ export default async function decorate(block) {
   const formView = document.createElement('div');
   formView.className = 'marketo-modal-form-view';
 
-  const title = document.createElement('h2');
+  const title = document.createElement('h3');
   title.className = 'marketo-modal-title';
   title.id = `marketo-modal-title-${modalId}`;
   title.textContent = heading;

@@ -63,7 +63,7 @@
 .marketo-modal-form-view {
   flex: 1 1 auto;
   min-height: 0;
-  overflow: auto;
+  margin-top: var(--spacing-layout-05);
 }
 
 .marketo-modal-dialog[hidden] {
@@ -91,21 +91,11 @@
 }
 
 .marketo-modal-title {
-  margin: 0 48px 16px 0;
-  font-family: var(--typography-font-family-700, sans-serif);
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.25;
-  color: var(--font-color-default, #000a14);
+  padding-bottom: var(--spacing-padding-05);
 }
 
 .marketo-modal-intro {
-  margin: 0 0 28px;
-  font-family: var(--typography-font-family-300, sans-serif);
-  font-size: 1rem;
-  font-weight: 300;
-  line-height: 1.5;
-  color: var(--color-dark-grey, #666);
+  margin: 0 0 var(--spacing-layout-02);
 }
 
 .marketo-modal-status {
@@ -198,6 +188,11 @@ body.marketo-modal-open {
   min-height: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
+  max-width: 400px;
+}
+
+.marketo-modal-form .mktoForm .mktoFormRow.aem-mrktoFieldCtn:has(.aem-mrktoCheckBox) .mktoFieldWrap {
+  max-width: none;
 }
 
 .marketo-modal-form .mktoForm .mktoFormRow.aem-mrktoFieldCtn {
