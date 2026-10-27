@@ -49,7 +49,6 @@
   display: flex;
   flex-direction: column;
   width: min(720px, 85vw);
-  max-height: min(90vh, 900px);
   /* Keep overflow off the dialog — invisible reCAPTCHA fails inside overflow containers */
   overflow: hidden;
   margin: auto;
@@ -191,7 +190,7 @@ body.marketo-modal-open {
   max-width: 400px;
 }
 
-.marketo-modal-form .mktoForm .mktoFormRow.aem-mrktoFieldCtn:has(.aem-mrktoCheckBox) .mktoFieldWrap {
+.marketo-modal-form .mktoForm .mktoFormRow.aem-mrktoFieldCtn:has(.aem-mrktoCheckBox) .mktoFieldDescriptor.mktoFormCol.aem-mrktoDescrip {
   max-width: none;
 }
 
@@ -442,6 +441,7 @@ body.marketo-modal-open {
   min-height: 0 !important;
   margin-top: 8px !important;
   gap: 10px;
+  max-width: none;
 }
 
 .marketo-modal-form .aem-mrktoCheckBox .mktoLabel {
@@ -456,7 +456,6 @@ body.marketo-modal-open {
   padding: 0 !important;
   border: 0 !important;
   background: transparent !important;
-  color: var(--color-dark-grey, #666) !important;
   font-size: 16px !important;
   font-weight: 300 !important;
   line-height: 26px !important;
@@ -491,10 +490,10 @@ body.marketo-modal-open {
   content: '';
   display: block;
   flex: 0 0 auto;
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 26px;
   min-width: 20px;
-  margin-top: 3px;
+  margin-top: -5px;
   margin-right: 0;
   border: 1px solid var(--color-light-grey, #dadada);
   border-radius: 4px;
@@ -513,6 +512,8 @@ body.marketo-modal-open {
   color: #fff;
   font-size: 12px;
   line-height: 1;
+  position: absolute;
+  top: 10px;
 }
 
 .marketo-modal-form .aem-mrktoCheckBox input[type='checkbox'] {
@@ -526,10 +527,10 @@ body.marketo-modal-open {
 
 .marketo-modal-form .aem-mrktoRichText,
 .marketo-modal-form .mktoCaptchaDisclaimer {
-  width: 100% !important;
-  color: var(--color-dark-grey, #666) !important;
-  font-size: 16px !important;
-  font-weight: 300 !important;
+  width: 100%;
+  font-size: 16px;
+  padding-top: 10px;
+  margin-bottom: var(--spacing-padding-03);
 }
 
 .marketo-modal-form .mktoForm a {
