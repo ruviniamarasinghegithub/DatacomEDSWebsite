@@ -89,6 +89,12 @@
   opacity: 0.75;
 }
 
+.marketo-modal-close:focus-visible {
+  outline: 2px solid var(--color-action-blue, #002bfe);
+  outline-offset: 6px;
+  border-radius: 3px;
+}
+
 .marketo-modal-title {
   padding-bottom: var(--spacing-padding-05);
 }
@@ -467,8 +473,9 @@ body.marketo-modal-open {
 
 .marketo-modal-form .aem-mrktoCheckBox .mktoCheckboxList {
   position: relative;
-  flex: 0 0 auto;
-  width: auto !important;
+  flex: 0 0 30px;
+  width: 30px !important;
+  min-width: 30px;
   padding: 0 !important;
   order: 1;
 }
@@ -483,6 +490,11 @@ body.marketo-modal-open {
   line-height: 26px;
   color: var(--color-dark-grey, #666);
   cursor: pointer;
+}
+
+.marketo-modal-form .aem-mrktoCheckBox label.focus-accessibility {
+  outline: 2px solid var(--color-action-blue, #002bfe);
+  border-radius: 4px;
 }
 
 /* Custom checkbox square (on option label, or on list when label text is in mktoLabel) */
@@ -514,6 +526,7 @@ body.marketo-modal-open {
   line-height: 1;
   position: absolute;
   top: 0;
+  border-radius: 5px;
 }
 
 .marketo-modal-form .aem-mrktoCheckBox input[type='checkbox'] {
@@ -536,6 +549,20 @@ body.marketo-modal-open {
 .marketo-modal-form .mktoForm a {
   color: var(--color-action-blue, #002bfe);
   text-decoration: none;
+}
+
+.marketo-modal-form .mktoCaptchaDisclaimer a,
+.marketo-modal-form #LblCustom_question_1__c a {
+  background-image: linear-gradient(transparent, transparent), linear-gradient(var(--color-action-blue-hover, #0022cb), var(--color-action-blue-hover, #0022cb));
+  background-size: 100% 1px, 0 1px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.1s linear;
+}
+
+.marketo-modal-form .mktoCaptchaDisclaimer a:focus-visible,
+.marketo-modal-form #LblCustom_question_1__c a:focus-visible {
+  background-size: 0 1px, 100% 1px;
 }
 
 .marketo-modal-form .mktoForm a:hover {
