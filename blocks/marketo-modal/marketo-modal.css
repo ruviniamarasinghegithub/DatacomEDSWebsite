@@ -354,7 +354,7 @@ body.marketo-modal-open {
 .marketo-modal-form .mktoForm .aem-mrktoInput:hover,
 .marketo-modal-form .mktoForm .aem-mrktoSelect:hover,
 .marketo-modal-form .mktoForm .aem-mrktoTextArea:hover {
-  border-color: var(--color-action-blue-hover, #0022cb) !important;
+  border: 1px solid var(--color-action-blue-hover, #0022cb) !important;
 }
 
 .marketo-modal-form .mktoForm .aem-mrktoInput.focus,
@@ -424,8 +424,7 @@ body.marketo-modal-open {
 
 .marketo-modal-form .message--error {
   visibility: hidden;
-  height: 0;
-  margin: 4px 0 0 16px;
+  margin: 12px 0 12px 20px;
   overflow: hidden;
   font-family: var(--typography-font-family-300, sans-serif);
   font-size: 12px;
@@ -435,9 +434,6 @@ body.marketo-modal-open {
 
 .marketo-modal-form .message--error.show {
   visibility: visible;
-  height: auto;
-  margin: 4px 0 8px 16px;
-  overflow: visible;
 }
 
 .marketo-modal-form .aem-mrktoCheckBox.single-check-box__ctn {
