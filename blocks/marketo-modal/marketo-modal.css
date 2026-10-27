@@ -225,24 +225,11 @@ body.marketo-modal-open {
   pointer-events: none;
 }
 
-.mktoField.mktoTextField.mktoHasWidth.mktoRequired.aem-mrktoInput:not(:has(error)):hover {
-  border: 1px solid var(--color-action-blue-hover);
-}
-
-.mktoForm .mktoFormRow.aem-mrktoFieldCtn:hover {
-  border: 1px solid var(--color-action-blue-hover);
-  background: red;
-}
-
-.mktoForm .aem-mrktoWrap .aem-mrktoInput:hover, 
-.cmp-mrkto-modal .aem-mrktoWrap .aem-mrktoInput:hover, 
-.mktoForm .aem-mrktoWrap .aem-mrktoSelect:hover, 
-.cmp-mrkto-modal .aem-mrktoWrap .aem-mrktoSelect:hover, 
-.mktoForm .aem-mrktoWrap .aem-mrktoTextArea:hover, 
-.cmp-mrkto-modal .aem-mrktoWrap .aem-mrktoTextArea:hover {
-
-border: 1px solid var(--color-action-blue-hover);
-
+.mktoForm .mktoFormRow.aem-mrktoFieldCtn:hover { 
+  input.mktoField {
+    border: 1px solid var(--color-action-blue-hover);
+    background: red;
+  }   
 }
 
 /* Never clip/hide reCAPTCHA widgets Marketo injects for submit */
