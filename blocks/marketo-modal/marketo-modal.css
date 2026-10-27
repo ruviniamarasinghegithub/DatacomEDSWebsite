@@ -100,7 +100,7 @@
 }
 
 .marketo-modal-intro {
-  margin: 0 0 var(--spacing-layout-02);
+  margin: 0 0 var(--spacing-layout-04);
 }
 
 .marketo-modal-status {
@@ -284,14 +284,17 @@ border: 1px solid var(--color-action-blue-hover);
   border: 0 !important;
   background: #fff !important;
   color: var(--color-dark-grey, #666) !important;
-  font-family: var(--typography-font-family-300, sans-serif) !important;
+  font-family: var(--typography-font-family-400) !important;
+  letter-spacing: var(--letter-spacing-small);
   font-size: 16px !important;
-  font-weight: 300 !important;
+  font-weight: unset !important;
   line-height: 1 !important;
   letter-spacing: normal !important;
   text-align: left !important;
   white-space: nowrap;
   pointer-events: none;
+  font-size: var(--font-16-size);
+  color: var(--color-dark-grey);
   transition: top 0.15s cubic-bezier(0.4, 0, 0.2, 1), font-size 0.15s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s ease;
 }
 
@@ -437,13 +440,12 @@ border: 1px solid var(--color-action-blue-hover);
 }
 
 .marketo-modal-form .message--error {
-  visibility: hidden;
-  margin: 12px 0 12px 20px;
-  overflow: hidden;
-  font-family: var(--typography-font-family-300, sans-serif);
+  font-family: var(--typography-font-family-400);
+  color: var(--color-error-red);
   font-size: 12px;
-  font-weight: 300;
-  color: var(--color-error-red, #c80000);
+  height: 0;
+  margin: 8px 0 5px 20px;
+  visibility: hidden;
 }
 
 .marketo-modal-form .message--error.show {
