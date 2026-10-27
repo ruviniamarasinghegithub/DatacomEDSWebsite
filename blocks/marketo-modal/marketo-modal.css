@@ -225,11 +225,9 @@ body.marketo-modal-open {
   pointer-events: none;
 }
 
-.mktoForm .mktoFormRow.aem-mrktoFieldCtn:hover { 
-  input.mktoField {
-    border: 1px solid var(--color-action-blue-hover);
-    background: red;
-  }   
+.mktoForm .mktoFormRow.aem-mrktoFieldCtn:hover input.mktoField {
+    border: 1px solid var(--color-action-blue-hover)!important;
+    background: red!important;  
 }
 
 /* Never clip/hide reCAPTCHA widgets Marketo injects for submit */
