@@ -225,7 +225,7 @@ body.marketo-modal-open {
   pointer-events: none;
 }
 
-mktoField.mktoTextField.mktoHasWidth.mktoRequired.aem-mrktoInput:not(:has(error)):hover {
+.mktoField.mktoTextField.mktoHasWidth.mktoRequired.aem-mrktoInput:not(:has(error)):hover {
   border: 1px solid var(--color-action-blue-hover);
 }
 
@@ -344,9 +344,7 @@ border: 1px solid var(--color-action-blue-hover);
   background-image: none !important;
   box-shadow: none !important;
   color: var(--font-color-default, #000a14) !important;
-  font-family: var(--typography-font-family-300, sans-serif) !important;
   font-size: 16px !important;
-  font-weight: 300 !important;
   line-height: 52px !important;
   outline: none !important;
   appearance: none !important;
@@ -443,7 +441,6 @@ border: 1px solid var(--color-action-blue-hover);
   font-family: var(--typography-font-family-400);
   color: var(--color-error-red);
   font-size: 12px;
-  height: 0;
   margin: 8px 0 5px 20px;
   visibility: hidden;
 }
