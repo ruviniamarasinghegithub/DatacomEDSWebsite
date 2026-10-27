@@ -127,7 +127,10 @@ function ensureHost() {
   close.type = 'button';
   close.className = 'marketo-modal-close cmp-mrkto-modal__content__close';
   close.setAttribute('aria-label', 'Close');
-  close.innerHTML = '&times;';
+  const closeIcon = document.createElement('i');
+  closeIcon.className = 'fal fa-times';
+  closeIcon.setAttribute('aria-hidden', 'true');
+  close.append(closeIcon);
 
   const formView = document.createElement('div');
   formView.className = 'marketo-modal-form-view';
