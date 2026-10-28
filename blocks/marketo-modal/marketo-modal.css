@@ -136,6 +136,7 @@
 }
 
 .marketo-modal-thank-you-cta {
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -144,8 +145,8 @@
   padding: 10px 24px;
   border: 2px solid var(--color-action-blue, #002bfe);
   border-radius: 8px;
-  background: #fff;
-  color: var(--color-action-blue, #002bfe);
+  background: var(--color-action-blue, #002bfe);
+  color: #fff;
   font-family: var(--typography-font-family-600, sans-serif);
   font-size: 1rem;
   font-weight: 600;
@@ -155,10 +156,15 @@
 }
 
 .marketo-modal-thank-you-cta:hover,
-.marketo-modal-thank-you-cta:focus-visible {
-  background: var(--color-action-blue, #002bfe);
+.marketo-modal-thank-you-cta:active {
+  border-color: var(--color-action-blue-hover, #0022cb);
+  background: var(--color-action-blue-hover, #0022cb);
   color: #fff;
-  outline: none;
+}
+
+.marketo-modal-thank-you-cta:focus-visible {
+  outline: 3px solid var(--color-action-blue, #002bfe);
+  outline-offset: 1px;
 }
 
 body.marketo-modal-open {

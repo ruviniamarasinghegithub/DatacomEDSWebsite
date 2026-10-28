@@ -164,7 +164,7 @@ function ensureHost() {
   thankYouBodyEl.className = 'marketo-modal-thank-you-body';
 
   const thankYouCtaEl = document.createElement('a');
-  thankYouCtaEl.className = 'marketo-modal-thank-you-cta cmp-cta-button cmp-cta-button--secondary cmp-cta-button--redirect';
+  thankYouCtaEl.className = 'marketo-modal-thank-you-cta cmp-cta-button cmp-cta-button--primary cmp-cta-button--redirect';
 
   thankYou.append(thankYouTitle, thankYouBodyEl, thankYouCtaEl);
   dialog.append(close, formView, thankYou);

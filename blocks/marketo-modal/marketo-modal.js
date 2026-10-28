@@ -133,7 +133,7 @@ export default async function decorate(block) {
   thankYouBodyEl.textContent = thankYouBody;
 
   const thankYouCtaEl = document.createElement('a');
-  thankYouCtaEl.className = 'marketo-modal-thank-you-cta cmp-cta-button cmp-cta-button--secondary cmp-cta-button--redirect';
+  thankYouCtaEl.className = 'marketo-modal-thank-you-cta cmp-cta-button cmp-cta-button--primary cmp-cta-button--redirect';
   thankYouCtaEl.href = thankYouHref;
   thankYouCtaEl.textContent = thankYouCta;
 
