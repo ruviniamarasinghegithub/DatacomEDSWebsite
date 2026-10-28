@@ -221,11 +221,6 @@ body.marketo-modal-open {
   pointer-events: none;
 }
 
-.mktoForm .mktoFormRow.aem-mrktoFieldCtn:hover input {
-    border: 1px solid var(--color-action-blue-hover)!important;  
-    border-radius: 8px !important;
-}
-
 /* Never clip/hide reCAPTCHA widgets Marketo injects for submit */
 .marketo-modal-form .g-recaptcha,
 .marketo-modal-form iframe[src*='recaptcha'],
@@ -367,18 +362,18 @@ body.marketo-modal-open {
   padding: 14px 15px !important;
 }
 
-.marketo-modal-form .mktoForm .aem-mrktoInput:hover,
-.marketo-modal-form .mktoForm .aem-mrktoSelect:hover,
-.marketo-modal-form .mktoForm .aem-mrktoTextArea:hover {
+.marketo-modal-form .mktoForm .aem-mrktoWrap .aem-mrktoInput:not(.error):hover,
+.marketo-modal-form .mktoForm .aem-mrktoWrap .aem-mrktoSelect:not(.error):hover,
+.marketo-modal-form .mktoForm .aem-mrktoWrap .aem-mrktoTextArea:not(.error):hover {
   border: 1px solid var(--color-action-blue-hover, #0022cb) !important;
   padding: 0 16px !important;
 }
 
-.marketo-modal-form .mktoForm .aem-mrktoSelect:hover {
+.marketo-modal-form .mktoForm .aem-mrktoWrap .aem-mrktoSelect:not(.error):hover {
   padding-right: 40px !important;
 }
 
-.marketo-modal-form .mktoForm .aem-mrktoTextArea:hover {
+.marketo-modal-form .mktoForm .aem-mrktoWrap .aem-mrktoTextArea:not(.error):hover {
   padding: 15px 16px !important;
 }
 
