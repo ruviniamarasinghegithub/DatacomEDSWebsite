@@ -37,6 +37,7 @@
   padding: 24px;
   overflow: auto;
   background: rgb(0 10 20 / 55%);
+  backdrop-filter: blur(8px);
 }
 
 .marketo-modal-backdrop[hidden] {
