@@ -183,8 +183,13 @@ export default async function decorate(block) {
     dialog.hidden = false;
     document.body.classList.add('marketo-modal-open');
     trigger.setAttribute('aria-expanded', 'true');
-    ensureForm();
     close.focus();
+    ensureForm().then(() => {
+      if (dialog.hidden || formView.hidden) return;
+      const firstInput = [...formHost.querySelectorAll('input:not([type="hidden"]):not(:disabled):not([readonly])')]
+        .find((input) => input.getClientRects().length > 0);
+      firstInput?.focus();
+    });
   }
 
   function closeModal() {

@@ -286,6 +286,11 @@ export async function openMarketoModalFromPath(path, options = {}) {
       });
     }
     await state.formLoadPromise;
+    if (!state.dialog.hidden && !state.formView.hidden) {
+      const firstInput = [...state.formHost.querySelectorAll('input:not([type="hidden"]):not(:disabled):not([readonly])')]
+        .find((input) => input.getClientRects().length > 0);
+      firstInput?.focus();
+    }
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);
