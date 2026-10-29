@@ -1,4 +1,4 @@
-const REPOSITORY_ID = 'author-p138504-e1855352.adobeaemcloud.com';
+const REPOSITORY_ID = 'author-p9609-e26009.adobeaemcloud.com';
 const SELECTOR_URL = 'https://experience.adobe.com/solutions/CQ-assets-selectors/static-assets/resources/assets-selectors.js';
 const DA_ASSETS_URL = 'https://da.live/nx2/utils/aem-assets';
 const DA_SDK_URL = 'https://da.live/nx/utils/sdk.js';
@@ -14,6 +14,7 @@ const repoConfig = {
   siteImageModifiers: null,
 };
 
+document.title = 'AEM Assets';
 const status = document.querySelector('#status');
 document.querySelector('#insert-asset')?.remove();
 document.querySelector('#asset-preview')?.remove();
@@ -40,7 +41,7 @@ function loadSelector() {
 
 async function init() {
   if (window.parent === window) {
-    status.textContent = 'Open EDS Assets from the DA editor Extensions menu.';
+    status.textContent = 'Open AEM Assets from the DA editor Extensions menu.';
     return;
   }
 
@@ -49,7 +50,7 @@ async function init() {
     const { actions, token } = await sdk;
     if (!token) throw new Error('No DA session token is available. Sign in to DA and reopen the extension.');
 
-    status.textContent = 'Loading EDS Assets...';
+    status.textContent = 'Loading AEM Assets...';
     const [{ buildAssetSelectorProps }, { resolveAssetSelection }] = await Promise.all([
       import(`${DA_ASSETS_URL}/selector-props.js`),
       import(`${DA_ASSETS_URL}/selection.js`),
