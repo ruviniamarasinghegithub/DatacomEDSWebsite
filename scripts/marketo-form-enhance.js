@@ -3,7 +3,11 @@
  * Floating labels inside fields by default; float on focus/fill.
  */
 
+import { GeneralUtil } from './general-util.js';
+
 const OVERRIDE_STYLE_ID = 'marketo-datacom-form-overrides';
+const EMAIL_ERROR_MESSAGE = 'Please enter a valid email';
+const PHONE_ERROR_MESSAGE = 'Please enter a valid phone number';
 
 /**
  * Marketo forms2.css loads after block CSS and wins the cascade.
@@ -76,6 +80,22 @@ function labelText(label) {
   return (label?.textContent || '').replace(/\*/g, '').trim();
 }
 
+function isEmailField(field, label) {
+  const fieldDetails = `${field?.type || ''} ${field?.name || ''} ${field?.id || ''} ${field?.className || ''} ${labelText(label)}`;
+  return /email/i.test(fieldDetails);
+}
+
+function isPhoneField(field, label) {
+  const fieldDetails = `${field?.type || ''} ${field?.name || ''} ${field?.id || ''} ${field?.className || ''} ${labelText(label)}`;
+  return /phone|tel/i.test(fieldDetails);
+}
+
+function fieldErrorMessage(field, label) {
+  if (isEmailField(field, label)) return EMAIL_ERROR_MESSAGE;
+  if (isPhoneField(field, label)) return PHONE_ERROR_MESSAGE;
+  return `Please enter your ${labelText(label)}`;
+}
+
 function fieldHasValue(field) {
   if (!field) return false;
   if (field.tagName === 'SELECT') {
@@ -91,7 +111,10 @@ function fieldHasValue(field) {
 }
 
 function ensureErrorAfter(row, message) {
-  if (row.nextElementSibling?.classList.contains('message--error')) return;
+  if (row.nextElementSibling?.classList.contains('message--error')) {
+    row.nextElementSibling.textContent = message;
+    return;
+  }
   const err = document.createElement('div');
   err.className = 'message--error';
   err.textContent = message;
@@ -161,9 +184,16 @@ function updateSubmitState(root) {
   const invalid = [...form.querySelectorAll('.mktoFieldWrap.mktoRequiredField[field-valid="false"]')]
     .filter(isVisibleFieldWrap)
     .length;
-  submit.disabled = invalid > 0;
-  submit.classList.toggle('is-disabled', invalid > 0);
-  if (invalid === 0) {
+  const invalidEmail = [...form.querySelectorAll('.mktoFieldWrap[data-email-invalid="true"]')]
+    .filter(isVisibleFieldWrap)
+    .length;
+  const invalidPhone = [...form.querySelectorAll('.mktoFieldWrap[data-phone-invalid="true"]')]
+    .filter(isVisibleFieldWrap)
+    .length;
+  const hasInvalidFields = invalid + invalidEmail + invalidPhone > 0;
+  submit.disabled = hasInvalidFields;
+  submit.classList.toggle('is-disabled', hasInvalidFields);
+  if (!hasInvalidFields) {
     submit.style.removeProperty('pointer-events');
   }
 }
@@ -211,6 +241,9 @@ function wireFieldInteractions(form) {
       ? row.nextElementSibling
       : null;
     const chevron = wrap?.querySelector('.marketo-select-chevron');
+    const emailField = isEmailField(field, label);
+    const phoneField = isPhoneField(field, label);
+    const requiredErrorMessage = `Please enter your ${labelText(label)}`;
 
     const clearError = () => {
       field.classList.remove('error');
@@ -220,7 +253,8 @@ function wireFieldInteractions(form) {
       err?.classList.remove('show');
     };
 
-    const setError = () => {
+    const setError = (message) => {
+      if (message && err) err.textContent = message;
       field.classList.add('error');
       field.classList.remove('focus');
       wrap?.classList.add('error');
@@ -232,7 +266,42 @@ function wireFieldInteractions(form) {
       syncFieldChrome(field, wrap, { focused: false, errored: true });
     };
 
+    const validateEmail = () => {
+      if (!emailField) return true;
+      const valid = !fieldHasValue(field) || GeneralUtil.isValidEmail(field.value);
+      if (valid) {
+        wrap?.removeAttribute('data-email-invalid');
+        field.setCustomValidity('');
+        return true;
+      }
+      wrap?.setAttribute('data-email-invalid', 'true');
+      field.setCustomValidity(EMAIL_ERROR_MESSAGE);
+      setError(EMAIL_ERROR_MESSAGE);
+      return false;
+    };
+
+    const validatePhone = () => {
+      if (!phoneField) return true;
+      const value = String(field.value || '');
+      const valid = !value || GeneralUtil.isValidPhoneNumber(value);
+      if (valid) {
+        wrap?.removeAttribute('data-phone-invalid');
+        field.setCustomValidity('');
+        return true;
+      }
+      wrap?.setAttribute('data-phone-invalid', 'true');
+      field.setCustomValidity(PHONE_ERROR_MESSAGE);
+      setError(PHONE_ERROR_MESSAGE);
+      return false;
+    };
+
+    const validateField = () => validateEmail() && validatePhone();
+
     field.addEventListener('focus', () => {
+      if (!validateField()) {
+        updateSubmitState(form);
+        return;
+      }
       clearError();
       field.classList.add('focus');
       chevron?.classList.add('focus');
@@ -247,14 +316,20 @@ function wireFieldInteractions(form) {
       const required = wrap?.classList.contains('mktoRequiredField');
       const empty = !fieldHasValue(field);
 
+      if (!validateField()) {
+        updateSubmitState(form);
+        return;
+      }
+
       if (required && empty) {
-        setError();
+        setError(requiredErrorMessage);
       } else if (required) {
         clearError();
         wrap?.setAttribute('field-valid', 'true');
         syncLabelState(field, label, { focused: false });
         syncFieldChrome(field, wrap, { focused: false });
       } else {
+        clearError();
         syncLabelState(field, label, { focused: false });
         syncFieldChrome(field, wrap, { focused: false });
       }
@@ -262,9 +337,16 @@ function wireFieldInteractions(form) {
     });
 
     field.addEventListener('input', () => {
+      if (!validateField()) {
+        updateSubmitState(form);
+        return;
+      }
       if (fieldHasValue(field)) {
         clearError();
         wrap?.setAttribute('field-valid', 'true');
+      } else {
+        clearError();
+        if (wrap?.classList.contains('mktoRequiredField')) wrap.setAttribute('field-valid', 'false');
       }
       syncLabelState(field, label, { focused: true });
       syncFieldChrome(field, wrap, { focused: true });
@@ -272,9 +354,16 @@ function wireFieldInteractions(form) {
     });
 
     field.addEventListener('change', () => {
+      if (!validateField()) {
+        updateSubmitState(form);
+        return;
+      }
       if (fieldHasValue(field)) {
         clearError();
         wrap?.setAttribute('field-valid', 'true');
+      } else {
+        clearError();
+        if (wrap?.classList.contains('mktoRequiredField')) wrap.setAttribute('field-valid', 'false');
       }
       const focused = field === document.activeElement;
       syncLabelState(field, label, { focused });
@@ -283,8 +372,10 @@ function wireFieldInteractions(form) {
     });
 
     // Initial: only float if already filled (never force-float empty fields)
-    syncLabelState(field, label, { focused: false });
-    syncFieldChrome(field, wrap, { focused: false });
+    const validField = validateField();
+    syncLabelState(field, label, { focused: false, errored: !validField });
+    syncFieldChrome(field, wrap, { focused: false, errored: !validField });
+    if (!validField) err?.classList.add('show');
   });
 
   form.querySelectorAll('.aem-mrktoCheckBox input[type="checkbox"]').forEach((box) => {
@@ -348,7 +439,7 @@ export function enhanceMarketoForm(formEl) {
     if (input) {
       input.classList.add('aem-mrktoInput');
       wrap?.classList.add('aem-mrktoWrap');
-      ensureErrorAfter(row, `Please enter your ${labelText(label)}`);
+      ensureErrorAfter(row, fieldErrorMessage(input, label));
       if (wrap?.classList.contains('mktoRequiredField')) wrap.setAttribute('field-valid', 'false');
     } else if (textarea) {
       textarea.classList.add('aem-mrktoTextArea');
@@ -422,7 +513,7 @@ function observeProgressiveFields(formEl) {
     if (input) {
       input.classList.add('aem-mrktoInput');
       wrap?.classList.add('aem-mrktoWrap');
-      ensureErrorAfter(row, `Please enter your ${labelText(label)}`);
+      ensureErrorAfter(row, fieldErrorMessage(input, label));
     } else if (textarea) {
       textarea.classList.add('aem-mrktoTextArea');
       wrap?.classList.add('aem-mrktoWrap');
