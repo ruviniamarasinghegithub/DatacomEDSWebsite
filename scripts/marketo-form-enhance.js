@@ -1,6 +1,6 @@
 /**
  * Apply Datacom Marketo form styling helpers (from AEM CmpMarketoModal.changeForm).
- * Floating labels inside fields by default; float on focus/fill/error.
+ * Floating labels inside fields by default; float on focus/fill.
  */
 
 const OVERRIDE_STYLE_ID = 'marketo-datacom-form-overrides';
@@ -23,9 +23,9 @@ function ensureOverrideStyles() {
   background: transparent !important;
   box-shadow: none !important;
 }
-.marketo-modal-form form.mktoForm input.aem-mrktoInput:hover,
-.marketo-modal-form form.mktoForm select.aem-mrktoSelect:hover,
-.marketo-modal-form form.mktoForm textarea.aem-mrktoTextArea:hover {
+.marketo-modal-form form.mktoForm input.aem-mrktoInput:not(.error):hover,
+.marketo-modal-form form.mktoForm select.aem-mrktoSelect:not(.error):hover,
+.marketo-modal-form form.mktoForm textarea.aem-mrktoTextArea:not(.error):hover {
   border-color: #0022cb !important;
 }
 .marketo-modal-form form.mktoForm input.aem-mrktoInput.focus,
@@ -171,7 +171,7 @@ function updateSubmitState(root) {
 function syncLabelState(field, label, { focused = false, errored = false } = {}) {
   if (!label) return;
   const filled = fieldHasValue(field);
-  const showFloat = focused || filled || errored;
+  const showFloat = focused || filled;
   label.classList.toggle('focus', showFloat);
   label.classList.toggle('error', errored);
   // Inline colors beat cross-origin Marketo forms2.css !important rules
@@ -291,6 +291,8 @@ function wireFieldInteractions(form) {
     const wrap = box.closest('.mktoFieldWrap');
     const optionLabel = box.closest('label') || wrap?.querySelector('label:not(.mktoLabel)');
     const list = box.closest('.mktoCheckboxList');
+    box.tabIndex = 0;
+    optionLabel?.removeAttribute('tabindex');
     const sync = () => {
       optionLabel?.classList.toggle('checked', box.checked);
       list?.classList.toggle('checked', box.checked);
