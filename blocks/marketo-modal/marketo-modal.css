@@ -82,7 +82,7 @@
   background: transparent;
   color: var(--color-action-blue, #002bfe);
   font-size: 32px;
-  line-height: 0.65;
+  line-height: 32px;
   cursor: pointer;
 }
 
@@ -121,18 +121,18 @@
 .marketo-modal-thank-you-title {
   margin: 0 48px 16px 0;
   font-family: var(--typography-font-family-700, sans-serif);
-  font-size: 2rem;
+  font-size: 32px;
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 40px;
   color: var(--font-color-default, #000a14);
 }
 
 .marketo-modal-thank-you-body {
   margin: 0 0 28px;
   font-family: var(--typography-font-family-400, sans-serif);
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 24px;
   color: var(--font-color-default, #000a14);
 }
 
@@ -149,9 +149,9 @@
   background: var(--color-action-blue, #002bfe);
   color: #fff;
   font-family: var(--typography-font-family-600, sans-serif);
-  font-size: 1rem;
+  font-size: 18px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 24px;
   text-decoration: none;
   cursor: pointer;
 }
@@ -276,7 +276,7 @@ body.marketo-modal-open {
   letter-spacing: var(--letter-spacing-small);
   font-size: 16px !important;
   font-weight: unset !important;
-  line-height: 1 !important;
+  line-height: 20px !important;
   letter-spacing: normal !important;
   text-align: left !important;
   white-space: nowrap;
@@ -290,7 +290,7 @@ body.marketo-modal-open {
 .marketo-modal-form .aem-mrktoWrap > .aem-mrktoLabel.focus {
   top: -6px !important;
   font-size: 12px !important;
-  line-height: 1em !important;
+  line-height: 20px !important;
   z-index: 3;
 }
 
@@ -341,7 +341,7 @@ body.marketo-modal-open {
   height: auto !important;
   min-height: 52px !important;
   padding: 15px 16px !important;
-  line-height: 1.4 !important;
+  line-height: 20px !important;
   resize: vertical;
 }
 
@@ -393,7 +393,7 @@ body.marketo-modal-open {
   color: var(--color-error-red, #c80000);
   font-size: 24px;
   font-weight: 700;
-  line-height: 1;
+  line-height: 24px;
   pointer-events: none;
 }
 
@@ -573,10 +573,6 @@ body.marketo-modal-open {
   outline: none;
 }
 
-.marketo-modal-form .mktoForm a:hover {
-  text-decoration: underline;
-}
-
 .marketo-modal-form .mktoButtonRow,
 .marketo-modal-form .cmp-form-button__btn-ctn--right {
   display: flex !important;
@@ -606,7 +602,7 @@ body.marketo-modal-open {
   font-family: var(--typography-font-family-600, sans-serif) !important;
   font-size: 16px !important;
   font-weight: 600 !important;
-  line-height: 1.2 !important;
+  line-height: 20px !important;
   cursor: pointer;
   float: none !important;
 }

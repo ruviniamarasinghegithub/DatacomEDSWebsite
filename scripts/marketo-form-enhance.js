@@ -382,6 +382,10 @@ function wireFieldInteractions(form) {
     const wrap = box.closest('.mktoFieldWrap');
     const optionLabel = box.closest('label') || wrap?.querySelector('label:not(.mktoLabel)');
     const list = box.closest('.mktoCheckboxList');
+    const textLabel = wrap?.querySelector('.mktoLabel');
+    if (list?.parentElement && textLabel?.parentElement === list.parentElement) {
+      list.parentElement.insertBefore(list, textLabel);
+    }
     box.tabIndex = 0;
     optionLabel?.removeAttribute('tabindex');
     const sync = () => {
