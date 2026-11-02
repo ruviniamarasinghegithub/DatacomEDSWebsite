@@ -336,6 +336,15 @@ body.marketo-modal-open {
   font-family: var(--typography-font-family-400, Arial, sans-serif) !important;
 }
 
+.marketo-modal-form .mktoForm .aem-mrktoInput:hover,
+.marketo-modal-form .mktoForm .aem-mrktoSelect:hover,
+.marketo-modal-form .mktoForm .aem-mrktoTextArea:hover,
+.marketo-modal-form .mktoForm input.mktoField:not([type='checkbox']):not([type='hidden']):hover,
+.marketo-modal-form .mktoForm select.mktoField:hover,
+.marketo-modal-form .mktoForm textarea.mktoField:hover {
+  border: 1px solid #0022CB !important;
+}
+
 .marketo-modal-form .mktoForm .aem-mrktoTextArea,
 .marketo-modal-form .mktoForm textarea.mktoField {
   height: auto !important;
