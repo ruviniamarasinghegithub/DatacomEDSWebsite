@@ -110,7 +110,6 @@ header nav.header-simple .nav-search {
 header nav.header-simple .nav-search:hover,
 header nav.header-simple .nav-search:focus-visible {
   opacity: 0.75;
-  outline-offset: 2px;
 }
 
 .cmp-header-mega__search:focus-visible,
