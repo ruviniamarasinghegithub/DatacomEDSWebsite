@@ -107,7 +107,7 @@ header nav.header-simple .nav-search {
   text-decoration: none;
 }
 
-header nav.header-simple .nav-search:focus-visible {
+.cmp-header-mega__search:focus-visible {
   outline-offset: 0;
 }
 
