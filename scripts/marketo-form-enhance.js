@@ -207,13 +207,13 @@ function syncLabelState(field, label, { focused = false, errored = false } = {})
 function syncFieldChrome(field, wrap, { focused = false, errored = false } = {}) {
   if (!field) return;
   if (errored) {
-    field.style.setProperty('border', '2px solid #c80000', 'important');
+    field.classList.remove('focus');
     wrap?.classList.add('error');
   } else if (focused) {
-    field.style.setProperty('border', '2px solid #002bfe', 'important');
+    field.classList.add('focus');
     wrap?.classList.remove('error');
   } else {
-    field.style.setProperty('border', '1px solid #dadada', 'important');
+    field.classList.remove('focus');
     wrap?.classList.remove('error');
   }
   field.style.setProperty('border-radius', '8px', 'important');

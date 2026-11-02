@@ -392,6 +392,11 @@ body.marketo-modal-open {
   padding: 0 15px !important;
 }
 
+.marketo-modal-form .mktoForm .aem-mrktoInput.error:hover {
+  border: 1px solid #0022CB !important;
+  padding: 0 16px !important;
+}
+
 .marketo-modal-form .aem-mrktoWrap.error::after {
   content: '!';
   position: absolute;
