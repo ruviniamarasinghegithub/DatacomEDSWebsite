@@ -54,9 +54,7 @@ function ensureOverrideStyles() {
 .marketo-modal-form .aem-mrktoWrap:has(input.focus, select.focus, textarea.focus):not(:has(.error)) > .aem-mrktoLabel.focus {
   color: #002bfe !important;
 }
-.marketo-modal-form .aem-mrktoWrap > .aem-mrktoLabel.error {
-  color: #c80000 !important;
-}
+
 .marketo-modal-form form.mktoForm .mktoButtonRow .mktoButton,
 .marketo-modal-form form.mktoForm .cmp-form-button__btn {
   background-color: #002bfe !important;
