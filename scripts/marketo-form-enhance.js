@@ -206,6 +206,7 @@ function syncLabelState(field, label, { focused = false, errored = false } = {})
 
 function syncFieldChrome(field, wrap, { focused = false, errored = false } = {}) {
   if (!field) return;
+  field.style.removeProperty('border');
   if (errored) {
     field.classList.remove('focus');
     wrap?.classList.add('error');

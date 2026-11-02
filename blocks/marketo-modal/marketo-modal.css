@@ -479,7 +479,7 @@ body.marketo-modal-open {
   line-height: 20px !important;
   white-space: normal !important;
   pointer-events: auto !important;
-  font-family: var(--typography-font-family-400, Arial, sans-serif) !important;
+  font-family: var(--typography-font-family-300, Arial, sans-serif) !important;
   order: 2;
 }
 
