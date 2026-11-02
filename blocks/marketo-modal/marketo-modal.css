@@ -300,11 +300,11 @@ body.marketo-modal-open {
   .aem-mrktoSelect.focus,
   .aem-mrktoTextArea.focus
 ):not(:has(.error)) .aem-mrktoLabel.focus {
-  /* color: var(--color-action-blue, #002bfe) !important; */
+  color: var(--color-action-blue, #002bfe) !important;
 }
 
 .marketo-modal-form .aem-mrktoWrap > .aem-mrktoLabel.error {
-  /* color: var(--color-error-red, #c80000) !important; */
+  color: var(--color-error-red, #c80000) !important;
   border: 0 !important;
   padding: 0 4px !important;
 }

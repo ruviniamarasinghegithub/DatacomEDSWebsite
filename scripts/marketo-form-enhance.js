@@ -204,14 +204,6 @@ function syncLabelState(field, label, { focused = false, errored = false } = {})
   const showFloat = focused || filled;
   label.classList.toggle('focus', showFloat);
   label.classList.toggle('error', errored);
-  // Inline colors beat cross-origin Marketo forms2.css !important rules
-  if (errored) {
-    label.style.setProperty('color', '#c80000', 'important');
-  } else if (focused) {
-    label.style.setProperty('color', '#002bfe', 'important');
-  } else {
-    label.style.setProperty('color', '#666666', 'important');
-  }
 }
 
 function syncFieldChrome(field, wrap, { focused = false, errored = false } = {}) {
@@ -434,6 +426,7 @@ export function enhanceMarketoForm(formEl) {
     }
     descriptor?.classList.add('aem-mrktoDescrip');
     label?.classList.add('aem-mrktoLabel');
+    label?.removeAttribute('style');
 
     // Ensure label is a sibling inside the wrap (absolute positioning context)
     if (label && wrap && label.parentElement !== wrap) {
@@ -512,6 +505,7 @@ function observeProgressiveFields(formEl) {
     row.classList.add('aem-mrktoFieldCtn');
     row.querySelector('.mktoFieldDescriptor')?.classList.add('aem-mrktoDescrip');
     label?.classList.add('aem-mrktoLabel');
+    label?.removeAttribute('style');
     if (label && wrap && label.parentElement !== wrap) wrap.prepend(label);
 
     if (input) {
