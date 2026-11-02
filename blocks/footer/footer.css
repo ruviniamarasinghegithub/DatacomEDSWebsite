@@ -137,6 +137,15 @@ footer .footer a:hover {
   text-decoration: underline;
 }
 
+footer .footer a:focus-visible:not([class~='feature-highlights__content_cta']) {
+  color: var(--color-action-blue);
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+  text-decoration-skip-ink: none;
+  outline: unset;
+}
+
 footer .footer .footer-external-link-icon {
   display: inline-block;
   width: 12px;

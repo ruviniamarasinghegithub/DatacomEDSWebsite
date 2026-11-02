@@ -67,6 +67,12 @@ header nav.header-simple .nav-brand:focus-visible {
   outline-offset: 4px;
 }
 
+.cmp-header-mega__logo:focus-visible {
+  outline: 2px solid var(--color-action-blue);
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+
 header nav.header-simple .nav-brand-wordmark {
   font-size: 1.125rem;
   font-weight: 700;
@@ -105,6 +111,13 @@ header nav.header-simple .nav-search:hover,
 header nav.header-simple .nav-search:focus-visible {
   opacity: 0.75;
   outline-offset: 2px;
+}
+
+.cmp-header-mega__search:focus-visible,
+header nav.header-simple .nav-search:focus-visible {
+  outline: 2px solid var(--color-action-blue);
+  outline-offset: 4px;
+  border-radius: 3px;
 }
 
 header nav.header-simple .nav-search-icon {
