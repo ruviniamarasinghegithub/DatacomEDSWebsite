@@ -294,13 +294,13 @@ body.marketo-modal-open {
   z-index: 3;
 }
 
-/* Active focus: blue label (matches production). Filled-but-blurred stays grey. */
+/* Keep the label grey when focused or filled. */
 .marketo-modal-form .aem-mrktoWrap:has(
   .aem-mrktoInput.focus,
   .aem-mrktoSelect.focus,
   .aem-mrktoTextArea.focus
 ):not(:has(.error)) .aem-mrktoLabel.focus {
-  color: var(--color-action-blue, #002bfe) !important;
+  color: var(--color-dark-grey, #666) !important;
 }
 
 .marketo-modal-form .aem-mrktoWrap > .aem-mrktoLabel.error {
