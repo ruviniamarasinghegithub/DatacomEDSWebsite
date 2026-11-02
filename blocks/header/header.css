@@ -107,6 +107,10 @@ header nav.header-simple .nav-search {
   text-decoration: none;
 }
 
+header nav.header-simple .nav-search:focus-visible {
+  outline-offset: 0;
+}
+
 header nav.header-simple .nav-search:hover,
 header nav.header-simple .nav-search:focus-visible {
   opacity: 0.75;
